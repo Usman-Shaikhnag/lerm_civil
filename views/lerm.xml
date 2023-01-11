@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record id="lerm_action" model="ir.actions.act_window">
+                <field name="name">SRF</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">lerm.srf</field>
+                <field name="view_mode">tree,kanban,form</field>
+                <field name="help" type="html">
+                        <p class="o_view_nocontent_smiling_face">Create a new SRF</p>
+                </field>
+
+            </record>
+    
+        <menuitem id="lerm_root"
+            name="LERM"
+            sequence="10"/>
+
+        <menuitem id="lerm_srfmenu"
+            name="SRF"
+            parent="lerm_root"
+            sequence="10"/>
+
+        <menuitem id="lerm_srf"
+            name="SRF"
+            parent="lerm_srfmenu"
+            action="lerm_action"
+            sequence="10"/>
+</odoo>

@@ -5,5 +5,5 @@
  'category': 'Uncategorized', 
  'version': '13.0.1', 
  'depends':['base' , 'contacts'],
- 'data': ['views/views.xml']
+ 'data': ['views/lerm.xml']
 }
