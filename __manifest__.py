@@ -1,5 +1,5 @@
-{'name':'EXIM_EXPORTS',
- 'summary': "EXIM_EXPORTS",
+{'name':'LERM_CIVIL',
+ 'summary': "LERM_CIVIL",
  'author': "Usman Shaikhnag", 
  'website': "http://www.esehat.org", 
  'category': 'Uncategorized', 
