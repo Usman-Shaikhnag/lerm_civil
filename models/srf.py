@@ -4,4 +4,30 @@ class LermSrf(models.Model):
     _name = "lerm.srf"
     _description = "Lerm SRF"
 
-    name = fields.Char(string="Name")
+    srf_no = fields.Char(string="SRF No")
+    srf_date = fields.Date("SRF Date")
+    customer = fields.Many2one('res.partner',string="Customer")
+    billing_customer = fields.Many2one('res.partner',string="Billing Customer")
+    contact_person = fields.Char(string="Contact Person")
+    mobile_no = fields.Char(string="Person Mobile No")
+    email_id = fields.Char(string="Person Email id")
+    client_ref = fields.Char(string="Client Reference")
+    job_no = fields.Char(string="Job No")
+    job_date = fields.Date(string="Job Date")
+
+    @api.onchange('customer')
+    def _compute_contact_person(self):
+        self.contact_person = "Contact Person"
+        
+
+
+    @api.onchange('customer')
+    def _compute_email(self):
+        self.email_id = "Email id"
+        
+    
+
+    @api.onchange('customer')
+    def _compute_mobile_no(self):
+        contact_obj = self.env['res.partner'].search([('name','=', self.customer.name)])
+        self.mobile_no = ''
