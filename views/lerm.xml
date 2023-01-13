@@ -54,5 +54,6 @@
         name="SRF"
         parent="lerm_srfmenu"
         action="lerm_action"
+        groups="base.group_user"
         sequence="10" />
 </odoo>
