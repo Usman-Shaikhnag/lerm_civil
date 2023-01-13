@@ -24,6 +24,26 @@
                             <field name="client_ref"/>
                         </group>
                     </group>
+
+                    <notebook>
+                            <page string="Sample Entry">
+                            <group>
+                                <group>
+                                    <field name="sample_id"/>
+                                    <field name="brand"/>
+                                    <field name="grade"/>
+                                    <field name="sample_qty"/>
+                                    <field name="sample_received_by"/>
+                                </group>
+                                <group>
+                                    <field name="sample_received_date"/>
+                                    <field name="Sample_description"/>
+                                    <field name="reason_id"/>
+                                    <field name="date_of_casting"/>
+                                </group>
+                            </group> 
+                            </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
