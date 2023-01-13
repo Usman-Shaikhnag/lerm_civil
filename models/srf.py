@@ -35,17 +35,19 @@ class LermSrf(models.Model):
 
     @api.onchange('customer')
     def _compute_contact_person(self):
-        self.contact_person = "Contact Person"
+        contact_obj = self.env['res.partner'].search([('id','=', self.customer.id)])
+        self.contact_person = contact_obj.name
         
 
 
     @api.onchange('customer')
     def _compute_email(self):
-        self.email_id = "Email id"
+        contact_obj = self.env['res.partner'].search([('id','=', self.customer.id)])
+        self.email_id = contact_obj.email
         
     
 
     @api.onchange('customer')
     def _compute_mobile_no(self):
-        contact_obj = self.env['res.partner'].search([('name','=', self.customer.name)])
-        self.mobile_no = ''
+        contact_obj = self.env['res.partner'].search([('id','=', self.customer.id)])
+        self.mobile_no = contact_obj.mobile
