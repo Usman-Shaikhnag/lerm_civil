@@ -50,6 +50,19 @@
 
     </record>
 
+    <record id="srf_tree" model="ir.ui.view">
+        <field name="name">lerm.srf.tree</field>
+        <field name="model">lerm.srf</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="srf_no"/>
+                <field name="job_no"/>
+                <field name="customer"/>
+                <field name="srf_date"/>
+            </tree>
+        </field>
+        </record>
+
     <record id="lerm_action" model="ir.actions.act_window">
         <field name="name">SRF</field>
         <field name="type">ir.actions.act_window</field>
