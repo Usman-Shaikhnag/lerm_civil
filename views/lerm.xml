@@ -16,7 +16,7 @@
                             <field name="billing_customer"/>
                             <field name="contact_person" readonly="1"/>
                             <field name="mobile_no" readonly="1"/>
-                            <field name="sample_entry"/>
+                            
                         </group>
                         <group>
                             <field name="srf_no"/>
@@ -24,6 +24,19 @@
                             <field name="email_id" readonly="1"/>
                             <field name="client_ref"/>
                         </group>
+                        <field name="sample_entry" >
+                            <tree editable="bottom">
+                                <field name="sample_id"/>
+                                <field name="brand"/>
+                                <field name="grade"/>
+                                <field name="sample_qty"/>
+                                <field name="sample_received_by"/>
+                                <field name="sample_received_date"/>
+                                <field name="Sample_description"/>
+                                <field name="reason_id"/>
+                                <field name="date_of_casting"/>
+                            </tree>
+                            </field>
                     </group>
 
                     <!-- <notebook>
