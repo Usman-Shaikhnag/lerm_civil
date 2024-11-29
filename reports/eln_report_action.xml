@@ -1058,7 +1058,82 @@
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
     </record>
+   <record id="design_mix_datasheet_action" model="ir.actions.report">
+    <field name="name">Design Mix Datasheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.design_mix_datasheet</field>
+    <field name="report_file">lerm_civil.design_mix_datasheet</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+  </record>
+  <record id="design_mix_report_action" model="ir.actions.report">
+    <field name="name">Design Mix Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.design_mix_report</field>
+    <field name="report_file">lerm_civil.design_mix_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+  </record>
 
+  <record id="measurmrnt_uncertainty_action" model="ir.actions.report">
+    <field name="name">Measurment Uncertainty DataSheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.measurmrnt_uncertainty_datasheet</field>
+    <field name="report_file">lerm_civil.measurmrnt_uncertainty_datasheet</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
+<record id="measurmrnt_uncertainty_report_action" model="ir.actions.report">
+    <field name="name">Measurment Uncertainty Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.measurment_uncertainty_report</field>
+    <field name="report_file">lerm_civil.measurment_uncertainty_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
+<record id="stainless_steel_tmt_bar_action" model="ir.actions.report">
+    <field name="name">STAINLESS STEEL - TMT Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.stainless_steel_tmt_bar_report</field>
+    <field name="report_file">lerm_civil.stainless_steel_tmt_bar_report</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+<record id="stainless_steel_tmt_bar_datasheet_action" model="ir.actions.report">
+    <field name="name">STAINLESS STEEL - TMT Datasheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.stainless_steel_tmt_bar_datasheet</field>
+    <field name="report_file">lerm_civil.stainless_steel_tmt_bar_datasheet</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+<record id="tile_datasheet_action" model="ir.actions.report">
+    <field name="name">Tile Datasheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.tile_datasheet</field>
+    <field name="report_file">lerm_civil.tile_datasheet</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+<record id="tile_report_action" model="ir.actions.report">
+    <field name="name">Tile Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.tile_report</field>
+    <field name="report_file">lerm_civil.tile_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
 
 
 

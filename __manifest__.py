@@ -228,6 +228,18 @@
     'reports/threaded_steel/threaded_steel_datasheet.xml',
     'reports/bricks_burnt_clay/bricks_burnt_clay_report.xml',
     'reports/bricks_burnt_clay/bricks_burnt_clay_datasheet.xml',
+    'views/mechanical/concrete_mix_design.xml',
+    'reports/concreate_design_mix/design_mix_datasheet.xml',
+    'reports/concreate_design_mix/design_mix_report.xml',
+    'views/mechanical/measurement_uncertainty.xml',
+    'reports/measurment_uncertainty/datasheet.xml',
+    'reports/measurment_uncertainty/report.xml',
+    'views/mechanical/stainless_steel_tmt.xml',
+    'reports/stainless_steel/stainless_steel_report.xml',
+    'reports/stainless_steel/stainless_steel_datasheet.xml',
+    'views/mechanical/tile.xml',
+    'reports/tile/tile_datasheet.xml',
+    'reports/tile/tile_report.xml'
 
 
     # 'views/portal_template.xml'

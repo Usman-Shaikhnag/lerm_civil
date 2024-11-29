@@ -1,0 +1,3303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_measurement_uncertainty_view" model="ir.ui.view">
+        <field name="name">mechanical.measurement.uncertainty.form</field>
+        <field name="model">mechanical.measurement.uncertainty</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                     <group>
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1" />
+                        <field name="eln_ref" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <h1>
+                            <field name="density_trial_mix" readonly="1" nolabel="1"/>
+                            <field name="equipment_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                   
+
+                    <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <label for="weighing_balance_1" string="Weighing Balance(gm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="weighing_balance_1" string="Uncertainty" />
+                            <field  name="weighing_balance_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="weighing_balance_2" string="K Factor" />
+                            <field  name="weighing_balance_2"  colspan="12"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="weighing_balance_3" string="Value" />
+                            <field  name="weighing_balance_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <label for="concrete_rod_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="concrete_rod_1" string="" />
+                            <field  name="concrete_rod_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="concrete_rod_2" string="" />
+                            <field  name="concrete_rod_2"  colspan="12"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="concrete_rod_3" string="" />
+                            <field  name="concrete_rod_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+
+                     <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <label for="density_cylinder_1" string="Density cylinder (litre)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="density_cylinder_1" string="" />
+                            <field  name="density_cylinder_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="density_cylinder_2" string="" />
+                            <field  name="density_cylinder_2"  colspan="12"  nolabel="1"/>
+                          </group>
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="density_cylinder_3" string="" />
+                            <field  name="density_cylinder_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <h1>
+                            <field name="sieve_analysis_name" readonly="1" nolabel="1"/>
+                            <field name="equipment_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                    <field name="uncertainty_rep_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="sr_no" string="No. of. Obs."/>
+                                <field name='mean_result' string="Measure Results"/>
+                                <field name='line1' string="(X! - X)"/>
+                                <field name='line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                  <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="mean_result_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <field name="line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <field name="line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition"></field>
+                            <field name="std_uncertainty"></field>
+                            <field name="relative_std"></field>
+                            <field name="nos_reading"></field>
+                            <field name="degree_freedom"></field>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <h1>
+                            <field name="type_b_uncertainty_name" readonly="1" nolabel="1"/>
+                            <field name="equipment_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                       <h2 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of Weighing Balance (gm))</h2>
+
+                    </group>
+
+
+
+                    <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty"></field>
+                            <field name="coverage_factor"></field>
+                            <field name="mean"></field>
+                            <field name="standard_uncertainty"></field>
+                            <field name="degree_of_freedom"></field>
+                            <field name="relative_std_uncertainty"></field>
+                    </group>
+
+                  <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                    <h2 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping Rod (mm))</h2>
+
+                  </group>
+
+
+                    <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty2"></field>
+                            <field name="coverage_factor2"></field>
+                            <field name="mean2"></field>
+                            <field name="standard_uncertainty2"></field>
+                            <field name="degree_of_freedom2"></field>
+                            <field name="relative_std_uncertainty2"></field>
+                    </group>
+
+                  <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                    <h2 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub3 (Uncertainty of Density Cylinder (Liter))</h2>
+                  </group>
+
+
+
+                    <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty3"></field>
+                            <field name="coverage_factor3"></field>
+                            <field name="mean3"></field>
+                            <field name="standard_uncertainty3"></field>
+                            <field name="degree_of_freedom3"></field>
+                            <field name="relative_std_uncertainty3"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="uc"></field>
+                           
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('equipment_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="verr"></field>
+                           
+                    </group>
+
+                     <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="covrage_factor"></field>
+                            <field name="relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('equipment_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+                   <!-- Parameter Name = 2) Density of hardened concrete -->
+
+
+                   <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <h1>
+                            <field name="density_hardened_concrete_name" readonly="1" nolabel="1"/>
+                            <field name="density_hardened_concrete_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <label for="w_balance_1" string="W .balance(gm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="w_balance_1" string="Uncertainty" />
+                            <field  name="w_balance_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="w_balance_2" string="K Factor" />
+                            <field  name="w_balance_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="w_balance_3" string="Value" />
+                            <field  name="w_balance_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <label for="vernier_calliper_1" string="Vernier Calliper(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="vernier_calliper_1" string="" />
+                            <field  name="vernier_calliper_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="vernier_calliper_2" string="" />
+                            <field  name="vernier_calliper_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="vernier_calliper_3" string="" />
+                            <field  name="vernier_calliper_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+                     <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <h1>
+                            <field name="density_hardend_name" readonly="1" nolabel="1"/>
+                            <field name="density_hardened_concrete_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                    <field name="density_hardend_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="density_no" string="No. of. Obs."/>
+                                <field name='mean_result1' string="Measure Results"/>
+                                <field name='density_line1' string="(X! - X)"/>
+                                <field name='density_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="mean_result1_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <field name="density_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <field name="density_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition1"></field>
+                            <field name="std_uncertainty1"></field>
+                            <field name="relative_std1"></field>
+                            <field name="nos_reading1"></field>
+                            <field name="degree_freedom1"></field>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                       <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of Weighing Balance (gm))</h3>
+
+                    </group>
+
+
+
+                    <group  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_density"></field>
+                            <field name="coverage_factor_density"></field>
+                            <field name="mean_density"></field>
+                            <field name="standard_uncertainty_density"></field>
+                            <field name="degree_of_freedom_density"></field>
+                            <field name="relative_std_uncertainty_density"></field>
+                    </group>
+
+                  <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Vernier Calliper (mm) )</h3>
+
+                  </group>
+
+
+                  <group  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_density1"></field>
+                            <field name="coverage_factor_density1"></field>
+                            <field name="mean_density1"></field>
+                            <field name="standard_uncertainty_density1"></field>
+                            <field name="degree_of_freedom_density1"></field>
+                            <field name="relative_std_uncertainty_density1"></field>
+                    </group>
+
+
+
+                      <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_density_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="density_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_density_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="density_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="density_covrage_factor"></field>
+                            <field name="density_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('density_hardened_concrete_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="density_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+                    <!-- 3) Cube Comp Strength  (M40) -->
+
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="compressive_name" readonly="1" nolabel="1"/>    
+                            <field name="compressive_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <label for="compressive_w_balance_1" string="W .balance(gm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="compressive_w_balance_1" string="Uncertainty" />
+                            <field  name="compressive_w_balance_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="compressive_w_balance_2" string="K Factor" />
+                            <field  name="compressive_w_balance_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="compressive_w_balance_3" string="Value" />
+                            <field  name="compressive_w_balance_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <label for="compressive_vernier_calliper_1" string="Vernier Calliper(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="compressive_vernier_calliper_1" string="" />
+                            <field  name="compressive_vernier_calliper_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="compressive_vernier_calliper_2" string="" />
+                            <field  name="compressive_vernier_calliper_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="compressive_vernier_calliper_3" string="" />
+                            <field  name="compressive_vernier_calliper_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <label for="compressive_ctm_1" string="CTM Machine(Kn)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="compressive_ctm_1" string="" />
+                            <field  name="compressive_ctm_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="compressive_ctm_2" string="" />
+                            <field  name="compressive_ctm_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="compressive_ctm_3" string="" />
+                            <field  name="compressive_ctm_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="compressive_type_name" readonly="1" nolabel="1"/>
+                            <field name="compressive_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <field name="compressive_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="compressive" string="No. of. Obs."/>
+                                <field name='compressive_mean_result' string="Measure Results"/>
+                                <field name='compressive_line1' string="(X! - X)"/>
+                                <field name='compressive_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="compressive_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <field name="compressive_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <field name="compressive_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_compressive"></field>
+                            <field name="std_uncertainty1_compressive"></field>
+                            <field name="relative_std_compressive"></field>
+                            <field name="nos_reading_compressive"></field>
+                            <field name="degree_freedom_compressive"></field>
+                    </group>
+
+                  <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  W. Balance (gm) )</h3>
+
+                  </group>
+
+
+                   <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_compressive"></field>
+                            <field name="coverage_factor_compressive"></field>
+                            <field name="mean_compressive"></field>
+                            <field name="standard_uncertainty_compressive"></field>
+                            <field name="degree_of_freedom_compressive"></field>
+                            <field name="relative_std_uncertainty_compressive"></field>
+                    </group>
+
+
+
+                    <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Vernier Calliper (mm))</h3>
+
+                  </group>
+
+
+                   <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_compressive1"></field>
+                            <field name="coverage_factor_compressive1"></field>
+                            <field name="mean_compressive1"></field>
+                            <field name="standard_uncertainty_compressive1"></field>
+                            <field name="degree_of_freedom_compressive1"></field>
+                            <field name="relative_std_uncertainty_compressive1"></field>
+                    </group>
+
+
+
+                  <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;"> Ub3 (Uncertainty of CMT Machine (Kn))</h3>
+
+                  </group>
+
+
+                      <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_compressive2"></field>
+                            <field name="coverage_factor_compressive2"></field>
+                            <field name="mean_compressive2"></field>
+                            <field name="standard_uncertainty_compressive2"></field>
+                            <field name="degree_of_freedom_compressive2"></field>
+                            <field name="relative_std_uncertainty_compressive2"></field>
+                    </group>
+
+
+
+                      <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_compressive_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="compressive_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('compressive_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_compressive_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="compressive_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="compressive_verr_covrage_factor"></field>
+                            <field name="compressive_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('compressive_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="compressive_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+                    <!-- 4) Accelerated Cube Comp Strength  (M40) -->
+
+                    <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <h1>
+                            <field name="act_name" readonly="1" nolabel="1"/>    
+                            <field name="act_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <label for="act_w_balance_1" string="W .balance(gm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="act_w_balance_1" string="Uncertainty" />
+                            <field  name="act_w_balance_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="act_w_balance_2" string="K Factor" />
+                            <field  name="act_w_balance_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="act_w_balance_3" string="Value" />
+                            <field  name="act_w_balance_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <label for="act_vernier_calliper_1" string="Vernier Calliper(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="act_vernier_calliper_1" string="" />
+                            <field  name="act_vernier_calliper_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="act_vernier_calliper_2" string="" />
+                            <field  name="act_vernier_calliper_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="act_vernier_calliper_3" string="" />
+                            <field  name="act_vernier_calliper_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+                     <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <label for="act_curing_tank_1" string="Curing Tank(°C)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="act_curing_tank_1" string="" />
+                            <field  name="act_curing_tank_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="act_curing_tank_2" string="" />
+                            <field  name="act_curing_tank_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="act_curing_tank_3" string="" />
+                            <field  name="act_curing_tank_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <label for="act_ctm_1" string="CTM Machine(Kn)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="act_ctm_1" string="" />
+                            <field  name="act_ctm_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="act_ctm_2" string="" />
+                            <field  name="act_ctm_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="act_ctm_3" string="" />
+                            <field  name="act_ctm_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+                   
+                   <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <h1>
+                            <field name="act_type_name" readonly="1" nolabel="1"/>
+                            <field name="act_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                    <field name="act_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="act" string="No. of. Obs."/>
+                                <field name='act_mean_result' string="Measure Results"/>
+                                <field name='act_line1' string="(X! - X)"/>
+                                <field name='act_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="act_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <field name="act_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <field name="act_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_act"></field>
+                            <field name="std_uncertainty1_act"></field>
+                            <field name="relative_std_act"></field>
+                            <field name="nos_reading_act"></field>
+                            <field name="degree_freedom_act"></field>
+                    </group>
+
+
+                 <!-- Type-B Uncertainty -->
+
+                    <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  W. Balance (gm) )</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_act1"></field>
+                            <field name="coverage_factor_act1"></field>
+                            <field name="mean_act1"></field>
+                            <field name="standard_uncertainty_act1"></field>
+                            <field name="degree_of_freedom_act1"></field>
+                            <field name="relative_std_uncertainty_act1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Vernier Calliper (mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_act2"></field>
+                            <field name="coverage_factor_act2"></field>
+                            <field name="mean_act2"></field>
+                            <field name="standard_uncertainty_act2"></field>
+                            <field name="degree_of_freedom_act2"></field>
+                            <field name="relative_std_uncertainty_act2"></field>
+                    </group>
+
+
+                
+                 <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub3 (Uncertainty of Accelerated Curing Tank)</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_act3"></field>
+                            <field name="coverage_factor_act3"></field>
+                            <field name="mean_act3"></field>
+                            <field name="standard_uncertainty_act3"></field>
+                            <field name="degree_of_freedom_act3"></field>
+                            <field name="relative_std_uncertainty_act3"></field>
+                    </group>
+
+
+
+                  <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub4 (Uncertainty of CMT Machine (Kn))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_act4"></field>
+                            <field name="coverage_factor_act4"></field>
+                            <field name="mean_act4"></field>
+                            <field name="standard_uncertainty_act4"></field>
+                            <field name="degree_of_freedom_act4"></field>
+                            <field name="relative_std_uncertainty_act4"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_act_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="act_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('act_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_act_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="act_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="act_verr_covrage_factor"></field>
+                            <field name="act_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('act_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="act_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+                    <!-- 5) flexural beam Comp Strength (M40) -->
+
+                    <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <h1>
+                            <field name="flexural_name" readonly="1" nolabel="1"/>    
+                            <field name="flexural_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <label for="flexural_w_balance_1" string="W .balance(gm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="flexural_w_balance_1" string="Uncertainty" />
+                            <field  name="flexural_w_balance_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_w_balance_2" string="K Factor" />
+                            <field  name="flexural_w_balance_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_w_balance_3" string="Value" />
+                            <field  name="flexural_w_balance_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <label for="flexural_vernier_calliper_1" string="Vernier Calliper(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="flexural_vernier_calliper_1" string="" />
+                            <field  name="flexural_vernier_calliper_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_vernier_calliper_2" string="" />
+                            <field  name="flexural_vernier_calliper_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_vernier_calliper_3" string="" />
+                            <field  name="flexural_vernier_calliper_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+                     <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <label for="flexural_utm_1" string="UTM Machine(KN)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="flexural_utm_1" string="" />
+                            <field  name="flexural_utm_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_utm_2" string="" />
+                            <field  name="flexural_utm_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_utm_3" string="" />
+                            <field  name="flexural_utm_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <label for="flexural_measuring_1" string="Measuring tape(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="flexural_measuring_1" string="" />
+                            <field  name="flexural_measuring_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_measuring_2" string="" />
+                            <field  name="flexural_measuring_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="flexural_measuring_3" string="" />
+                            <field  name="flexural_measuring_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+                   
+                   <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <h1>
+                            <field name="flexural_type_name" readonly="1" nolabel="1"/>
+                            <field name="flexural_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                    <field name="flexural_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="flexural" string="No. of. Obs."/>
+                                <field name='flexural_mean_result' string="Measure Results"/>
+                                <field name='flexural_line1' string="(X! - X)"/>
+                                <field name='flexural_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="flexural_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <field name="flexural_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <field name="flexural_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_flexural"></field>
+                            <field name="std_uncertainty1_flexural"></field>
+                            <field name="relative_std_flexural"></field>
+                            <field name="nos_reading_flexural"></field>
+                            <field name="degree_freedom_flexural"></field>
+                    </group>
+
+
+                     <!-- Type-B Uncertainty -->
+
+                    <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  W. Balance (gm) )</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_flexural1"></field>
+                            <field name="coverage_factor_flexural1"></field>
+                            <field name="mean_flexural1"></field>
+                            <field name="standard_uncertainty_flexural1"></field>
+                            <field name="degree_of_freedom_flexural1"></field>
+                            <field name="relative_std_uncertainty_flexural1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Vernier Calliper (mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_flexural2"></field>
+                            <field name="coverage_factor_flexural2"></field>
+                            <field name="mean_flexural2"></field>
+                            <field name="standard_uncertainty_flexural2"></field>
+                            <field name="degree_of_freedom_flexural2"></field>
+                            <field name="relative_std_uncertainty_flexural2"></field>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub3 (Uncertainty of UTM Machine (Kn))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_flexural3"></field>
+                            <field name="coverage_factor_flexural3"></field>
+                            <field name="mean_flexural3"></field>
+                            <field name="standard_uncertainty_flexural3"></field>
+                            <field name="degree_of_freedom_flexural3"></field>
+                            <field name="relative_std_uncertainty_flexural3"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub4 (Uncertainty of Measuring Tape (mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_flexural4"></field>
+                            <field name="coverage_factor_flexural4"></field>
+                            <field name="mean_flexural4"></field>
+                            <field name="standard_uncertainty_flexural4"></field>
+                            <field name="degree_of_freedom_flexural4"></field>
+                            <field name="relative_std_uncertainty_flexural4"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_flexural_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="flexural_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('flexural_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_flexural_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="flexural_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="flexural_verr_covrage_factor"></field>
+                            <field name="flexural_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('flexural_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="flexural_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+
+                     <!-- 6) concrete Water Absorption -->
+
+                    <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <h1>
+                            <field name="water_name" readonly="1" nolabel="1"/>    
+                            <field name="water_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <label for="water_w_balance_1" string="W .balance(gm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="water_w_balance_1" string="Uncertainty" />
+                            <field  name="water_w_balance_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="water_w_balance_2" string="K Factor" />
+                            <field  name="water_w_balance_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="water_w_balance_3" string="Value" />
+                            <field  name="water_w_balance_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <label for="water_hotair_1" string="Hot Air Oven(°C)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="water_hotair_1" string="" />
+                            <field  name="water_hotair_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="water_hotair_2" string="" />
+                            <field  name="water_hotair_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="water_hotair_3" string="" />
+                            <field  name="water_hotair_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+                    
+
+                   
+                   <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <h1>
+                            <field name="water_type_name" readonly="1" nolabel="1"/>
+                            <field name="water_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                    <field name="water_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="water" string="No. of. Obs."/>
+                                <field name='water_mean_result' string="Measure Results"/>
+                                <field name='water_line1' string="(X! - X)"/>
+                                <field name='water_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="water_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <field name="water_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <field name="water_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('water_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_water"></field>
+                            <field name="std_uncertainty1_water"></field>
+                            <field name="relative_std_water"></field>
+                            <field name="nos_reading_water"></field>
+                            <field name="degree_freedom_water"></field>
+                    </group>
+
+                <!-- Type-B Uncertainty -->
+
+                    <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  W. Balance (gm) )</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('water_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_water1"></field>
+                            <field name="coverage_factor_water1"></field>
+                            <field name="mean_water1"></field>
+                            <field name="standard_uncertainty_water1"></field>
+                            <field name="degree_of_freedom_water1"></field>
+                            <field name="relative_std_uncertainty_water1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Hot Air Oven (°C))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('water_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_water2"></field>
+                            <field name="coverage_factor_water2"></field>
+                            <field name="mean_water2"></field>
+                            <field name="standard_uncertainty_water2"></field>
+                            <field name="degree_of_freedom_water2"></field>
+                            <field name="relative_std_uncertainty_water2"></field>
+                    </group>
+
+
+                      <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_water_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('water_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="water_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('water_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_water_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('water_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="water_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('water_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="water_verr_covrage_factor"></field>
+                            <field name="water_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('water_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="water_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+                    <!-- 6) split tensile Strength  (M40) -->
+
+                    <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <h1>
+                            <field name="split_name" readonly="1" nolabel="1"/>    
+                            <field name="split_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <label for="split_w_balance_1" string="W .balance(gm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="split_w_balance_1" string="Uncertainty" />
+                            <field  name="split_w_balance_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="split_w_balance_2" string="K Factor" />
+                            <field  name="split_w_balance_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="split_w_balance_3" string="Value" />
+                            <field  name="split_w_balance_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    
+
+
+                     <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <label for="split_measuring_1" string="Measuring tape(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="split_measuring_1" string="" />
+                            <field  name="split_measuring_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="split_measuring_2" string="" />
+                            <field  name="split_measuring_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="split_measuring_3" string="" />
+                            <field  name="split_measuring_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <label for="split_ctm_1" string="CTM Machine(Kn)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="split_ctm_1" string="" />
+                            <field  name="split_ctm_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="split_ctm_2" string="" />
+                            <field  name="split_ctm_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="split_ctm_3" string="" />
+                            <field  name="split_ctm_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+                    
+
+                   
+                   <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <h1>
+                            <field name="split_type_name" readonly="1" nolabel="1"/>
+                            <field name="split_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                    <field name="split_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="split" string="No. of. Obs."/>
+                                <field name='split_mean_result' string="Measure Results"/>
+                                <field name='split_line1' string="(X! - X)"/>
+                                <field name='split_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="split_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <field name="split_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <field name="split_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_split"></field>
+                            <field name="std_uncertainty1_split"></field>
+                            <field name="relative_std_split"></field>
+                            <field name="nos_reading_split"></field>
+                            <field name="degree_freedom_split"></field>
+                    </group>
+
+
+                     <!-- Type-B Uncertainty -->
+
+                    <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  W. Balance (gm) )</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_split1"></field>
+                            <field name="coverage_factor_split1"></field>
+                            <field name="mean_split1"></field>
+                            <field name="standard_uncertainty_split1"></field>
+                            <field name="degree_of_freedom_split1"></field>
+                            <field name="relative_std_uncertainty_split1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Measuring tape (mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_split2"></field>
+                            <field name="coverage_factor_split2"></field>
+                            <field name="mean_split2"></field>
+                            <field name="standard_uncertainty_split2"></field>
+                            <field name="degree_of_freedom_split2"></field>
+                            <field name="relative_std_uncertainty_split2"></field>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub3 (Uncertainty of CTM Machine(Kn))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_split3"></field>
+                            <field name="coverage_factor_split3"></field>
+                            <field name="mean_split3"></field>
+                            <field name="standard_uncertainty_split3"></field>
+                            <field name="degree_of_freedom_split3"></field>
+                            <field name="relative_std_uncertainty_split3"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_split_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="split_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('split_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_split_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="split_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="split_verr_covrage_factor"></field>
+                            <field name="split_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('split_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="split_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+                     <!-- 8) drying Shrinkage Of Concrete -->
+
+                    <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <h1>
+                            <field name="drying_name" readonly="1" nolabel="1"/>    
+                            <field name="drying_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <label for="drying_vernier_1" string="Vernier Caliper (mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="drying_vernier_1" string="Uncertainty" />
+                            <field  name="drying_vernier_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="drying_vernier_2" string="K Factor" />
+                            <field  name="drying_vernier_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="drying_vernier_3" string="Value" />
+                            <field  name="drying_vernier_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    
+
+
+                     <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <label for="drying_hot_1" string="Hot air oven (°c)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="drying_hot_1" string="" />
+                            <field  name="drying_hot_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="drying_hot_2" string="" />
+                            <field  name="drying_hot_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="drying_hot_3" string="" />
+                            <field  name="drying_hot_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <label for="drying_dial_1" string="Dial Guage (mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="drying_dial_1" string="" />
+                            <field  name="drying_dial_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="drying_dial_2" string="" />
+                            <field  name="drying_dial_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="drying_dial_3" string="" />
+                            <field  name="drying_dial_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <h1>
+                            <field name="drying_type_name" readonly="1" nolabel="1"/>
+                            <field name="drying_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                    <field name="drying_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="drying" string="No. of. Obs."/>
+                                <field name='drying_mean_result' string="Measure Results"/>
+                                <field name='drying_line1' string="(X! - X)"/>
+                                <field name='drying_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="drying_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <field name="drying_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <field name="drying_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_drying"></field>
+                            <field name="std_uncertainty1_drying"></field>
+                            <field name="relative_std_drying"></field>
+                            <field name="nos_reading_drying"></field>
+                            <field name="degree_freedom_drying"></field>
+                    </group>
+
+                      <!-- Type-B Uncertainty -->
+
+                    <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Vernier Caliper (mm) )</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_drying1"></field>
+                            <field name="coverage_factor_drying1"></field>
+                            <field name="mean_drying1"></field>
+                            <field name="standard_uncertainty_drying1"></field>
+                            <field name="degree_of_freedom_drying1"></field>
+                            <field name="relative_std_uncertainty_drying1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Hot air oven (°c))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_drying2"></field>
+                            <field name="coverage_factor_drying2"></field>
+                            <field name="mean_drying2"></field>
+                            <field name="standard_uncertainty_drying2"></field>
+                            <field name="degree_of_freedom_drying2"></field>
+                            <field name="relative_std_uncertainty_drying2"></field>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub3 (Uncertainty of Dial Guage (mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_drying3"></field>
+                            <field name="coverage_factor_drying3"></field>
+                            <field name="mean_drying3"></field>
+                            <field name="standard_uncertainty_drying3"></field>
+                            <field name="degree_of_freedom_drying3"></field>
+                            <field name="relative_std_uncertainty_drying3"></field>
+                    </group>
+
+                     <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_drying_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="drying_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('drying_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_drying_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="drying_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="drying_verr_covrage_factor"></field>
+                            <field name="drying_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('drying_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="drying_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+                     <!-- 9) Moisture Movement Of Concrete -->
+
+                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <h1>
+                            <field name="moisture_name" readonly="1" nolabel="1"/>    
+                            <field name="moisture_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <label for="moisture_vernier_1" string="Vernier Caliper (mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="moisture_vernier_1" string="Uncertainty" />
+                            <field  name="moisture_vernier_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="moisture_vernier_2" string="K Factor" />
+                            <field  name="moisture_vernier_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="moisture_vernier_3" string="Value" />
+                            <field  name="moisture_vernier_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+
+                    
+
+
+                     <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <label for="moisture_hot_1" string="Hot air oven (°c)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="moisture_hot_1" string="" />
+                            <field  name="moisture_hot_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="moisture_hot_2" string="" />
+                            <field  name="moisture_hot_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="moisture_hot_3" string="" />
+                            <field  name="moisture_hot_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <label for="moisture_dial_1" string="Dial Guage (mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="moisture_dial_1" string="" />
+                            <field  name="moisture_dial_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="moisture_dial_2" string="" />
+                            <field  name="moisture_dial_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="moisture_dial_3" string="" />
+                            <field  name="moisture_dial_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <h1>
+                            <field name="moisture_type_name" readonly="1" nolabel="1"/>
+                            <field name="moisture_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                    <field name="moisture_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="moisture" string="No. of. Obs."/>
+                                <field name='moisture_mean_result' string="Measure Results"/>
+                                <field name='moisture_line1' string="(X! - X)"/>
+                                <field name='moisture_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="moisture_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <field name="moisture_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <field name="moisture_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_moisture"></field>
+                            <field name="std_uncertainty1_moisture"></field>
+                            <field name="relative_std_moisture"></field>
+                            <field name="nos_reading_moisture"></field>
+                            <field name="degree_freedom_moisture"></field>
+                    </group>
+
+                      <!-- Type-B Uncertainty -->
+
+                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Vernier Caliper (mm) )</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_moisture1"></field>
+                            <field name="coverage_factor_moisture1"></field>
+                            <field name="mean_moisture1"></field>
+                            <field name="standard_uncertainty_moisture1"></field>
+                            <field name="degree_of_freedom_moisture1"></field>
+                            <field name="relative_std_uncertainty_moisture1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Hot air oven (°c))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_moisture2"></field>
+                            <field name="coverage_factor_moisture2"></field>
+                            <field name="mean_moisture2"></field>
+                            <field name="standard_uncertainty_moisture2"></field>
+                            <field name="degree_of_freedom_moisture2"></field>
+                            <field name="relative_std_uncertainty_moisture2"></field>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub3 (Uncertainty of Dial Guage (mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_moisture3"></field>
+                            <field name="coverage_factor_moisture3"></field>
+                            <field name="mean_moisture3"></field>
+                            <field name="standard_uncertainty_moisture3"></field>
+                            <field name="degree_of_freedom_moisture3"></field>
+                            <field name="relative_std_uncertainty_moisture3"></field>
+                    </group>
+
+                     <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_moisture_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="moisture_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_moisture_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="moisture_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="moisture_verr_covrage_factor"></field>
+                            <field name="moisture_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('moisture_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="moisture_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+                      <!-- 10) Slump 0 min -->
+
+                    <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump0_name" readonly="1" nolabel="1"/>    
+                            <field name="slump0_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <label for="slump0_cone_1" string="Slump cone(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump0_cone_1" string="Uncertainty" />
+                            <field  name="slump0_cone_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump0_cone_2" string="K Factor" />
+                            <field  name="slump0_cone_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump0_cone_3" string="Value" />
+                            <field  name="slump0_cone_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <label for="slump0_taping_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump0_taping_1" string="" />
+                            <field  name="slump0_taping_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump0_taping_2" string="" />
+                            <field  name="slump0_taping_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump0_taping_3" string="" />
+                            <field  name="slump0_taping_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump0_type_name" readonly="1" nolabel="1"/>
+                            <field name="slump0_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                    <field name="slump0_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="slump0" string="No. of. Obs."/>
+                                <field name='slump0_mean_result' string="Measure Results"/>
+                                <field name='slump0_line1' string="(X! - X)"/>
+                                <field name='slump0_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="slump0_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <field name="slump0_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <field name="slump0_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('slump0_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_slump0"></field>
+                            <field name="std_uncertainty1_slump0"></field>
+                            <field name="relative_std_slump0"></field>
+                            <field name="nos_reading_slump0"></field>
+                            <field name="degree_freedom_slump0"></field>
+                    </group>
+
+                      <!-- Type-B Uncertainty -->
+
+                    <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Slump cone(mm)) </h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump0_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump01"></field>
+                            <field name="coverage_factor_slump01"></field>
+                            <field name="mean_slump01"></field>
+                            <field name="standard_uncertainty_slump01"></field>
+                            <field name="degree_of_freedom_slump01"></field>
+                            <field name="relative_std_uncertainty_slump01"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping rod(mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump0_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump02"></field>
+                            <field name="coverage_factor_slump02"></field>
+                            <field name="mean_slump02"></field>
+                            <field name="standard_uncertainty_slump02"></field>
+                            <field name="degree_of_freedom_slump02"></field>
+                            <field name="relative_std_uncertainty_slump02"></field>
+                    </group>
+
+
+                   
+                     <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_slump02_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump0_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump02_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump0_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_slump02_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump0_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump02_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('slump0_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump02_verr_covrage_factor"></field>
+                            <field name="slump02_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump0_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump02_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+                     <!-- 11) Slump 30 min -->
+
+                    <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump30_name" readonly="1" nolabel="1"/>    
+                            <field name="slump30_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <label for="slump30_cone_1" string="Slump cone(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump30_cone_1" string="Uncertainty" />
+                            <field  name="slump30_cone_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump30_cone_2" string="K Factor" />
+                            <field  name="slump30_cone_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump30_cone_3" string="Value" />
+                            <field  name="slump30_cone_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <label for="slump30_taping_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump30_taping_1" string="" />
+                            <field  name="slump30_taping_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump30_taping_2" string="" />
+                            <field  name="slump30_taping_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump30_taping_3" string="" />
+                            <field  name="slump30_taping_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump30_type_name" readonly="1" nolabel="1"/>
+                            <field name="slump30_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                    <field name="slump30_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="slump30" string="No. of. Obs."/>
+                                <field name='slump30_mean_result' string="Measure Results"/>
+                                <field name='slump30_line1' string="(X! - X)"/>
+                                <field name='slump30_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="slump30_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <field name="slump30_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <field name="slump30_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('slump30_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_slump30"></field>
+                            <field name="std_uncertainty1_slump30"></field>
+                            <field name="relative_std_slump30"></field>
+                            <field name="nos_reading_slump30"></field>
+                            <field name="degree_freedom_slump30"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Slump cone(mm)) </h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump30_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump30_1"></field>
+                            <field name="coverage_factor_slump30_1"></field>
+                            <field name="mean_slump30_1"></field>
+                            <field name="standard_uncertainty_slump30_1"></field>
+                            <field name="degree_of_freedom_slump30_1"></field>
+                            <field name="relative_std_uncertainty_slump30_1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping rod(mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump30_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump30_2"></field>
+                            <field name="coverage_factor_slump30_2"></field>
+                            <field name="mean_slump30_2"></field>
+                            <field name="standard_uncertainty_slump30_2"></field>
+                            <field name="degree_of_freedom_slump30_2"></field>
+                            <field name="relative_std_uncertainty_slump30_2"></field>
+                    </group>
+
+
+                   
+                     <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_slump30_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump30_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump30_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump30_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_slump30_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump30_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump30_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('slump30_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump30_verr_covrage_factor"></field>
+                            <field name="slump30_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump30_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump30_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+
+                     <!-- 12) Slump 60 min -->
+
+                    <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump60_name" readonly="1" nolabel="1"/>    
+                            <field name="slump60_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <label for="slump60_cone_1" string="Slump cone(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump60_cone_1" string="Uncertainty" />
+                            <field  name="slump60_cone_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump60_cone_2" string="K Factor" />
+                            <field  name="slump60_cone_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump60_cone_3" string="Value" />
+                            <field  name="slump60_cone_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <label for="slump60_taping_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump60_taping_1" string="" />
+                            <field  name="slump60_taping_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump60_taping_2" string="" />
+                            <field  name="slump60_taping_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump60_taping_3" string="" />
+                            <field  name="slump60_taping_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump60_type_name" readonly="1" nolabel="1"/>
+                            <field name="slump60_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                    <field name="slump60_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="slump60" string="No. of. Obs."/>
+                                <field name='slump60_mean_result' string="Measure Results"/>
+                                <field name='slump60_line1' string="(X! - X)"/>
+                                <field name='slump60_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="slump60_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <field name="slump60_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <field name="slump60_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('slump60_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_slump60"></field>
+                            <field name="std_uncertainty1_slump60"></field>
+                            <field name="relative_std_slump60"></field>
+                            <field name="nos_reading_slump60"></field>
+                            <field name="degree_freedom_slump60"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Slump cone(mm)) </h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump60_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump60_1"></field>
+                            <field name="coverage_factor_slump60_1"></field>
+                            <field name="mean_slump60_1"></field>
+                            <field name="standard_uncertainty_slump60_1"></field>
+                            <field name="degree_of_freedom_slump60_1"></field>
+                            <field name="relative_std_uncertainty_slump60_1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping rod(mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump60_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump60_2"></field>
+                            <field name="coverage_factor_slump60_2"></field>
+                            <field name="mean_slump60_2"></field>
+                            <field name="standard_uncertainty_slump60_2"></field>
+                            <field name="degree_of_freedom_slump60_2"></field>
+                            <field name="relative_std_uncertainty_slump60_2"></field>
+                    </group>
+
+
+                   
+                     <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_slump60_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump60_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump60_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump60_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_slump60_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump60_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump60_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('slump60_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump60_verr_covrage_factor"></field>
+                            <field name="slump60_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump60_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump60_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+                     <!-- 13) Slump 90 min -->
+
+                    <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump90_name" readonly="1" nolabel="1"/>    
+                            <field name="slump90_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <label for="slump90_cone_1" string="Slump cone(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump90_cone_1" string="Uncertainty" />
+                            <field  name="slump90_cone_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump90_cone_2" string="K Factor" />
+                            <field  name="slump90_cone_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump90_cone_3" string="Value" />
+                            <field  name="slump90_cone_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <label for="slump90_taping_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump90_taping_1" string="" />
+                            <field  name="slump90_taping_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump90_taping_2" string="" />
+                            <field  name="slump90_taping_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump90_taping_3" string="" />
+                            <field  name="slump90_taping_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump90_type_name" readonly="1" nolabel="1"/>
+                            <field name="slump90_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                    <field name="slump90_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="slump90" string="No. of. Obs."/>
+                                <field name='slump90_mean_result' string="Measure Results"/>
+                                <field name='slump90_line1' string="(X! - X)"/>
+                                <field name='slump90_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="slump90_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <field name="slump90_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <field name="slump90_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('slump90_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_slump90"></field>
+                            <field name="std_uncertainty1_slump90"></field>
+                            <field name="relative_std_slump90"></field>
+                            <field name="nos_reading_slump90"></field>
+                            <field name="degree_freedom_slump90"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Slump cone(mm)) </h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump90_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump90_1"></field>
+                            <field name="coverage_factor_slump90_1"></field>
+                            <field name="mean_slump90_1"></field>
+                            <field name="standard_uncertainty_slump90_1"></field>
+                            <field name="degree_of_freedom_slump90_1"></field>
+                            <field name="relative_std_uncertainty_slump90_1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping rod(mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump90_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump90_2"></field>
+                            <field name="coverage_factor_slump90_2"></field>
+                            <field name="mean_slump90_2"></field>
+                            <field name="standard_uncertainty_slump90_2"></field>
+                            <field name="degree_of_freedom_slump90_2"></field>
+                            <field name="relative_std_uncertainty_slump90_2"></field>
+                    </group>
+
+
+                   
+                     <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_slump90_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump90_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump90_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump90_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_slump90_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump90_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump90_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('slump90_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump90_verr_covrage_factor"></field>
+                            <field name="slump90_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump90_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump90_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+                     <!-- 14) Slump 120 min -->
+
+                    <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump120_name" readonly="1" nolabel="1"/>    
+                            <field name="slump120_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <label for="slump120_cone_1" string="Slump cone(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump120_cone_1" string="Uncertainty" />
+                            <field  name="slump120_cone_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump120_cone_2" string="K Factor" />
+                            <field  name="slump120_cone_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump120_cone_3" string="Value" />
+                            <field  name="slump120_cone_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <label for="slump120_taping_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump120_taping_1" string="" />
+                            <field  name="slump120_taping_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump120_taping_2" string="" />
+                            <field  name="slump120_taping_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump120_taping_3" string="" />
+                            <field  name="slump120_taping_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump120_type_name" readonly="1" nolabel="1"/>
+                            <field name="slump120_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                    <field name="slump120_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="slump120" string="No. of. Obs."/>
+                                <field name='slump120_mean_result' string="Measure Results"/>
+                                <field name='slump120_line1' string="(X! - X)"/>
+                                <field name='slump120_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="slump120_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <field name="slump120_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <field name="slump120_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('slump120_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_slump120"></field>
+                            <field name="std_uncertainty1_slump120"></field>
+                            <field name="relative_std_slump120"></field>
+                            <field name="nos_reading_slump120"></field>
+                            <field name="degree_freedom_slump120"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Slump cone(mm)) </h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump120_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump120_1"></field>
+                            <field name="coverage_factor_slump120_1"></field>
+                            <field name="mean_slump120_1"></field>
+                            <field name="standard_uncertainty_slump120_1"></field>
+                            <field name="degree_of_freedom_slump120_1"></field>
+                            <field name="relative_std_uncertainty_slump120_1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping rod(mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump120_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump120_2"></field>
+                            <field name="coverage_factor_slump120_2"></field>
+                            <field name="mean_slump120_2"></field>
+                            <field name="standard_uncertainty_slump120_2"></field>
+                            <field name="degree_of_freedom_slump120_2"></field>
+                            <field name="relative_std_uncertainty_slump120_2"></field>
+                    </group>
+
+
+                   
+                     <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_slump120_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump120_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump120_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump120_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_slump120_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump120_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump120_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('slump120_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump120_verr_covrage_factor"></field>
+                            <field name="slump120_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump120_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump120_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+                     <!-- 15) Slump 150 min -->
+
+                    <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump150_name" readonly="1" nolabel="1"/>    
+                            <field name="slump150_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <label for="slump150_cone_1" string="Slump cone(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump150_cone_1" string="Uncertainty" />
+                            <field  name="slump150_cone_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump150_cone_2" string="K Factor" />
+                            <field  name="slump150_cone_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump150_cone_3" string="Value" />
+                            <field  name="slump150_cone_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <label for="slump150_taping_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump150_taping_1" string="" />
+                            <field  name="slump150_taping_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump150_taping_2" string="" />
+                            <field  name="slump150_taping_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump150_taping_3" string="" />
+                            <field  name="slump150_taping_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump150_type_name" readonly="1" nolabel="1"/>
+                            <field name="slump150_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                    <field name="slump150_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="slump150" string="No. of. Obs."/>
+                                <field name='slump150_mean_result' string="Measure Results"/>
+                                <field name='slump150_line1' string="(X! - X)"/>
+                                <field name='slump150_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="slump150_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <field name="slump150_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <field name="slump150_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('slump150_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_slump150"></field>
+                            <field name="std_uncertainty1_slump150"></field>
+                            <field name="relative_std_slump150"></field>
+                            <field name="nos_reading_slump150"></field>
+                            <field name="degree_freedom_slump150"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Slump cone(mm)) </h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump150_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump150_1"></field>
+                            <field name="coverage_factor_slump150_1"></field>
+                            <field name="mean_slump150_1"></field>
+                            <field name="standard_uncertainty_slump150_1"></field>
+                            <field name="degree_of_freedom_slump150_1"></field>
+                            <field name="relative_std_uncertainty_slump150_1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping rod(mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump150_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump150_2"></field>
+                            <field name="coverage_factor_slump150_2"></field>
+                            <field name="mean_slump150_2"></field>
+                            <field name="standard_uncertainty_slump150_2"></field>
+                            <field name="degree_of_freedom_slump150_2"></field>
+                            <field name="relative_std_uncertainty_slump150_2"></field>
+                    </group>
+
+
+                   
+                     <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_slump150_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump150_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump150_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump150_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_slump150_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump150_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump150_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('slump150_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump150_verr_covrage_factor"></field>
+                            <field name="slump150_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump150_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump150_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+                      <!-- 15) Slump 180 min -->
+
+                    <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump180_name" readonly="1" nolabel="1"/>    
+                            <field name="slump180_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <label for="slump180_cone_1" string="Slump cone(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump180_cone_1" string="Uncertainty" />
+                            <field  name="slump180_cone_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump180_cone_2" string="K Factor" />
+                            <field  name="slump180_cone_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump180_cone_3" string="Value" />
+                            <field  name="slump180_cone_3"  colspan="12"  nolabel="1"/>
+                          </group>
+                         
+                          
+                        </div>
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <label for="slump180_taping_1" string="Concrete Tamping rod(mm)" />
+                        <div class="address_format " >
+                          <group colspan="18"  class="oe_inline">
+                            <label for="slump180_taping_1" string="" />
+                            <field  name="slump180_taping_1"  colspan="12"  nolabel="1"/>
+                          </group>
+                          <group colspan="1" class="oe_inline"  >
+                            <label for="slump180_taping_2" string="" />
+                            <field  name="slump180_taping_2"  colspan="12"  nolabel="1"/>
+                          </group>
+
+
+                           <group colspan="1" class="oe_inline"  >
+                            <label for="slump180_taping_3" string="" />
+                            <field  name="slump180_taping_3"  colspan="12"  nolabel="1"/>
+                          </group>
+
+                          
+                        </div>
+                    </group>
+
+
+                     <!-- Type-A Uncertainty (Repeatability) -->
+
+
+                     <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <h1>
+                            <field name="slump180_type_name" readonly="1" nolabel="1"/>
+                            <field name="slump180_visible" invisible="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                    <field name="slump180_child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="slump180" string="No. of. Obs."/>
+                                <field name='slump180_mean_result' string="Measure Results"/>
+                                <field name='slump180_line1' string="(X! - X)"/>
+                                <field name='slump180_line2' string="(X! - X)2"/>
+                               
+                            </tree>
+                    </field>
+                    </group>
+
+
+                     <group style="width:100%">
+                    <group style="width:50%"  attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <div style="white-space: nowrap;">
+                            <b>Mean = Measure Results: </b>
+                            <field name="slump180_mean_avg" />
+                        </div>
+                    </group>
+                    <group style="width:25%"  attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <field name="slump180_line1_sum"/>
+                    </group>
+
+                    <group style="width:25%"  attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <field name="slump180_line2_sum"/>
+                    </group>
+                  </group>
+
+                 <group  attrs="{'invisible': [('slump180_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="standard_devition_slump180"></field>
+                            <field name="std_uncertainty1_slump180"></field>
+                            <field name="relative_std_slump180"></field>
+                            <field name="nos_reading_slump180"></field>
+                            <field name="degree_freedom_slump180"></field>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub1 (Uncertainty of  Slump cone(mm)) </h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump180_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump180_1"></field>
+                            <field name="coverage_factor_slump180_1"></field>
+                            <field name="mean_slump180_1"></field>
+                            <field name="standard_uncertainty_slump180_1"></field>
+                            <field name="degree_of_freedom_slump180_1"></field>
+                            <field name="relative_std_uncertainty_slump180_1"></field>
+                    </group>
+
+                 <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                    <h3 style="text-align: center; margin-top: 5mm; margin-bottom: 5mm;">Ub2 (Uncertainty of Concrete Tamping rod(mm))</h3>
+
+                  </group>
+              
+
+                   <group  attrs="{'invisible': [('slump180_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="expanded_uncertainty_slump180_2"></field>
+                            <field name="coverage_factor_slump180_2"></field>
+                            <field name="mean_slump180_2"></field>
+                            <field name="standard_uncertainty_slump180_2"></field>
+                            <field name="degree_of_freedom_slump180_2"></field>
+                            <field name="relative_std_uncertainty_slump180_2"></field>
+                    </group>
+
+
+                   
+                     <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <h1>
+                            <field name="combined_standard_slump180_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump180_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump180_uc"></field>
+                           
+                    </group>
+
+
+                     <group attrs="{'invisible': [('slump180_visible', '=', False)]}">
+                        <h1>
+                            <field name="effective_freedom_slump180_name" readonly="1" nolabel="1"/>
+
+                        </h1>
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump180_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump180_verr"></field>
+                           
+                    </group>
+
+
+                     <group  attrs="{'invisible': [('slump180_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump180_verr_covrage_factor"></field>
+                            <field name="slump180_verr_relative_expanded"></field>
+                           
+                    </group>
+
+
+                    <group  attrs="{'invisible': [('slump180_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                            <field name="slump180_verr_expanded_uncertainty"></field>
+                           
+                    </group>
+
+
+
+
+
+
+
+
+                    
+
+
+                   
+                     
+                </sheet>
+            </form>
+        </field>
+    </record>
+   
+
+
+    </data>
+</odoo>

@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_tile" model="ir.ui.view">
+        <field name="name">mechanical.tile.form</field>
+        <field name="model">mechanical.tile</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                         <field name="grade" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+                   
+       
+
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <h1>
+                            <field name="dimension_name1" readonly="1" nolabel="1"/>
+                            <field name="dimension_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <field name="child_lines" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='length1'/>
+                                <field name='length2'/>
+                                <field name='length3'/>
+                                <field name='length4'/>
+
+                                <field name='width1'/>
+                                <field name='width2'/>
+                                <field name='width3'/>
+                                <field name='width4'/>
+
+                                <field name='thickness1'/>
+                                <field name='thickness2'/>
+                                <field name='thickness3'/>
+                                <field name='thickness4'/>
+                                <field name='thickness5'/>
+                                <field name='thickness6'/>
+                                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <field name='average_length' col="4"/>
+                        <field name='average_width'  col="4"/> 
+                        <field name='average_thickness' col="4"/>
+                    </group>
+
+                     <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <field name='deviation_length' col="4"/>
+                        <field name='deviation_width'  col="4"/> 
+                        <field name='deviation_length_width' col="4"/>
+                           <field name='deviation_thickness' col="4"/>
+                    </group>
+
+
+<!-- Straightness -->
+
+                      <group attrs="{'invisible': [('straightness_visible', '=', False)]}">
+                        <h1>
+                            <field name="straightness_name" readonly="1" nolabel="1"/>
+                            <field name="straightness_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('straightness_visible', '=', False)]}">
+                        <field name='sample_size' col="4"/>
+                      
+                    </group>
+
+
+                       <group attrs="{'invisible': [('straightness_visible', '=', False)]}">
+                        <field name="child_lines_straightness" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='straightness1'/>
+                                <field name='straightness2'/>
+                                <field name='straightness3'/>
+                                <field name='straightness4'/>
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                        <group attrs="{'invisible': [('straightness_visible', '=', False)]}">
+                        <field name='average_straightness' col="4"/>
+                         <field name='deviation_straightness' col="4"/>
+                      
+                    </group>
+
+                    <group style="width:25%" attrs="{'invisible': [('straightness_visible', '=', False)]}">
+                                <field name='deviation_straightness_conformity'
+                                       decoration-success="deviation_straightness_conformity == 'pass'" 
+                                       decoration-danger="deviation_straightness_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('straightness_visible', '=', False)]}">
+                                <field name="deviation_straightness_nabl"
+                                       decoration-success="deviation_straightness_nabl == 'pass'" 
+                                       decoration-danger="deviation_straightness_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+
+
+
+<!-- Rectangularity -->
+
+
+                     <group attrs="{'invisible': [('rectangularity_visible', '=', False)]}">
+                        <h1>
+                            <field name="rectangularity_name" readonly="1" nolabel="1"/>
+                            <field name="rectangularity_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('rectangularity_visible', '=', False)]}">
+                        <field name='rectangularity_sample_size' col="4"/>
+                      
+                    </group>
+
+
+                       <group attrs="{'invisible': [('rectangularity_visible', '=', False)]}">
+                        <field name="child_lines_rectangularity" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='rectangularity1'/>
+                                <field name='rectangularity2'/>
+                                <field name='rectangularity3'/>
+                                <field name='rectangularity4'/>
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                        <group attrs="{'invisible': [('rectangularity_visible', '=', False)]}">
+                        <field name='average_rectangularity' col="4"/>
+                         <field name='deviation_rectangularity' col="4"/>
+                      
+                    </group>
+
+                      <group style="width:25%" attrs="{'invisible': [('rectangularity_visible', '=', False)]}">
+                                <field name='deviation_rectangularity_conformity'
+                                       decoration-success="deviation_rectangularity_conformity == 'pass'" 
+                                       decoration-danger="deviation_rectangularity_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('rectangularity_visible', '=', False)]}">
+                                <field name="deviation_rectangularity_nabl"
+                                       decoration-success="deviation_rectangularity_nabl == 'pass'" 
+                                       decoration-danger="deviation_rectangularity_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+
+                    <!-- Centre Curvature -->
+
+
+                     <group attrs="{'invisible': [('centre_curvature_visible', '=', False)]}">
+                        <h1>
+                            <field name="centre_curvature_name" readonly="1" nolabel="1"/>
+                            <field name="centre_curvature_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('centre_curvature_visible', '=', False)]}">
+                        <field name='centre_curvature_sample_size' col="4"/>
+                        <field name='centre_curvature_diagonal' col="4"/>
+                      
+                    </group>
+
+
+                       <group attrs="{'invisible': [('centre_curvature_visible', '=', False)]}">
+                        <field name="child_lines_centre_curvature" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='centre_curvature1'/>
+                                <field name='centre_curvature2'/>
+                                <field name='centre_curvature3'/>
+                                <field name='centre_curvature4'/>
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                        <group attrs="{'invisible': [('centre_curvature_visible', '=', False)]}">
+                        <field name='average_centre_curvature' col="4"/>
+                         <field name='deviation_centre_curvature' col="4"/>
+                      
+                    </group>
+
+                     <group style="width:25%" attrs="{'invisible': [('centre_curvature_visible', '=', False)]}">
+                                <field name='deviation_centre_curvature_conformity'
+                                       decoration-success="deviation_centre_curvature_conformity == 'pass'" 
+                                       decoration-danger="deviation_centre_curvature_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('centre_curvature_visible', '=', False)]}">
+                                <field name="deviation_centre_curvature_nabl"
+                                       decoration-success="deviation_centre_curvature_nabl == 'pass'" 
+                                       decoration-danger="deviation_centre_curvature_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+
+
+
+<!-- Edge Curvature -->
+
+
+                      <group attrs="{'invisible': [('edge_curvature_visible', '=', False)]}">
+                        <h1>
+                            <field name="edge_curvature_name" readonly="1" nolabel="1"/>
+                            <field name="edge_curvature_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('edge_curvature_visible', '=', False)]}">
+                        <field name='edge_curvature_sample_size' col="4"/>
+                        <field name='edge_curvature_diagonal' col="4"/>
+                      
+                    </group>
+
+
+                       <group attrs="{'invisible': [('edge_curvature_visible', '=', False)]}">
+                        <field name="child_lines_edge_curvature" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='edge_curvature1'/>
+                                <field name='edge_curvature2'/>
+                                <field name='edge_curvature3'/>
+                                <field name='edge_curvature4'/>
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                        <group attrs="{'invisible': [('edge_curvature_visible', '=', False)]}">
+                        <field name='average_edge_curvature' col="4"/>
+                         <field name='deviation_edge_curvature' col="4"/>
+                      
+                    </group>
+
+                      <group style="width:25%" attrs="{'invisible': [('edge_curvature_visible', '=', False)]}">
+                                <field name='deviation_edge_curvature_conformity'
+                                       decoration-success="deviation_edge_curvature_conformity == 'pass'" 
+                                       decoration-danger="deviation_edge_curvature_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('edge_curvature_visible', '=', False)]}">
+                                <field name="deviation_edge_curvature_nabl"
+                                       decoration-success="deviation_edge_curvature_nabl == 'pass'" 
+                                       decoration-danger="deviation_edge_curvature_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+
+
+                   <!-- warpage -->
+
+
+                      <group attrs="{'invisible': [('warpage_visible', '=', False)]}">
+                        <h1>
+                            <field name="warpage_name" readonly="1" nolabel="1"/>
+                            <field name="warpage_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('warpage_visible', '=', False)]}">
+                        <field name='warpage_sample_size' col="4"/>
+                        <field name='warpage_diagonal' col="4"/>
+                      
+                    </group>
+
+
+                       <group attrs="{'invisible': [('warpage_visible', '=', False)]}">
+                        <field name="child_lines_warpage" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='warpage1'/>
+                                <field name='warpage2'/>
+                                <field name='warpage3'/>
+                                <field name='warpage4'/>
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                        <group attrs="{'invisible': [('warpage_visible', '=', False)]}">
+                        <field name='average_warpage' col="4"/>
+                         <field name='deviation_warpage' col="4"/>
+                      
+                    </group>
+
+                     <group style="width:25%" attrs="{'invisible': [('warpage_visible', '=', False)]}">
+                                <field name='deviation_warpage_conformity'
+                                       decoration-success="deviation_warpage_conformity == 'pass'" 
+                                       decoration-danger="deviation_warpage_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('warpage_visible', '=', False)]}">
+                                <field name="deviation_warpage_nabl"
+                                       decoration-success="deviation_warpage_nabl == 'pass'" 
+                                       decoration-danger="deviation_warpage_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+
+
+
+
+<!-- water absorption and bulk density -->
+
+                       <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}">
+                        <h1>
+                            <field name="water_bulk_name" readonly="1" nolabel="1"/>
+                            <field name="water_bulk_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}">
+                        <field name="child_lines_water_bulk" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='lenght'/>
+                                <field name='width'/>
+                                <field name='thickness'/>
+                                <field name='oven_dry'/>
+                                   <field name='wet_weight'/>
+                                <field name='water_obsorption'/>
+                                <field name='bulk_density'/>
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_water_bulk' col="4"/>
+                         <field name='individual_water_bulk' col="4"/>
+                          <field name='bulk_density' col="4"/>
+                      
+                    </group>
+
+                     <group style="width:25%" attrs="{'invisible': [('water_bulk_visible', '=', False)]}">
+                                <field name='bulk_density_conformity'
+                                       decoration-success="bulk_density_conformity == 'pass'" 
+                                       decoration-danger="bulk_density_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('water_bulk_visible', '=', False)]}">
+                                <field name="bulk_density_nabl"
+                                       decoration-success="bulk_density_nabl == 'pass'" 
+                                       decoration-danger="bulk_density_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+
+
+
+
+
+                    <!-- Modulus and rupture and breaking strength-->
+
+                       <group attrs="{'invisible': [('modulus_visible', '=', False)]}">
+                        <h1>
+                            <field name="modulus_name" readonly="1" nolabel="1"/>
+                            <field name="modulus_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('modulus_visible', '=', False)]}">
+                        <field name="child_lines_modulus" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='width'/>
+                                  <field name='span'/>
+                                <field name='thickness'/>
+                                <field name='peak_load'/>
+                                   <field name='mor'/>
+                                <field name='bs'/>
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('modulus_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_modulus' col="4"/>
+                         <field name='individual_modulus' col="4"/>
+                          <field name='breaking_strenght' col="4"/>
+                      
+                    </group>
+
+                     <group style="width:25%" attrs="{'invisible': [('modulus_visible', '=', False)]}">
+                                <field name='breaking_strenght_conformity'
+                                       decoration-success="breaking_strenght_conformity == 'pass'" 
+                                       decoration-danger="breaking_strenght_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('modulus_visible', '=', False)]}">
+                                <field name="breaking_strenght_nabl"
+                                       decoration-success="breaking_strenght_nabl == 'pass'" 
+                                       decoration-danger="breaking_strenght_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+
+
+<!-- crazing resistance test -->
+
+
+                         <group attrs="{'invisible': [('crazing_visible', '=', False)]}">
+                        <h1>
+                            <field name="crazing_name" readonly="1" nolabel="1"/>
+                            <field name="crazing_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('crazing_visible', '=', False)]}">
+                        <field name='observations' col="4"/>
+                      
+                    </group>
+
+
+
+                      <group attrs="{'invisible': [('chemical_visible', '=', False)]}">
+                        <h1>
+                            <field name="chemical_name" readonly="1" nolabel="1"/>
+                            <field name="chemical_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('chemical_visible', '=', False)]}">
+                        <field name='observations_chemical' col="4"/>
+                      
+                    </group>
+
+
+
+
+
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
+                    
+                     
+
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

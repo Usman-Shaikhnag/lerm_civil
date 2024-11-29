@@ -1,0 +1,6079 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+
+<template id="measurmrnt_uncertainty_datasheet">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			<t t-call="lerm_civil.data_sheet_header_design_mix">
+                <div style="text-align:center;font-size:18px">
+                MEASUREMENT UNCERTAINTY DATASHEET
+                </div>
+				
+            <div class="container_eln" style="margin-top:5px">
+				
+            <!-- Density -->
+
+            	<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			        	Density
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Weighing Balance (gm)</td>
+						<td><span t-field="data.weighing_balance_1"/></td> 
+						<td><span t-field="data.weighing_balance_2"/></td> 
+						<td><span t-field="data.weighing_balance_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping Rod (mm)</td>
+						<td><span t-field="data.concrete_rod_1"/></td> 
+						<td><span t-field="data.concrete_rod_2"/></td>
+						<td><span t-field="data.concrete_rod_3"/></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Density Cylinder (litre)</td>
+						<td><span t-field="data.density_cylinder_1"/></td> 
+						<td><span t-field="data.density_cylinder_2"/></td>
+						<td><span t-field="data.density_cylinder_3"/></td>
+					</tr>
+                   
+              
+             
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			        Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.uncertainty_rep_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['mean_result']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_result_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			      Ub1 (Uncertainty of Weighing Balance (gm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			     Ub2 (Uncertainty of Concrete Tamping Rod (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			    Ub3 (Uncertainty of Density Cylinder (Liter))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub3 ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor3"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub3 = [Ub3 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub3/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty3"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+          <!-- Cube Comp Strength  (M40) -->
+
+				<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			        Cube Comp Strength  (M40)
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>W .balance(gm)</td>
+						<td><span t-field="data.compressive_w_balance_1"/></td> 
+						<td><span t-field="data.compressive_w_balance_2"/></td> 
+						<td><span t-field="data.compressive_w_balance_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Vernier Calliper(mm)</td>
+						<td><span t-field="data.compressive_vernier_calliper_1"/></td> 
+						<td><span t-field="data.compressive_vernier_calliper_2"/></td>
+						<td><span t-field="data.compressive_vernier_calliper_3"/></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>CTM Machine(Kn)</td>
+						<td><span t-field="data.compressive_ctm_1"/></td> 
+						<td><span t-field="data.compressive_ctm_2"/></td>
+						<td><span t-field="data.compressive_ctm_3"/></td>
+					</tr>
+                   
+              
+             
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.compressive_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['compressive_mean_result']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['compressive_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['compressive_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_compressive"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_compressive"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_compressive"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_compressive"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_compressive"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			  Ub1 (Uncertainty of W. Balance (gm) )
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_compressive"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_compressive"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_compressive"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_compressive"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_compressive"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_compressive"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			   Ub2 (Uncertainty of Vernier Calliper (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_compressive1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_compressive1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_compressive1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_compressive1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_compressive1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_compressive1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			Ub3 (Uncertainty of CMT Machine (Kn))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub3 ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_compressive2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_compressive2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_compressive2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub3 = [Ub3 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_compressive2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_compressive2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub3/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_compressive2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.compressive_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+					<!-- Accelerated Cube Comp Strength  (M40) -->
+
+				<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			        Accelerated Cube Comp Strength  (M40)
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>W .balance(gm)</td>
+						<td><span t-field="data.act_w_balance_1"/></td> 
+						<td><span t-field="data.act_w_balance_2"/></td> 
+						<td><span t-field="data.act_w_balance_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Vernier Calliper(mm)</td>
+						<td><span t-field="data.act_vernier_calliper_1"/></td> 
+						<td><span t-field="data.act_vernier_calliper_2"/></td>
+						<td><span t-field="data.act_vernier_calliper_3"/></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Curing Tank(°C)</td>
+						<td><span t-field="data.act_curing_tank_1"/></td> 
+						<td><span t-field="data.act_curing_tank_2"/></td>
+						<td><span t-field="data.act_curing_tank_3"/></td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>CTM Machine(Kn)</td>
+						<td><span t-field="data.act_ctm_1"/></td> 
+						<td><span t-field="data.act_ctm_2"/></td>
+						<td><span t-field="data.act_ctm_3"/></td>
+					</tr>
+                   
+              
+             
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.act_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['act_mean_result']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['act_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['act_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_act"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_act"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_act"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_act"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_act"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			  Ub1 (Uncertainty of W. Balance (gm) )
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_act1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_act1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_act1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_act1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_act1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_act1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			   Ub2 (Uncertainty of Vernier Calliper (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_act2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_act2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_act2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_act2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_act2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_act2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			Ub3 (Uncertainty of Accelerated Curing Tank)
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub3 ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_act3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_act3"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_act3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub3 = [Ub3 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_act3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_act3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub3/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_act3"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+					Ub4 (Uncertainty of CMT Machine (Kn))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub4  ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_act4"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_act4"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_act4"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub4 = [Ub4 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_act4"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_act4"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub4/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_act4"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.act_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+<!-- Flexural beam Comp Strength (M40) -->
+
+
+					<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			       Flexural beam Comp Strength (M40)
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>W .balance(gm)</td>
+						<td><span t-field="data.flexural_w_balance_1"/></td> 
+						<td><span t-field="data.flexural_w_balance_2"/></td> 
+						<td><span t-field="data.flexural_w_balance_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Vernier Calliper(mm)</td>
+						<td><span t-field="data.flexural_vernier_calliper_1"/></td> 
+						<td><span t-field="data.flexural_vernier_calliper_2"/></td>
+						<td><span t-field="data.flexural_vernier_calliper_3"/></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>UTM Machine(KN)</td>
+						<td><span t-field="data.flexural_utm_1"/></td> 
+						<td><span t-field="data.flexural_utm_2"/></td>
+						<td><span t-field="data.flexural_utm_3"/></td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Measuring tape(mm)</td>
+						<td><span t-field="data.flexural_measuring_1"/></td> 
+						<td><span t-field="data.flexural_measuring_2"/></td>
+						<td><span t-field="data.flexural_measuring_3"/></td>
+					</tr>
+                   
+              
+             
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.flexural_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['flexural_mean_result']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['flexural_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['flexural_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_flexural"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_flexural"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_flexural"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_flexural"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_flexural"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			  Ub1 (Uncertainty of W. Balance (gm) )
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_flexural1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_flexural1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_flexural1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_flexural1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_flexural1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_flexural1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			   Ub2 (Uncertainty of Vernier Calliper (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_flexural2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_flexural2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_flexural2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_flexural2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_flexural2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_flexural2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			Ub3 (Uncertainty of UTM Machine (Kn))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub3 ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_flexural3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_flexural3"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_flexural3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub3 = [Ub3 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_flexural3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_flexural3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub3/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_flexural3"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+					Ub4 (Uncertainty of Measuring Tape (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub4  ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_flexural4"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_flexural4"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_flexural4"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub4 = [Ub4 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_flexural4"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_flexural4"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub4/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_flexural4"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.flexural_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+<!-- concrete Water Absorption -->
+
+						<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			      concrete Water Absorption
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>W .balance(gm)</td>
+						<td><span t-field="data.water_w_balance_1"/></td> 
+						<td><span t-field="data.water_w_balance_2"/></td> 
+						<td><span t-field="data.water_w_balance_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Hot Air Oven(°C)</td>
+						<td><span t-field="data.water_hotair_1"/></td> 
+						<td><span t-field="data.water_hotair_2"/></td>
+						<td><span t-field="data.water_hotair_3"/></td>
+					</tr>
+					
+                   
+              
+             
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.water_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['water_mean_result']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['water_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['water_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_water"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_water"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_water"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_water"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_water"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			  Ub1 (Uncertainty of W. Balance (gm) )
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_water1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_water1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_water1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_water1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_water1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_water1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			 Ub2 (Uncertainty of Hot Air Oven (°C))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_water2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_water2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_water2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_water2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_water2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_water2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.water_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+
+				<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			      split tensile Strength  (M40)
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>W .balance(gm)</td>
+						<td><span t-field="data.split_w_balance_1"/></td> 
+						<td><span t-field="data.split_w_balance_2"/></td> 
+						<td><span t-field="data.split_w_balance_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Measuring tape (mm)</td>
+						<td><span t-field="data.split_measuring_1"/></td> 
+						<td><span t-field="data.split_measuring_2"/></td>
+						<td><span t-field="data.split_measuring_3"/></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>CTM Machine(Kn)</td>
+						<td><span t-field="data.split_ctm_1"/></td> 
+						<td><span t-field="data.split_ctm_2"/></td>
+						<td><span t-field="data.split_ctm_3"/></td>
+					</tr>
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.split_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['split_mean_result']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['split_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['split_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_split"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_split"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_split"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_split"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_split"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			  Ub1 (Uncertainty of W. Balance (gm) )
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_split1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_split1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_split1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_split1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_split1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_split1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			 Ub2 (Uncertainty of Measuring tape (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_split2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_split2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_split2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_split2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_split2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_split2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+						Ub3 (Uncertainty of CTM Machine(Kn))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub3 ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_split3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_split3"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_split3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub3 = [Ub3 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_split3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_split3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub3/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_split3"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.split_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+<!-- Drying Shrinkage Of Concrete -->
+
+				<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			   Drying Shrinkage Of Concrete
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Vernier Caliper (mm)</td>
+						<td><span t-field="data.drying_vernier_1"/></td> 
+						<td><span t-field="data.drying_vernier_2"/></td> 
+						<td><span t-field="data.drying_vernier_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Hot air oven  (°c)</td>
+						<td><span t-field="data.drying_hot_1"/></td> 
+						<td><span t-field="data.drying_hot_2"/></td>
+						<td><span t-field="data.drying_hot_3"/></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Dial Guage (mm)</td>
+						<td><span t-field="data.drying_dial_1"/></td> 
+						<td><span t-field="data.drying_dial_2"/></td>
+						<td><span t-field="data.drying_dial_3"/></td>
+					</tr>
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.drying_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['drying_mean_result']" t-options='{"widget": "float", "precision": 4}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['drying_line1']" t-options='{"widget": "float", "precision": 4}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['drying_line2']" t-options='{"widget": "float", "precision": 6}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_drying"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_drying"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_drying"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_drying"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_drying"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  	Ub1 (Uncertainty of Vernier Caliper (mm) )
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_drying1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_drying1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_drying1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_drying1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_drying1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_drying1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Hot air oven (°c))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_drying2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_drying2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_drying2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_drying2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_drying2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_drying2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+						Ub3 (Uncertainty of Dial Guage (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub3 ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_drying3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_drying3"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_drying3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub3 = [Ub3 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_drying3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_drying3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub3/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_drying3"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.drying_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+<!-- Moisture Movement Of Concrete -->
+
+
+				<div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			       Moisture Movement Of Concrete
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Vernier Caliper (mm)</td>
+						<td><span t-field="data.moisture_vernier_1"/></td> 
+						<td><span t-field="data.moisture_vernier_2"/></td> 
+						<td><span t-field="data.moisture_vernier_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Hot air oven  (°c)</td>
+						<td><span t-field="data.moisture_hot_1"/></td> 
+						<td><span t-field="data.moisture_hot_2"/></td>
+						<td><span t-field="data.moisture_hot_3"/></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Dial Guage (mm)</td>
+						<td><span t-field="data.moisture_dial_1"/></td> 
+						<td><span t-field="data.moisture_dial_2"/></td>
+						<td><span t-field="data.moisture_dial_3"/></td>
+					</tr>
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.moisture_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['moisture_mean_result']" t-options='{"widget": "float", "precision": 3}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['moisture_line1']" t-options='{"widget": "float", "precision": 4}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['moisture_line2']" t-options='{"widget": "float", "precision": 6}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_moisture"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_moisture"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_moisture"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_moisture"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_moisture"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  	Ub1 (Uncertainty of Vernier Caliper (mm) )
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_moisture1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_moisture1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_moisture1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_moisture1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_moisture1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_moisture1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Hot air oven (°c))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_moisture2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_moisture2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_moisture2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_moisture2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_moisture2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_moisture2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+						Ub3 (Uncertainty of Dial Guage (mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub3 ex)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_moisture3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_moisture3"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_moisture3"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub3 = [Ub3 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_moisture3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_moisture3"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub3/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_moisture3"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.moisture_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+            <!-- Slump 0 min -->
+				<div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			     Slump 0 min
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Slump cone(mm)</td>
+						<td><span t-field="data.slump0_cone_1"/></td> 
+						<td><span t-field="data.slump0_cone_2"/></td> 
+						<td><span t-field="data.slump0_cone_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping rod(mm)</td>
+						<td><span t-field="data.slump0_taping_1"/></td> 
+						<td><span t-field="data.slump0_taping_2"/></td>
+						<td><span t-field="data.slump0_taping_3"/></td>
+					</tr>
+				
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.slump0_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['slump0_mean_result']" t-options='{"widget": "float", "precision": 3}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump0_line1']" t-options='{"widget": "float", "precision": 4}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump0_line2']" t-options='{"widget": "float", "precision": 6}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump0_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump0_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump0_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_slump0"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_slump0"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_slump0"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_slump0"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_slump0"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  Ub1 (Uncertainty of Slump cone(mm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump01"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump01"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump01"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump01"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump01"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump01"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Concrete Tamping rod(mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump02"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump02"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump02"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump02"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump02"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump02"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump02_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump02_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump02_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump02_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump02_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+                <!-- Slump 30 min -->
+				<div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			    Slump 30 min
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Slump cone(mm)</td>
+						<td><span t-field="data.slump30_cone_1"/></td> 
+						<td><span t-field="data.slump30_cone_2"/></td> 
+						<td><span t-field="data.slump30_cone_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping rod(mm)</td>
+						<td><span t-field="data.slump30_taping_1"/></td> 
+						<td><span t-field="data.slump30_taping_2"/></td>
+						<td><span t-field="data.slump30_taping_3"/></td>
+					</tr>
+				
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.slump30_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['slump30_mean_result']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump30_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump30_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_slump30"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_slump30"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_slump30"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_slump30"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_slump30"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  Ub1 (Uncertainty of Slump cone(mm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump30_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump30_1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump30_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump30_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump30_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump30_1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Concrete Tamping rod(mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump30_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump30_2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump30_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump30_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump30_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump30_2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump30_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+               <!-- Slump 60 min -->
+				<div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			    Slump 60 min
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Slump cone(mm)</td>
+						<td><span t-field="data.slump60_cone_1"/></td> 
+						<td><span t-field="data.slump60_cone_2"/></td> 
+						<td><span t-field="data.slump60_cone_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping rod(mm)</td>
+						<td><span t-field="data.slump60_taping_1"/></td> 
+						<td><span t-field="data.slump60_taping_2"/></td>
+						<td><span t-field="data.slump60_taping_3"/></td>
+					</tr>
+				
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.slump60_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['slump60_mean_result']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump60_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump60_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_slump60"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_slump60"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_slump60"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_slump60"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_slump60"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  Ub1 (Uncertainty of Slump cone(mm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump60_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump60_1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump60_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump60_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump60_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump60_1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Concrete Tamping rod(mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump60_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump60_2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump60_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump60_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump60_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump60_2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump60_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+                <!-- Slump 90 min -->
+				<div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			  			Slump 90 min
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Slump cone(mm)</td>
+						<td><span t-field="data.slump90_cone_1"/></td> 
+						<td><span t-field="data.slump90_cone_2"/></td> 
+						<td><span t-field="data.slump90_cone_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping rod(mm)</td>
+						<td><span t-field="data.slump90_taping_1"/></td> 
+						<td><span t-field="data.slump90_taping_2"/></td>
+						<td><span t-field="data.slump90_taping_3"/></td>
+					</tr>
+				
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.slump90_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['slump90_mean_result']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump90_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump90_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_slump90"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_slump90"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_slump90"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_slump90"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_slump90"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  Ub1 (Uncertainty of Slump cone(mm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump90_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump90_1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump90_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump90_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump90_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump90_1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Concrete Tamping rod(mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump90_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump90_2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump90_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump90_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump90_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump90_2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump90_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+               <!-- Slump 120 min -->
+
+            <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			  		Slump 120 min
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Slump cone(mm)</td>
+						<td><span t-field="data.slump120_cone_1"/></td> 
+						<td><span t-field="data.slump120_cone_2"/></td> 
+						<td><span t-field="data.slump120_cone_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping rod(mm)</td>
+						<td><span t-field="data.slump120_taping_1"/></td> 
+						<td><span t-field="data.slump120_taping_2"/></td>
+						<td><span t-field="data.slump120_taping_3"/></td>
+					</tr>
+				
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.slump120_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['slump120_mean_result']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump120_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump120_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_slump120"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_slump120"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_slump120"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_slump120"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_slump120"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  Ub1 (Uncertainty of Slump cone(mm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump120_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump120_1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump120_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump120_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump120_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump120_1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Concrete Tamping rod(mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump120_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump120_2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump120_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump120_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump120_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump120_2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump120_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+                <!-- Slump 150 min -->
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			  	Slump 150 min
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Slump cone(mm)</td>
+						<td><span t-field="data.slump150_cone_1"/></td> 
+						<td><span t-field="data.slump150_cone_2"/></td> 
+						<td><span t-field="data.slump150_cone_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping rod(mm)</td>
+						<td><span t-field="data.slump150_taping_1"/></td> 
+						<td><span t-field="data.slump150_taping_2"/></td>
+						<td><span t-field="data.slump150_taping_3"/></td>
+					</tr>
+				
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.slump150_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['slump150_mean_result']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump150_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump150_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_slump150"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_slump150"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_slump150"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_slump150"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_slump150"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  Ub1 (Uncertainty of Slump cone(mm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump150_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump150_1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump150_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump150_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump150_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump150_1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Concrete Tamping rod(mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump150_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump150_2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump150_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump150_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump150_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump150_2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump150_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+            <!-- Slump 180 min -->
+			<div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			Slump 180 min
+
+				</div>
+
+			     <table style="margin-top:20px;width: 100%">
+               
+                 <tr>
+						<td>Sr No</td>
+						<td>Equipment/ Apparatus</td>
+						<td>Uncertainty</td>
+						<td>K Factor</td>
+						<td>Value</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Slump cone(mm)</td>
+						<td><span t-field="data.slump180_cone_1"/></td> 
+						<td><span t-field="data.slump180_cone_2"/></td> 
+						<td><span t-field="data.slump180_cone_3"/></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Concrete Tamping rod(mm)</td>
+						<td><span t-field="data.slump180_taping_1"/></td> 
+						<td><span t-field="data.slump180_taping_2"/></td>
+						<td><span t-field="data.slump180_taping_3"/></td>
+					</tr>
+				
+					
+            </table>
+
+			</div>
+           <!-- Type-A Uncertainty (Repeatability) -->
+
+			  <div style="margin-top:20px">
+				<div style="text-align:center;font-size:18px">
+			      Type-A Uncertainty (Repeatability)
+
+
+				</div>
+				<table style="margin-top:20px">
+                <thead style="background-color: #d3d3d3;">
+                 
+                    <tr >
+						<td >No. of. Obs.
+						</td>
+						<td >Measures Results (in N/mm2)
+						</td>
+						
+					<td >(X! - X)</td>
+					<td  >(X! - X)2</td>
+				
+				
+                    </tr>
+                   
+                </thead>
+                <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.slump180_child_lines" t-as="r">
+							<td >
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['slump180_mean_result']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump180_line1']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+							<td colspan="1">
+								<span t-esc="r['slump180_line2']" t-options='{"widget": "float", "precision": 2}'/>
+							</td>
+
+							
+
+							
+						</tr>
+                 
+                </tbody>
+            </table>
+
+			
+			</div>
+
+			 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Measures Results
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_mean_avg"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_line1_sum"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">(X! - X)2
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_line2_sum"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+					 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Stnadard Deviation 
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_devition_slump180"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Std Uncertainty Ua =(S/√n) =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.std_uncertainty1_slump180"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ua/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_slump180"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Nos of Reading = n
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.nos_reading_slump180"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of Freedom V1= (n-1)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_freedom_slump180"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+			
+				<div style="text-align:center;font-size:18px;margin-top:20px">
+			      Type-B Uncertainty
+
+				</div>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+		                  Ub1 (Uncertainty of Slump cone(mm))
+
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub1 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump180_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump180_1"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump180_1"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub1 = [Ub1 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump180_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump180_1"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub1/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump180_1"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+                    Ub2 (Uncertainty of Concrete Tamping rod(mm))
+				</div>
+
+				 <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty of Master in Cert. (Ub2 ex)
+
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.expanded_uncertainty_slump180_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Coverage factor (k) 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.coverage_factor_slump180_2"/>
+							</td>
+						</tr>
+							<tr>
+							<td colspan="6">Mean
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.mean_slump180_2"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6">Standard Uncertainty  Ub2 = [Ub2 ex/ k]
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.standard_uncertainty_slump180_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Degree of freedom 
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.degree_of_freedom_slump180_2"/>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6">Relative Std. Uncertainty (Ub2/ Mean)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.relative_std_uncertainty_slump180_2"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Combined Standard Uncertainty (Relative)
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">UC =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_uc"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+				<div  style="text-align:center;font-size:18px;margin-top:20px">
+			       Effective Degrees of Freedom
+				</div>
+
+               <table style="margin-top:20px">
+						<tr cols="12">
+							<td colspan="6">Verr =
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_verr"/>
+							</td>
+						</tr>
+
+						<tr cols="12">
+							<td colspan="6">Covrage Factor (k)- (as per Student t distribution)
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_verr_covrage_factor"/>
+							</td>
+						</tr>
+						<tr cols="12">
+							<td colspan="6">Relative Expanded Uncertainty U=  k X uc
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_verr_relative_expanded"/>
+							</td>
+						</tr>
+						
+						<tr cols="12">
+							<td colspan="6">Expanded Uncertainty  (U X Mean)  ±
+								<![CDATA[&nbsp;]]>
+							</td>
+							<td colspan="6">
+								<span t-field="data.slump180_verr_expanded_uncertainty"/>
+							</td>
+						</tr>
+						
+						
+					</table>
+
+
+
+
+
+
+
+
+
+			</div>
+
+				<div class="authorizeRowDataSheet">
+						<div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
+                                </b>
+                            </div>
+						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Checked By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<!-- <div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div> -->
+							
+							<div>
+								<b>
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
+								</b>
+							</div>
+						</div>
+					</div>
+			</t>
+		</t>
+	</template>
+</odoo>

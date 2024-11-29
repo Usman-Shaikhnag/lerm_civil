@@ -141,5 +141,12 @@ from .report import act_compressive_strength_ds_report
 from .mechanical import drying_shrinkage
 from .report import drying_shrinkage_ds_report
 from .report import concrete_cube_water_ds_report
+from .mechanical import concrete_mix_design
+from .report import concreate_design_mix_ds_report
+from .mechanical import measurement_uncertainty
+from . report import measurment_uncertainty_ds_report
+from .mechanical import stainless_steel_tmt
+from .mechanical import tile
+from .report import tile_ds_report
 
 # from .import dash_bord
