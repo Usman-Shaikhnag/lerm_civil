@@ -23,6 +23,7 @@
     'views/sample.xml',
     'views/sample_range.xml',
     'views/eln.xml',
+    'views/lab_master.xml',
     'views/contractor.xml',
     'views/employee.xml',
     # 'views/mechanical/sieve_analysis.xml',

@@ -440,13 +440,24 @@ class SrfForm(models.Model):
 
                 
                 if sample.scope == 'nabl':
-                
-                    lab_loc = str(sample.lab_no_value)
-                    lab_cert_no = str(company.lab_certificate_no)
-                    # lab_loc = company.lab_seq_no
-                    ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
-                    ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                    ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+
+                    if sample.lab_location:
+                        code = sample.lab_location.ulr_sequence.code
+                        ulr_no = self.env['ir.sequence'].next_by_code(code) or 'New'
+                        lab_loc = sample.location_name.location_code
+                        lab_cert_no = sample.lab_location.lab_certificate_no
+                        ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                        ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                        
+
+
+                    else:
+                        lab_loc = str(sample.lab_no_value)
+                        lab_cert_no = str(company.lab_certificate_no)
+                        # lab_loc = company.lab_seq_no
+                        ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+                        ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                        ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
                 else:
                     ulr_no = ''
                 # import wdb ; wdb.set_trace()
@@ -769,7 +780,8 @@ class CreateSampleWizard(models.TransientModel):
     is_update = fields.Boolean('Is Update')
 
     department_id = fields.Char(string='Department')
-
+    lab_location = fields.Many2one('lerm.lab.master',string="Lab Location")
+    location_name = fields.Many2one('lerm.lab.location.master',string="Location Name")
 
     @api.onchange('discipline_id', 'group_id', 'material_id')
     def onchange_discipline_group_material(self):
@@ -964,7 +976,10 @@ class CreateSampleWizard(models.TransientModel):
             'client_sample_id':client_sample_id,
             'conformity':conformity,
             'volume':volume,
-            'product_name':product_name
+            'product_name':product_name,
+            'lab_location':self.lab_location.id,
+            'location_name':self.location_name.id
+
             
         })
         return {'type': 'ir.actions.act_window_close'}
@@ -992,8 +1007,8 @@ class CreateSampleWizard(models.TransientModel):
 
     def add_sample(self,data=False):
 
+        # import wdb; wdb.set_trace()
         if data:
-            print(data)
             discipline_id = data['discipline_id']
             lab_no_value = data['lab_no_value']
             # lab_l_id = data['lab_l_id']
@@ -1008,6 +1023,7 @@ class CreateSampleWizard(models.TransientModel):
             casting = data["casting"]
             days_casting = data["days_casting"]
             date_casting = data["date_casting"]
+
             
             sample_range = self.env['sample.range.line'].create({
                 'srf_id': srf_id,
@@ -1042,7 +1058,11 @@ class CreateSampleWizard(models.TransientModel):
                 'sample_description':sample_description,
                 'casting':casting,
                 'date_casting':date_casting,
-                'days_casting':days_casting
+                'days_casting':days_casting,
+                'lab_location':self.lab_location.id,
+                'location_name':self.location_name.id
+
+
             })
             
         
@@ -1078,6 +1098,9 @@ class CreateSampleWizard(models.TransientModel):
             conformity = self.conformity
             volume = self.volume
             product_name = self.product_name
+            lab_location  = self.lab_location.id
+            location_name = self.location_name.id
+
 
 
             if self.grade_required:
@@ -1172,7 +1195,9 @@ class CreateSampleWizard(models.TransientModel):
                         'main_name':self.main_name,
                         'price':self.price,
                         'date_casting':self.date_casting,
-                        'product_alias':self.product_alias.id
+                        'product_alias':self.product_alias.id,
+                        'lab_location':lab_location,
+                        'location_name':location_name,
 
                     })
 
