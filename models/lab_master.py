@@ -19,8 +19,14 @@ class LabMaster(models.Model):
     zip = fields.Char("ZIP")
     country_id = fields.Many2one('res.country',string="Country")
 
-    header_image = fields.Binary('Header Image')
+    header_image = fields.Binary('NABL Header Image')
     header_filename = fields.Char("Header FileName")
+
+    non_nabl_header = fields.Binary('Non NABL Header Image')
+    non_nabl_header_filename = fields.Char("Header FileName")
+
+    watermark_image = fields.Binary('Watermark Image')
+    watermark_filename = fields.Char("Watermark filename")
 
     footer_image = fields.Binary('Footer Image')
     footer_filename = fields.Char("Footer filename")
