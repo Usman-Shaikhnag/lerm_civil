@@ -196,6 +196,17 @@
 
     </record>
 
+    <record id="lab_master_action" model="ir.actions.act_window">
+        <field name="name">Lab Master</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lerm.lab.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Lab Master</p>
+        </field>
+
+    </record>
+
      <!-- <record id="lerm_sample_reports_action" model="ir.actions.act_window">
             <field name="name">Sample Reports</field>
             <field name="type">ir.actions.act_window</field>    
@@ -303,6 +314,13 @@
         action="size_master_action"
         groups="kes_admin_access_group,lerm_civil.lerm_master"
         sequence="13" />
+    
+    <menuitem id="lab_master"
+        name="Lab Master"
+        parent="lerm_menu"
+        action="lab_master_action"
+        groups="kes_admin_access_group"
+        sequence="14" />
 
     <menuitem id="lerm_test_method"
         name="Test Method"
