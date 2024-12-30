@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="pile_integrity_report">
+		<t t-call="web.html_container">
+			<!-- <t t-call="web.basic_layout"> -->
+			
+			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
+			
+			  <div class="page" style="page-break-before: always;margin-top: 60px;">
+					<div style="text-align:center;font-size:18px">
+					   TEST DESCRIPTIONS
+
+			     	</div>
+					<div style="text-align:center;font-size:18px; margin-top:20px">
+					 1. PILE INTEGRITY TEST
+			     	</div>
+				
+			        <table style="margin-top:20px">
+					<div >
+						 <b>Code of Reference :  </b><span t-field="data.code_ref" />
+					</div>
+						 <br></br>
+						<div style="margin-top:20px">
+						  <b>Principle :  <br></br></b><span t-field="data.principle_details" style="margin-left: 20px;"/>
+						</div>
+						<div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: 20px; margin-left: 250px;">
+							<img t-attf-src="data:image/png;base64,{{data.instrument_image}}" alt="Image" id="photo" class="img img-responsive" style="width: 400px; height: 400px;" />
+						</div>
+
+                     <div style="margin-top:20px">
+						  <b>Procedure :  </b> 
+					
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.procedure_id" t-as="r">
+							<div>
+								<span t-esc="i + 1"/>
+								<t t-set="i" t-value="i + 1"/> <!-- Update increment value -->
+								<span t-esc="r['name']" style="margin-left: 20px;"/>
+							</div>
+					
+						</tr>
+					  </div>
+					  <div style="margin-top:20px">
+						  <b>Influences Of Test Result :  <br></br></b><span t-field="data.influences_result" style="margin-left: 20px;"/>
+						</div>
+
+						 <div style="margin-top:20px">
+						  <b>Interpretation Of Test Result :  <br></br></b><span t-field="data.interpretation_result" style="margin-left: 20px;"/>
+						</div>
+
+					
+							
+
+					</table>
+				</div>
+                <div class="container_eln" style="page-break-before: always;">
+					<div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: 20px; margin-left: 100px;">
+							<img t-attf-src="data:image/png;base64,{{data.instrument_description_image}}" alt="Image" id="photo" class="img img-responsive" style="width: 800px; height: 800px;" />
+						</div>
+					</div>
+			
+				<div class="container_eln" style="page-break-before: always;">
+
+				 
+					<div t-foreach="eln" t-as="o">
+						
+						<table >
+							<tr>
+								<td style="font-size:12px;width:100%" >Customer Party Name :
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.customer.name"/>
+									
+									<span t-field="o.srf_id.customer.street"/>
+									<span t-field="o.srf_id.customer.street2"/>
+									<span t-field="o.srf_id.customer.city"/>
+									<span t-if="o.srf_id.customer.zip" t-field="o.srf_id.customer.zip"/>
+									<span t-field="o.srf_id.customer.state_id"/>
+								
+									<span t-field="o.srf_id.customer.country_id"/>
+								</td>
+								
+								
+							</tr>
+							<tr>
+							<td style="font-size:12px;width:100%" >Project / Site Address : 																		<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.name_work"/>
+								</td>
+							</tr>
+								
+						
+							
+						</table>
+						<table>
+							<tr>
+								<td style="font-size:12px;width:30%;" colspan="3">Test Start Date :																		<![CDATA[&nbsp;]]>
+									<span t-field="o.start_date"/>
+								</td>
+								<td style="font-size:12px;width:30%;" colspan="3">Test End Date :																		<![CDATA[&nbsp;]]>
+									<span t-field="o.end_date"/>
+								</td>
+								<td style="font-size:12px;width:40%;" colspan="4">Sample Receipt Date :																		<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_received_date"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="font-size:12px;width:30%;" colspan="3">Grade :
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.grade_id.grade"/>
+								</td>
+								<td style="font-size:12px;width:30%;" colspan="3">Size :
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.size_id.size"/>
+								</td>
+								<td style="font-size:12px;width:40%;" colspan="4">Sample Id Mark: 																		<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.client_sample_id"/>
+								</td>
+								
+							</tr>
+							
+							
+							<tr>
+								<td style="font-size:12px;width:30%;" colspan="3">Consultant :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.consultant_name1"/>
+								</td>
+								<td style="font-size:12px;width:30%4" colspan="3">Client :
+									<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client"/>
+								</td>
+								<td style="font-size:12px;width:40%;" colspan="4">Client Ref :
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.srf_id.client_refrence"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="font-size:12px;" colspan="3">Brand :
+									<span t-field="o.sample_id.brand"/>
+								</td>
+								<td style="font-size:12px;" colspan="3">Discipline :
+									<span t-field="o.discipline.discipline"/>
+								</td>
+								
+								<td style="font-size:12px;" colspan="3">Group :
+									<span t-field="o.group.group"/>
+								</td>
+							</tr>
+
+							<tr>
+								<td style="font-size:12px;width:50%;" colspan="6">Material/Test Name :
+																											<![CDATA[&nbsp;]]>
+									<span t-field="o.material.name"/>
+								</td>
+								<td style="font-size:12px;width:50%;" colspan="6">Sample Description : 																		<![CDATA[&nbsp;]]>
+									<span t-field="o.sample_id.sample_description"/>
+								</td>
+							
+							</tr>
+								<tr>
+								<td style="font-size:12px;width:50%;" colspan="6">Temp :
+																											<![CDATA[&nbsp;]]>
+									  <span t-field="data.temperature" />
+
+								</td>
+								<td style="font-size:12px;width:50%;" colspan="6">Instrument Used : 																		<![CDATA[&nbsp;]]>
+								  <span t-field="data.instrument" />
+
+								</td>
+							
+							</tr>
+						</table>
+					</div>
+
+				<div style="margin-top:20px">
+					<div style="text-align:center;font-size:18px">
+			           <!-- <span t-field="data.pile_integrity_test_name" /> -->
+					   A. PILE INTEGRITY TEST REPORT
+
+			     	</div>
+				
+			        <table style="margin-top:20px">
+					<thead style="background-color: #d3d3d3;">
+						<tr cols="12">
+							<td rowspan="2">Sr no 
+							</td>
+							<td rowspan="2">Pile ID
+							</td>
+							<td rowspan="2">DOC
+							</td>
+							<td rowspan="2">Dia (MM)
+							</td>
+							<td rowspan="2">Cut Off Length (M)
+							</td>
+							<td rowspan="2">Shaft Cross-Section &amp; Soil Changes
+
+							</td>
+
+						
+						</tr>
+						
+						</thead>
+						  <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.pile_integrity_test_table" t-as="r">
+							<td colspan="1">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td >
+								<span t-esc="r['pile_id']" />
+							</td>
+							<td >
+								<span t-esc="r['doc']" />
+							</td>
+							<td >
+								<span t-esc="r['pile_dia']" />
+							</td>
+							<td >
+								<span t-esc="r['cut_off']" />
+							</td>
+							<td >
+								<span t-esc="r['shaft_cross']" />
+							</td>
+
+						
+							
+						</tr>
+						</tbody>
+					</table>
+					</div>
+
+				
+
+				
+							
+						<div style="margin-top:2px" class="noteContainer">
+							<div>
+								<b>Note :-</b>
+							</div>
+							<div>
+								<ul>
+									<li>
+										 The test report or calibration certificate shall not be reproduced except in full, without written approval of the laboratory.
+									</li>
+									<li>
+										The results related only to the items tested.
+
+									</li>
+									<li>
+									We do not undertake any responsibility for any involvement in any type of litigation arising out of result submitted by Knack Engineering Services Pvt. Ltd.
+									</li>
+									<li t-if="eln.has_witness">
+										Test witnessed by : <span t-esc="eln.witness_name"/>
+										
+									</li>
+									<li t-if="eln.remarks">
+										<span t-esc="eln.remarks"/>
+									</li>
+								</ul>
+							</div>
+						</div>
+					
+						<div style="margin-top:2px; page-break-inside: avoid;" class="signatureContainer girdgird">
+
+							<div>
+								<div>
+									<!-- <b>
+									Checked By
+									</b> -->
+								</div>
+								<div style="height: 30px;">
+									<!-- <t t-if="eln.sample_id.checkby_signature_required">
+										<div t-if="eln.sample_id.check_by.employee_id.signature">
+											<img t-att-src="'data:image/png;base64,' + eln.sample_id.check_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 30px;margin-top:1px; z-index: -10;"/>
+										</div>
+										
+									</t> -->
+								</div>
+								<div>
+									<!-- <b>
+										<span t-esc="eln.sample_id.check_by.name"/>
+									</b> -->
+								</div>
+								<div>
+									<!-- <b>
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
+									</b> -->
+								</div>
+							</div>
+							<div>
+								<div>
+									<!-- <img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image" style="width:65px;height:65px;"/> -->
+								</div>
+								<div style="padding-top:2px">
+								<!-- Format No. <span t-esc="eln.material.test_format_no"/> -->
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+									Approved By 
+									</b>
+
+								</div>
+								<div style="height: 30px;">
+									<t t-if="eln.sample_id.approveby_signature_required">
+										<div t-if="eln.sample_id.approved_by.employee_id.signature">
+											<img t-att-src="'data:image/png;base64,' + eln.sample_id.approved_by.employee_id.signature.decode('utf-8')" style="max-width: 200px;max-height: 30px;margin-top:1px;margin-bottom:1px; z-index: -10;"/>
+										</div>
+										
+									</t>
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>)
+									</b>
+								</div>
+								
+							</div>
+						</div>
+						<!-- <div style="text-align:center;margin-top:15px">
+								......End of Report......
+						</div>
+				 -->
+				 	<div style="margin-top: 20px; text-align: center;">
+								<p style="border-top: 1px dashed #000; padding-top: 10px;">
+									...... End Of Report......
+								</p>
+							</div>
+
+					 
+					<div class="container_eln" style="page-break-before: always;">
+						 <img t-if="graph" t-att-src="'data:image/png;base64,' + graph" style="width:800px;height:2000px;"/>
+					</div>
+			
+
+				</div>
+			</t>
+		</t>
+	</template>
+
+
+</odoo>

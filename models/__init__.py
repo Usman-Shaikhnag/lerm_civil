@@ -148,5 +148,14 @@ from . report import measurment_uncertainty_ds_report
 from .mechanical import stainless_steel_tmt
 from .mechanical import tile
 from .report import tile_ds_report
+from .ndt import pile_integrity
+from .mechanical import gypsum_plaster_board
+from .report import gypsum_plaster_ds_report
+from .mechanical import shuttering_plywood
+from .report import shuttering_plywood_ds_report
+from .mechanical import particle_board
+from .report import particle_ds_report
+from .mechanical import door
+from .report import door_ds_report
 
 # from .import dash_bord
