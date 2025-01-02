@@ -429,7 +429,7 @@ class SrfForm(models.Model):
                 # lab_location =  self.env.context['discipline_id']
                 # print('<<<<<<<<<<<<<<<<<<<<',lab_location)
                 # lab_cert_no = str(sample.lab_certificate_no)
-                # import wdb; wdb.set_trace()
+                
 
                 # try: 
                 #     sample.received_by_id = self.env.user
@@ -437,7 +437,6 @@ class SrfForm(models.Model):
                 #     pass
 
                 
-
                 
                 if sample.scope == 'nabl':
 
@@ -452,12 +451,42 @@ class SrfForm(models.Model):
 
 
                     else:
-                        lab_loc = str(sample.lab_no_value)
-                        lab_cert_no = str(company.lab_certificate_no)
-                        # lab_loc = company.lab_seq_no
-                        ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
-                        ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                        ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                        srf_date = sample.srf_id.srf_date
+                        next_number = ''
+                        ulr = self.env['ir.sequence'].sudo().search([('code','=','sample.ulr.seq')])
+                        current_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq').split('F')[0].split(')')[-1]
+                        for dt in ulr.date_range_ids:
+                            # import wdb; wdb.set_trace()
+
+                            from_date = dt.date_from
+                            to_date = dt.date_to
+                            if srf_date >= from_date and srf_date <=to_date:
+                                next_number = dt.number_next_actual
+                                prefix = ulr.prefix
+                                suffix = ulr.suffix
+                                lab_location = str(sample.lab_no_value)
+                                lab_certificate_no = str(company.lab_certificate_no)
+                                prefix = prefix.replace('(lab_certificate_no)', lab_certificate_no)
+                                prefix = prefix.replace('(lab_no_value)', lab_location)
+                                prefix = prefix.replace('%(y)s', str(srf_date.year)[-2:])
+                                ulr_no = str(prefix)+str(next_number).zfill(8)+str(suffix)
+                                next_number = next_number +1
+                                dt.write({'number_next_actual':next_number})
+                                break
+
+
+                                
+
+
+
+
+
+                        # lab_loc = str(sample.lab_no_value)
+                        # lab_cert_no = str(company.lab_certificate_no)
+                        # # lab_loc = company.lab_seq_no
+                        # ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+                        # ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                        # ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
                 else:
                     ulr_no = ''
                 # import wdb ; wdb.set_trace()
