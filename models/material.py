@@ -188,6 +188,7 @@ class GradeLine(models.Model):
     
     product_id = fields.Many2one('product.template')
     grade = fields.Char("Grade")
+    
 
 
 class ProductBasedCalculation(models.Model):

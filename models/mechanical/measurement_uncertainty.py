@@ -60,9 +60,9 @@ class MEASUREMENTUNCERTAINTY(models.Model):
         for record in self:
             results = record.uncertainty_rep_child_lines.mapped('mean_result')
             if results:
-                record.mean_result_avg = sum(results) / len(results)
+                record.mean_result1_avg = sum(results) / len(results)
             else:
-                record.mean_result_avg = 0.0
+                record.mean_result1_avg = 0.0
 
     @api.depends('uncertainty_rep_child_lines.line2', 'degree_freedom')
     def _compute_standard_deviation(self):
@@ -360,9 +360,9 @@ class MEASUREMENTUNCERTAINTY(models.Model):
     density_line1_sum = fields.Float(string="(X! - X)",compute="_compute_line_sums1",digits=(12,4))
     density_line2_sum = fields.Float(string="(X! - X)2",compute="_compute_line_sums1",digits=(12,4))
 
-    standard_devition1 = fields.Float(string="Standard Deviation",digits=(12 , 4),compute="_compute_standard_deviation1")
-    std_uncertainty1 = fields.Float(string="Std Uncertainty Ua =(S/√n) =",digits=(12 , 4),compute="_compute_std_uncertainty1")
-    relative_std1 = fields.Float(string="Relative Std. Uncertainty (Ua/ Mean)",digits=(12 , 5),compute="_compute_relative_std1")
+    standard_devition1 = fields.Float(string="Standard Deviation",compute="_compute_standard_deviation1",digits=(12 , 4))
+    std_uncertainty1 = fields.Float(string="Std Uncertainty Ua =(S/√n) =",compute="_compute_std_uncertainty1",digits=(12 , 4))
+    relative_std1 = fields.Float(string="Relative Std. Uncertainty (Ua/ Mean)",compute="_compute_relative_std1",digits=(12 , 5))
     nos_reading1 = fields.Float(string="Nos of Reading = n")
     degree_freedom1 = fields.Float(string="Degree of Freedom V1= (n-1)")
 
@@ -375,8 +375,7 @@ class MEASUREMENTUNCERTAINTY(models.Model):
                 record.mean_result1_avg = sum(results1) / len(results1)
             else:
                 record.mean_result1_avg = 0.0
-
-
+  
     @api.depends('density_hardend_child_lines.density_line2', 'degree_freedom')
     def _compute_standard_deviation1(self):
         for record in self:

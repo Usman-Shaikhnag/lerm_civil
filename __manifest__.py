@@ -240,7 +240,22 @@
     'reports/stainless_steel/stainless_steel_datasheet.xml',
     'views/mechanical/tile.xml',
     'reports/tile/tile_datasheet.xml',
-    'reports/tile/tile_report.xml'
+    'reports/tile/tile_report.xml',
+    'views/ndt/pile_integrity.xml',
+    'reports/pile_integrity_report.xml',
+    'views/mechanical/gypsum_plaster_board.xml',
+    'reports/gypsum_plaster/gypsum_datasheet.xml',
+    'reports/gypsum_plaster/gypsum_plaster_report.xml',
+    'views/mechanical/shuttering_plywood.xml',
+    'reports/shuttering_plywood/shuttering_datasheet.xml',
+    'reports/shuttering_plywood/shuttering_report.xml',
+    'views/mechanical/particle_board.xml',
+    'reports/particle_board/particle_datasheet.xml',
+    'views/portal/lerm_portal.xml',
+    'reports/particle_board/particle_report.xml',
+    'views/mechanical/door.xml',
+    'reports/door/door_datasheet.xml',
+    'reports/door/door_report.xml'
 
 
     # 'views/portal_template.xml'

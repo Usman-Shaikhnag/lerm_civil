@@ -1135,6 +1135,105 @@
     <field name="binding_type">report</field>
 </record>
 
+<record id="pile_integrity_report_action" model="ir.actions.report">
+    <field name="name">Pile Integrity Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.pile_integrity_report</field>
+    <field name="report_file">lerm_civil.pile_integrity_report</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+
+
+<record id="gypsum_plaster_datasheet_action" model="ir.actions.report">
+    <field name="name">Gypsum Plaster Board DataSheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.gypsum_plaster_datasheet</field>
+    <field name="report_file">lerm_civil.gypsum_plaster_datasheet</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+
+
+<record id="gypsum_plaster_report_action" model="ir.actions.report">
+    <field name="name">Gypsum Plaster Board Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.gypsum_plaster_report</field>
+    <field name="report_file">lerm_civil.gypsum_plaster_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
+
+
+<record id="shuttering_plywood_datasheet_action" model="ir.actions.report">
+    <field name="name">Shuttering Plywood DataSheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.shuttering_plywood_datasheet</field>
+    <field name="report_file">lerm_civil.shuttering_plywood_datasheet</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+
+<record id="shuttering_plywood_report_action" model="ir.actions.report">
+    <field name="name">Shuttering Plywood Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.shuttering_plywood_report</field>
+    <field name="report_file">lerm_civil.shuttering_plywood_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
+
+
+<record id="particle_board_datasheet_action" model="ir.actions.report">
+    <field name="name">Particle Board DataSheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.particle_board_datasheet</field>
+    <field name="report_file">lerm_civil.particle_board_datasheet</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+
+<record id="particle_board_report_action" model="ir.actions.report">
+    <field name="name">Particle Board Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.particle_board_report</field>
+    <field name="report_file">lerm_civil.particle_board_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
+
+<record id="door_datasheet_action" model="ir.actions.report">
+    <field name="name">Door DataSheet</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.door_datasheet</field>
+    <field name="report_file">lerm_civil.door_datasheet</field>
+    <!--  <field name="binding_model_id" ref="model_lerm_eln"/>  -->
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">report</field>
+</record>
+
+<record id="door_report_action" model="ir.actions.report">
+    <field name="name">Door Report</field>
+    <field name="model">lerm.eln</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">lerm_civil.door_report</field>
+    <field name="report_file">lerm_civil.door_report</field>
+    <field name="binding_model_id" ref="model_lerm_eln"/>
+    <field name="binding_type">report</field>
+</record>
+
 
 
 </odoo>
