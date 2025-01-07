@@ -442,7 +442,15 @@ class SrfForm(models.Model):
 
                     if sample.lab_location:
                         code = sample.lab_location.ulr_sequence.code
+                        srf_date = sample.srf_id.srf_date
                         ulr_no = self.env['ir.sequence'].next_by_code(code) or 'New'
+                        for dt in sample.lab_location.ulr_sequence.date_range_ids:
+                            from_date = dt.date_from
+                            to_date = dt.date_to
+                            break
+
+                        import wdb; wdb.set_trace()
+
                         lab_loc = sample.location_name.location_code
                         lab_cert_no = sample.lab_location.lab_certificate_no
                         ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
