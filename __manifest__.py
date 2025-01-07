@@ -255,7 +255,9 @@
     'reports/particle_board/particle_report.xml',
     'views/mechanical/door.xml',
     'reports/door/door_datasheet.xml',
-    'reports/door/door_report.xml'
+    'reports/door/door_report.xml',
+    'views/sample_test_request.xml',
+    'views/mechanical/natural_building_stone.xml'
 
 
     # 'views/portal_template.xml'

@@ -328,6 +328,7 @@
 <template id="create_sample_form" name="Create Sample Form">
     <t t-call="portal.portal_layout">
         <div class="container">
+       
             <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSampleModal">Add Sample</button>
 
             <!-- Add Sample Modal -->
@@ -341,12 +342,12 @@
                         <div class="modal-body">
                             <form id="addSampleForm" action="/sample/create/submit" method="POST">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                
 
                                 <div class="row mb-3">
-                                    <!-- Discipline Dropdown -->
                                     <div class="col-md-6">
                                         <label for="discipline_id" class="form-label">Discipline:</label>
-                                        <select name="discipline_id" id="discipline_id" class="form-control" required="True">
+                                        <select name="discipline_id" id="discipline_id" class="form-control" >
                                             <option value="">-- Select Discipline --</option>
                                             <t t-foreach="disciplines" t-as="discipline">
                                                 <option t-att-value="discipline.id">
@@ -355,11 +356,12 @@
                                             </t>
                                         </select>
                                     </div>
+                                    
 
                                     <!-- Group Dropdown -->
                                     <div class="col-md-6">
                                         <label for="group_id" class="form-label">Group:</label>
-                                        <select name="group_id" id="group_id" class="form-control" required="True">
+                                        <select name="group_id" id="group_id" class="form-control" >
                                             <option value="">-- Select Group --</option>
                                             <t t-foreach="groups" t-as="group">
                                                 <option t-att-value="group.id">
@@ -373,7 +375,7 @@
                                 <!-- Material Dropdown -->
                                 <div class="form-group">
                                     <label for="material_id" class="form-label">Material:</label>
-                                    <select name="material_id" id="material_id" class="form-control" onchange="updateGradesAndSizes(this.value)"  required="True">
+                                    <select name="material_id" id="material_id" class="form-control" onchange="updateGradesAndSizes(this.value)"  >
                                         <option value="">-- Select Material --</option>
                                         <t t-foreach="materials" t-as="material">
                                             <option t-att-value="material.id">
@@ -382,6 +384,7 @@
                                         </t>
                                     </select>
                                 </div>
+                                
 
                                 <div class="row mb-3">
                                <div class="col-md-6">
@@ -409,12 +412,8 @@
                                     </t>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="brand">Brand</label>
-                                <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter Brand" />
-                            </div>
-                         </div>
-
+                        </div>
+                         
                                  <div class="form-group">
                                                 <label for="candidate_ids">Parameters</label>
                                                 <button type="button" class="btn btn-info custom-btn" data-toggle="modal" data-target="#candidateModal">
@@ -489,33 +488,15 @@
                 <tbody>
                     <t t-foreach="samples" t-as="sample">
                         <tr>
+                           
                             <td><t t-esc="sample.discipline_id.discipline" /></td>
                             <td><t t-esc="sample.group_id.group" /></td>
                             <td><t t-esc="sample.material_id.name" /></td>
-                            <!-- <td>
-                                <div>
-                                    <t t-set="count" t-value="0" />
-                                    <t t-foreach="sample.grade_ids" t-as="grade">
-                                        <t t-if="count % 2 == 0 and count > 0">
-                                            <br />
-                                        </t>
-                                        <span class="badge bg-info text-dark">
-                                            <t t-esc="grade.grade" /> 
-                                        </span>
-                                        <t t-set="count" t-value="count + 1" />
-                                    </t>
-                                </div>
-                            </td> -->
-                        <td>
-                            <div>
-                                <t t-foreach="sample.grade_ids" t-as="grade">
-                                    <span class="badge bg-info text-dark">
-                                        <t t-esc="grade.grade" />
-                                    </span>
-                                </t>
-                            </div>
-                        </td>
-                        <td>
+                            <td><t t-esc="sample.grade_ids.grade" /></td>
+                            <td><t t-esc="sample.size_ids.size" /></td>
+                           
+                      
+                        <!-- <td>
                             <div>
                                 <t t-foreach="sample.size_ids" t-as="size">
                                     <span >
@@ -523,7 +504,7 @@
                                     </span>
                                 </t>
                             </div>
-                        </td>
+                        </td> -->
                              <td>
                                 <div>
                                     <t t-set="count" t-value="0" />
@@ -547,6 +528,9 @@
                     </t>
                 </tbody>
             </table>
+             <!-- <t t-if="request.params.get('success')">
+                <div class="alert alert-success">Sample created successfully!</div>
+            </t> -->
 
             <!-- Delete Sample Modal -->
             <div class="modal fade" id="deleteSampleModal" tabindex="-1" role="dialog" aria-labelledby="deleteSampleModalLabel" aria-hidden="true">
@@ -605,7 +589,28 @@
                 });
             });
         });
-        function updateGradesAndSizes(productId) {
+        <!-- function updateGradesAndSizes(productId) {
+        if (productId) {
+            fetch(/sample/create?product_id=${productId})
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Update Grades
+                    const gradeSelect = document.getElementById('grade_ids');
+                    const newGradeOptions = doc.querySelector('#grade_ids').innerHTML;
+                    gradeSelect.innerHTML = newGradeOptions;
+
+                    // Update Sizes
+                    const sizeSelect = document.getElementById('size_ids');
+                    const newSizeOptions = doc.querySelector('#size_ids').innerHTML;
+                    sizeSelect.innerHTML = newSizeOptions;
+                })
+                .catch(error => console.error('Error fetching grades and sizes:', error));
+        }
+    } -->
+    function updateGradesAndSizes(productId) {
         if (productId) {
             fetch(`/sample/create?product_id=${productId}`)
                 .then(response => response.text())
@@ -626,10 +631,50 @@
                 .catch(error => console.error('Error fetching grades and sizes:', error));
         }
     }
+
     
         </script>
     </t>
 </template>
+
+<template id="customer_create_template" name="Create Customer">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <h1>Create Customer</h1>
+                <form action="/customers/create/submit" method="post" class="mt-4">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                   <div class="form-group">
+                                    <label for="customer_id" class="form-label">Customer:</label>
+                                    <select name="customer_id" id="customer_id" class="form-control">
+                                        <option value="">-- Select Customer --</option>
+                                        <t t-foreach="customer" t-as="customer">
+                                            <option t-att-value="customer.id">
+                                                <t t-esc="customer.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                        </div>
+                    <button type="submit" class="btn btn-primary">Create Customer</button>
+                </form>
+                <h2 class="mt-4">Customer List</h2>
+                <table class="table table-bordered table-hover mt-4">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Customer Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="samples" t-as="customer">
+                            <tr>
+                                <td><t t-esc="customer.customer_id.name"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
 
 
 
