@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_natural_building_stone" model="ir.ui.view">
+        <field name="name">mechanical.natural.bulding.stone.form</field>
+        <field name="model">mechanical.natural.bulding.stone</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                         <field name="grade" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+
+
+                       <!--  density -->
+
+                       <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                        <h1>
+                            <field name="asgapw_name" readonly="1" nolabel="1"/>
+                            <field name="asgapw_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                        <field name="child_lines_asgapw" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='weight_of_saturated'/>
+                                <field name='quantity_of_water'/>
+                                <field name='weight_of_oven'/>
+                                <field name='apparent_specific'/>
+                                   <field name='apparent_porosity'/>
+                                <field name='water_absorption'/>
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('asgapw_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_asg' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('asgapw_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_ap' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('asgapw_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_wa' col="4"/>
+                       
+                    </group>
+
+                 
+
+                    <!-- <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name='average_density_shuttering_conformity'
+                                       decoration-success="average_density_shuttering_conformity == 'pass'" 
+                                       decoration-danger="average_density_shuttering_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name="average_density_shuttering_nabl"
+                                       decoration-success="average_density_shuttering_nabl == 'pass'" 
+                                       decoration-danger="average_density_shuttering_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group> -->
+
+
+                   
+                   
+
+
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
+                    
+                     
+
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
