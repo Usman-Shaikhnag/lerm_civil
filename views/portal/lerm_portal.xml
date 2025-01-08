@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+ <template id="portal_my_home" inherit_id="portal.portal_my_home">
+
+
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="url" t-value="'/sample/create'" />
+                <t t-set="title" t-value="'Sample Test'" />
+            </t>
+
+          
+        </xpath>
+       
+
+    </template>
+
+ <!-- <template id="create_sample_form" name="Create Sample Form">
+    <t t-call="portal.portal_layout">
+        <div class="container">
+            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSampleModal">Add Sample</button>
+
+            <div class="modal fade" id="addSampleModal" tabindex="-1" role="dialog" aria-labelledby="addSampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addSampleModalLabel">Add Sample</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addSampleForm" action="/sample/create/submit" method="POST">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="discipline_id" class="form-label">Discipline:</label>
+                                        <select name="discipline_id" id="discipline_id" class="form-control" required="True">
+                                            <option value=""></option>
+                                            <t t-foreach="disciplines" t-as="discipline">
+                                                <option t-att-value="discipline.id">
+                                                    <t t-esc="discipline.discipline" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="group_id" class="form-label">Group:</label>
+                                        <select name="group_id" id="group_id" class="form-control" required="True">
+                                            <option value=""></option>
+                                            <t t-foreach="groups" t-as="group">
+                                                <option t-att-value="group.id">
+                                                    <t t-esc="group.group" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+
+                              
+                                  <div class="form-group">
+                                    <label for="material_id" class="form-label">Material:</label>
+                                    <select name="material_id" id="material_id" class="form-control"  required="True">
+                                        <option value=""></option>
+                                        <t t-foreach="materials" t-as="material">
+                                            <option t-att-value="material.id">
+                                                <t t-esc="material.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                                
+                                
+                              <div class="row mb-3">
+                               <div class="col-md-6">
+                                    <label for="grade_ids" class="form-label">Grade:</label>
+                                    <select name="grade_ids" id="grade_ids" class="form-control" >
+                                        <option value=""></option>
+                                        <t t-foreach="grade_ids" t-as="grade">
+                                            <option t-att-value="grade.id">
+                                                <t t-esc="grade.grade" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                               
+
+
+                             <div class="col-md-6">
+                                <label for="size_ids" class="form-label">Size:</label>
+                                <select name="size_ids" id="size_ids" class="form-control">
+                                    <option value=""></option>
+                                    <t t-foreach="size_ids" t-as="size">
+                                        <option t-att-value="size.id">
+                                            <t t-esc="size.size" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                         </div>
+                             
+                             
+                            
+                     
+                                         <div class="form-group">
+                                                <label for="candidate_ids">Parameters</label>
+                                                <button type="button" class="btn btn-info custom-btn" data-toggle="modal" data-target="#candidateModal">
+                                                    Add Parameters
+                                                </button>
+
+                                            </div>
+                                            <style>
+                                                .custom-btn {
+                                                    margin-left: 30px; /* Adjust for gap */
+                                                    width: 200px;      /* Smaller width */
+                                                }
+                                            </style>
+
+                                            <div class="modal fade" id="candidateModal" tabindex="-1" role="dialog" aria-labelledby="candidateModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="candidateModalLabel">Parameters</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">X</span>
+                                                            </button>
+                                                        </div>
+                                                            <div class="modal-body">
+                                                            <div class="checkboxes">
+                                                                <t t-foreach="request.env['lerm.parameter.master'].sudo().search([])" t-as="parameters">
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" class="form-check-input" 
+                                                                            t-att-value="parameters.id" 
+                                                                            name="parameters" 
+                                                                            id="parameters_id_{{ parameters.id }}" /> 
+                                                                        <label class="form-check-label" 
+                                                                            t-att-for="'parameters_id_' + str(parameters.id)">
+                                                                            <t t-esc="parameters.parameter_name"/>
+                                                                        </label>
+                                                                    </div>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Add</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" form="addSampleForm" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Discipline</th>
+                        <th>Group</th>
+                        <th>Material</th>
+                       
+                        <th>Parameters:</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="samples" t-as="sample">
+                        <tr>
+                            <td><t t-esc="sample.discipline_id.discipline" /></td>
+                            <td><t t-esc="sample.group_id.group" /></td>
+                            <td><t t-esc="sample.material_id.name" /></td>
+                         
+
+                        <td>
+                                <div>
+                                    <t t-set="count" t-value="0" />
+                                    <t t-foreach="sample.parameters" t-as="parameter">
+                                        <t t-if="count % 2 == 0 and count > 0">
+                                            <br />
+                                        </t>
+                                        <span class="badge bg-info text-dark">
+                                            <t t-esc="parameter.parameter_name" />
+                                        </span>
+                                        <t t-set="count" t-value="count + 1" />
+                                    </t>
+                                </div>
+                            </td>
+
+                   
+                            <td>
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteSampleModal" t-att-data-sample-id="sample.id">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            
+            </table>
+
+            <div class="modal fade" id="deleteSampleModal" tabindex="-1" role="dialog" aria-labelledby="deleteSampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteSampleModalLabel">Delete Sample</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/sample/delete" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <input type="hidden" id="deleteSampleId" name="sample_id" />
+                            <div class="modal-body">
+                                Are you sure you want to delete this sample? This action cannot be undone.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+      
+            // Delete sample modal data handling
+            document.addEventListener('DOMContentLoaded', function () {
+                const deleteSampleModal = document.getElementById('deleteSampleModal');
+                deleteSampleModal.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    const sampleId = button.getAttribute('data-sample-id');
+                    const input = deleteSampleModal.querySelector('#deleteSampleId');
+                    input.value = sampleId;
+                });
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+            const addParametersButton = document.getElementById('add-parameters-btn');
+            const parameterCheckboxes = document.querySelectorAll('.parameter-checkbox');
+            const parameterList = document.getElementById('parameter-list');
+
+            addParametersButton.addEventListener('click', function () {
+                // Clear the current list
+                parameterList.innerHTML = '';
+
+                // Get all selected parameters
+                parameterCheckboxes.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        const parameterName = checkbox.getAttribute('data-parameter-name');
+                        const listItem = document.createElement('li');
+                        listItem.textContent = parameterName;
+                        parameterList.appendChild(listItem);
+                    }
+                });
+            });
+        });
+        function validateAndSubmitForm() {
+            const form = document.getElementById('addSampleForm');
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    isValid = false;
+                    field.classList.add('is-invalid'); // Add Bootstrap invalid class
+                } else {
+                    field.classList.remove('is-invalid'); // Remove Bootstrap invalid class
+                }
+            });
+
+            if (isValid) {
+                form.submit();
+            }
+        }
+
+        function updateGrades(productId) {
+            if (productId) {
+                fetch(`/sample/create?product_id=${productId}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const gradeSelect = document.getElementById('grade_ids');
+                        const newOptions = doc.querySelector('#grade_ids').innerHTML;
+                        gradeSelect.innerHTML = newOptions;
+                    })
+                    .catch(error => console.error('Error fetching grades:', error));
+            }
+        }
+        function updateGradesAndSizes(productId) {
+            if (productId) {
+                fetch(`/sample/create?product_id=${productId}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+
+                        // Update Grades
+                        const gradeSelect = document.getElementById('grade_ids');
+                        const newGradeOptions = doc.querySelector('#grade_ids').innerHTML;
+                        gradeSelect.innerHTML = newGradeOptions;
+
+                        // Update Sizes
+                        const sizeSelect = document.getElementById('size_ids');
+                        const newSizeOptions = doc.querySelector('#size_ids').innerHTML;
+                        sizeSelect.innerHTML = newSizeOptions;
+                    })
+                    .catch(error => console.error('Error fetching grades and sizes:', error));
+            }
+        }
+      
+        </script>
+      
+
+    
+    </t>
+</template> -->
+
+<template id="create_sample_form" name="Create Sample Form">
+    <t t-call="portal.portal_layout">
+        <div class="container">
+            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSampleModal">Add Sample</button>
+
+            <!-- Add Sample Modal -->
+            <div class="modal fade" id="addSampleModal" tabindex="-1" role="dialog" aria-labelledby="addSampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addSampleModalLabel">Add Sample</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addSampleForm" action="/sample/create/submit" method="POST">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+
+                                <div class="row mb-3">
+                                    <!-- Discipline Dropdown -->
+                                    <div class="col-md-6">
+                                        <label for="discipline_id" class="form-label">Discipline:</label>
+                                        <select name="discipline_id" id="discipline_id" class="form-control" required="True">
+                                            <option value="">-- Select Discipline --</option>
+                                            <t t-foreach="disciplines" t-as="discipline">
+                                                <option t-att-value="discipline.id">
+                                                    <t t-esc="discipline.discipline" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+
+                                    <!-- Group Dropdown -->
+                                    <div class="col-md-6">
+                                        <label for="group_id" class="form-label">Group:</label>
+                                        <select name="group_id" id="group_id" class="form-control" required="True">
+                                            <option value="">-- Select Group --</option>
+                                            <t t-foreach="groups" t-as="group">
+                                                <option t-att-value="group.id">
+                                                    <t t-esc="group.group" />
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Material Dropdown -->
+                                <div class="form-group">
+                                    <label for="material_id" class="form-label">Material:</label>
+                                    <select name="material_id" id="material_id" class="form-control" onchange="updateGradesAndSizes(this.value)"  required="True">
+                                        <option value="">-- Select Material --</option>
+                                        <t t-foreach="materials" t-as="material">
+                                            <option t-att-value="material.id">
+                                                <t t-esc="material.name" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+
+                                <div class="row mb-3">
+                               <div class="col-md-6">
+                                    <label for="grade_ids" class="form-label">Grade:</label>
+                                    <select name="grade_ids" id="grade_ids" class="form-control" >
+                                        <option value=""></option>
+                                        <t t-foreach="grade_ids" t-as="grade">
+                                            <option t-att-value="grade.id">
+                                                <t t-esc="grade.grade" />
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                               
+
+
+                             <div class="col-md-6">
+                                <label for="size_ids" class="form-label">Size:</label>
+                                <select name="size_ids" id="size_ids" class="form-control">
+                                    <option value=""></option>
+                                    <t t-foreach="size_ids" t-as="size">
+                                        <option t-att-value="size.id">
+                                            <t t-esc="size.size" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="brand">Brand</label>
+                                <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter Brand" />
+                            </div>
+                         </div>
+
+                                 <div class="form-group">
+                                                <label for="candidate_ids">Parameters</label>
+                                                <button type="button" class="btn btn-info custom-btn" data-toggle="modal" data-target="#candidateModal">
+                                                    Add Parameters
+                                                </button>
+
+                                            </div>
+                                            <style>
+                                                .custom-btn {
+                                                    margin-left: 30px; /* Adjust for gap */
+                                                    width: 200px;      /* Smaller width */
+                                                }
+                                            </style>
+
+                                            <div class="modal fade" id="candidateModal" tabindex="-1" role="dialog" aria-labelledby="candidateModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="candidateModalLabel">Parameters</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">X</span>
+                                                            </button>
+                                                        </div>
+                                                            <div class="modal-body">
+                                                            <div class="checkboxes">
+                                                                <t t-foreach="request.env['lerm.parameter.master'].sudo().search([])" t-as="parameters">
+                                                                    <div class="form-check">
+                                                                        <input type="checkbox" class="form-check-input" 
+                                                                            t-att-value="parameters.id" 
+                                                                            name="parameters" 
+                                                                            id="parameters_id_{{ parameters.id }}" /> 
+                                                                        <label class="form-check-label" 
+                                                                            t-att-for="'parameters_id_' + str(parameters.id)">
+                                                                            <t t-esc="parameters.parameter_name"/>
+                                                                        </label>
+                                                                    </div>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Add</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" form="addSampleForm" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+            <!-- Samples Table -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Discipline</th>
+                        <th>Group</th>
+                        <th>Material</th>
+                        <th>Grade</th>
+                         <th>Size</th>
+                        <th>Parameters</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="samples" t-as="sample">
+                        <tr>
+                            <td><t t-esc="sample.discipline_id.discipline" /></td>
+                            <td><t t-esc="sample.group_id.group" /></td>
+                            <td><t t-esc="sample.material_id.name" /></td>
+                            <!-- <td>
+                                <div>
+                                    <t t-set="count" t-value="0" />
+                                    <t t-foreach="sample.grade_ids" t-as="grade">
+                                        <t t-if="count % 2 == 0 and count > 0">
+                                            <br />
+                                        </t>
+                                        <span class="badge bg-info text-dark">
+                                            <t t-esc="grade.grade" /> 
+                                        </span>
+                                        <t t-set="count" t-value="count + 1" />
+                                    </t>
+                                </div>
+                            </td> -->
+                        <td>
+                            <div>
+                                <t t-foreach="sample.grade_ids" t-as="grade">
+                                    <span class="badge bg-info text-dark">
+                                        <t t-esc="grade.grade" />
+                                    </span>
+                                </t>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <t t-foreach="sample.size_ids" t-as="size">
+                                    <span >
+                                        <t t-esc="size.size" />
+                                    </span>
+                                </t>
+                            </div>
+                        </td>
+                             <td>
+                                <div>
+                                    <t t-set="count" t-value="0" />
+                                    <t t-foreach="sample.parameters" t-as="parameter">
+                                        <t t-if="count % 2 == 0 and count > 0">
+                                            <br />
+                                        </t>
+                                        <span class="badge bg-info text-dark">
+                                            <t t-esc="parameter.parameter_name" />
+                                        </span>
+                                        <t t-set="count" t-value="count + 1" />
+                                    </t>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteSampleModal" t-att-data-sample-id="sample.id">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+            <!-- Delete Sample Modal -->
+            <div class="modal fade" id="deleteSampleModal" tabindex="-1" role="dialog" aria-labelledby="deleteSampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteSampleModalLabel">Delete Sample</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/sample/delete" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                            <input type="hidden" id="deleteSampleId" name="sample_id" />
+                            <div class="modal-body">
+                                Are you sure you want to delete this sample? This action cannot be undone.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+      
+            // Delete sample modal data handling
+            document.addEventListener('DOMContentLoaded', function () {
+                const deleteSampleModal = document.getElementById('deleteSampleModal');
+                deleteSampleModal.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    const sampleId = button.getAttribute('data-sample-id');
+                    const input = deleteSampleModal.querySelector('#deleteSampleId');
+                    input.value = sampleId;
+                });
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+            const addParametersButton = document.getElementById('add-parameters-btn');
+            const parameterCheckboxes = document.querySelectorAll('.parameter-checkbox');
+            const parameterList = document.getElementById('parameter-list');
+
+            addParametersButton.addEventListener('click', function () {
+                // Clear the current list
+                parameterList.innerHTML = '';
+
+                // Get all selected parameters
+                parameterCheckboxes.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        const parameterName = checkbox.getAttribute('data-parameter-name');
+                        const listItem = document.createElement('li');
+                        listItem.textContent = parameterName;
+                        parameterList.appendChild(listItem);
+                    }
+                });
+            });
+        });
+        function updateGradesAndSizes(productId) {
+        if (productId) {
+            fetch(`/sample/create?product_id=${productId}`)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Update Grades
+                    const gradeSelect = document.getElementById('grade_ids');
+                    const newGradeOptions = doc.querySelector('#grade_ids').innerHTML;
+                    gradeSelect.innerHTML = newGradeOptions;
+
+                    // Update Sizes
+                    const sizeSelect = document.getElementById('size_ids');
+                    const newSizeOptions = doc.querySelector('#size_ids').innerHTML;
+                    sizeSelect.innerHTML = newSizeOptions;
+                })
+                .catch(error => console.error('Error fetching grades and sizes:', error));
+        }
+    }
+    
+        </script>
+    </t>
+</template>
+
+
+
+</odoo>

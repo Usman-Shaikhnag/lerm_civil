@@ -4,17 +4,34 @@
 	<template id="custom_layout_header_footer_lerm_eln">
         <div t-attf-class="header article" t-att-style="report_header_style">
 			<div class="row">
-				<div t-if="(eln.sample_id.scope == 'nabl' and nabl) or fromEln" class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
-				</div>
-				
-				<div t-if="(eln.sample_id.scope == 'non_nabl' or not nabl) and not fromEln" class="col-12 imageContainer" >
-					<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
-				</div>
+				<t t-if="eln.sample_id.lab_location">
+					<div t-if="(eln.sample_id.scope == 'nabl' and nabl) or fromEln" class="col-12 imageContainer" >
+						<img t-att-src="'data:image/png;base64,' + eln.sample_id.lab_location.header_image.decode('utf-8')"/>
+					</div>
+					
+					<div t-if="(eln.sample_id.scope == 'non_nabl' or not nabl) and not fromEln" class="col-12 imageContainer" >
+						<img t-att-src="'data:image/png;base64,' + eln.sample_id.lab_location.non_nabl_header.decode('utf-8')"/>
+					</div>
+				</t>
+				<t t-else="">
+					<div t-if="(eln.sample_id.scope == 'nabl' and nabl) or fromEln" class="col-12 imageContainer" >
+						<img t-attf-src="/lerm_civil/static/src/img/header.png" alt="Image"/>
+					</div>
+					
+					<div t-if="(eln.sample_id.scope == 'non_nabl' or not nabl) and not fromEln" class="col-12 imageContainer" >
+						<img t-attf-src="/lerm_civil/static/src/img/letterHead.jpg" alt="Image"/>
+					</div>
+				</t>
 				
 			</div>
 			<div class="row backgroundimage" style="opacity:0.2; font-size:100px; width:85%; text-align:center;top:500px; right:100px; position: fixed; z-index:-99;">
-				<img src="/lerm_civil/static/src/img/watermark.png" style="width:100%;"/>
+				<t t-if="eln.sample_id.lab_location">
+					<img t-att-src="'data:image/png;base64,' + eln.sample_id.lab_location.watermark_image.decode('utf-8')"/>
+					
+				</t>
+				<t t-else="">
+					<img src="/lerm_civil/static/src/img/watermark.jpg" />
+				</t>
 			</div>
 			<!-- <div class="container_eln row" style="position: fixed; z-index:99;margin-bottom:20px;">
 				

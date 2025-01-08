@@ -157,6 +157,11 @@ class LermSampleForm(models.Model):
     ], string='Invoice Status',  store=True, default='1-uninvoiced')
 
     print_button_visible = fields.Boolean("Print Nabl visible",compute="_compute_print_nabl_visible")
+
+    lab_location = fields.Many2one('lerm.lab.master',string="Lab Location")
+    location_name = fields.Many2one('lerm.lab.location.master',string="Location Name")
+
+
    
 
    
@@ -340,8 +345,8 @@ class LermSampleForm(models.Model):
                 'default_sample': self.id,
                 }
             }
-
-        
+    
+    
 
 
     def edit_sample(self):
@@ -405,9 +410,11 @@ class LermSampleForm(models.Model):
     @api.depends('state')
     def compute_form_product_based(self):
         for record in self:
-            record.product_or_form_based = False
+
+            record.product_or_form_based = True
+            print("SAMPLE STATE",record.state)
             if record.state != '1-allotment_pending':
-                eln_id = self.env['lerm.eln'].search([('sample_id','=',record.id)])
+                eln_id = self.env['lerm.eln'].sudo().search([('sample_id','=',record.id)])
                 if eln_id and eln_id.parameters_result:  # Check if eln_id and parameters_result are not empty
                     print("DATA",eln_id.parameters_result)
                     is_product_based = eln_id.is_product_based_calculation
@@ -415,6 +422,8 @@ class LermSampleForm(models.Model):
                     if is_product_based or is_form_based:
                         record.product_or_form_based = True
                         record.parameters_result.write({'verified':True})
+                    else:
+                        record.product_or_form_based = False
             else:
                 record.product_or_form_based = False
 
