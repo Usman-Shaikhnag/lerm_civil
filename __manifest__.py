@@ -257,7 +257,9 @@
     'reports/door/door_datasheet.xml',
     'reports/door/door_report.xml',
     'views/sample_test_request.xml',
-    'views/mechanical/natural_building_stone.xml'
+    'views/mechanical/natural_building_stone.xml',
+    'reports/natural_stone/natural_datasheet.xml',
+    'reports/natural_stone/natural_report.xml'
 
 
     # 'views/portal_template.xml'
