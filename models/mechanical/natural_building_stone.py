@@ -580,12 +580,24 @@ class NaturalBuildingStone(models.Model):
     compressive_natural_visible = fields.Boolean("Compressive strength Visible",compute="_compute_visible")   
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines_compressive_natural1 = fields.One2many('mechanical.naturalcompressive1.line','parent_id',string="Parameter")
+    child_lines_compressive_natural1 = fields.One2many('mechanical.naturalcompressive1.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural1())
 
     avg_uniaxial_compressive = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values")
     avg_kg = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values")
 
     dry_state_perpendicular = fields.Float(string="Dry State- Perpendicular to the plane",digits=(12,4),compute="_compute_dry_state_perpendicular")
+
+    @api.model
+    def _default_child_lines_compressive_natural1(self):
+        default_lines = [
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+         
+        ]
+        return default_lines
 
     @api.depends('avg_kg')
     def _compute_dry_state_perpendicular(self):
@@ -607,7 +619,19 @@ class NaturalBuildingStone(models.Model):
                 record.avg_kg = 0.0
 
 
-    child_lines_compressive_natural2 = fields.One2many('mechanical.naturalcompressive2.line','parent_id',string="Parameter")
+    child_lines_compressive_natural2 = fields.One2many('mechanical.naturalcompressive2.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural2())
+
+    @api.model
+    def _default_child_lines_compressive_natural2(self):
+        default_lines = [
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+         
+        ]
+        return default_lines
 
     avg_uniaxial_compressive2 = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values2")
     avg_kg2 = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values2")
@@ -633,7 +657,19 @@ class NaturalBuildingStone(models.Model):
                 record.avg_uniaxial_compressive2 = 0.0
                 record.avg_kg2 = 0.0
 
-    child_lines_compressive_natural3 = fields.One2many('mechanical.naturalcompressive3.line','parent_id',string="Parameter")
+    child_lines_compressive_natural3 = fields.One2many('mechanical.naturalcompressive3.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural3())
+
+    @api.model
+    def _default_child_lines_compressive_natural3(self):
+        default_lines = [
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+         
+        ]
+        return default_lines
 
     avg_uniaxial_compressive3 = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values3")
     avg_kg3 = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values3")
@@ -659,7 +695,19 @@ class NaturalBuildingStone(models.Model):
                 record.avg_uniaxial_compressive3 = 0.0
                 record.avg_kg3 = 0.0
 
-    child_lines_compressive_natural4 = fields.One2many('mechanical.naturalcompressive4.line','parent_id',string="Parameter")
+    child_lines_compressive_natural4 = fields.One2many('mechanical.naturalcompressive4.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural4())
+
+    @api.model
+    def _default_child_lines_compressive_natural4(self):
+        default_lines = [
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+         
+        ]
+        return default_lines
 
     avg_uniaxial_compressive4 = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values4")
     avg_kg4 = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values4")
