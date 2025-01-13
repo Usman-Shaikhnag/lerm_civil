@@ -158,5 +158,8 @@ from .mechanical import particle_board
 from .report import particle_ds_report
 from .mechanical import door
 from .report import door_ds_report
+from . import sample_test_request
+from . mechanical import natural_building_stone
+from .report import natural_stone_ds_report
 
 # from .import dash_bord

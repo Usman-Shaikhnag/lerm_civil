@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_natural_building_stone" model="ir.ui.view">
+        <field name="name">mechanical.natural.bulding.stone.form</field>
+        <field name="model">mechanical.natural.bulding.stone</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                         <field name="grade" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+
+
+                       <!--  density -->
+
+                       <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                        <h1>
+                            <field name="asgapw_name" readonly="1" nolabel="1"/>
+                            <field name="asgapw_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                        <field name="child_lines_asgapw" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='weight_of_saturated'/>
+                                <field name='quantity_of_water'/>
+                                <field name='weight_of_oven'/>
+                                <field name='apparent_specific'/>
+                                   <field name='apparent_porosity'/>
+                                <field name='water_absorption'/>
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('asgapw_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_asg' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('asgapw_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_ap' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('asgapw_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_wa' col="4"/>
+                       
+                    </group>
+
+                 
+
+                    <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name='average_asg_conformity'
+                                       decoration-success="average_asg_conformity == 'pass'" 
+                                       decoration-danger="average_asg_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name="average_asg_nabl"
+                                       decoration-success="average_asg_nabl == 'pass'" 
+                                       decoration-danger="average_asg_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+
+                    <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name='average_ap_conformity'
+                                       decoration-success="average_ap_conformity == 'pass'" 
+                                       decoration-danger="average_ap_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name="average_ap_nabl"
+                                       decoration-success="average_ap_nabl == 'pass'" 
+                                       decoration-danger="average_ap_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+
+
+
+                    <group attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name='average_wa_conformity'
+                                       decoration-success="average_wa_conformity == 'pass'" 
+                                       decoration-danger="average_wa_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('asgapw_visible', '=', False)]}">
+                                <field name="average_wa_nabl"
+                                       decoration-success="average_wa_nabl == 'pass'" 
+                                       decoration-danger="average_wa_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+
+
+
+
+
+                    <group attrs="{'invisible': [('psg_visible', '=', False)]}">
+                        <h1>
+                            <field name="psg_name" readonly="1" nolabel="1"/>
+                            <field name="psg_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('psg_visible', '=', False)]}">
+                        <field name="child_lines_psg" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='mass_empty'/>
+                                <field name='mass_specific'/>
+                                <field name='mass_specific_gravity'/>
+                                <field name='mass_specific_bottle'/>
+                                   <field name='true_specific'/>
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('psg_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_psg' col="4"/>
+                       
+                    </group>
+
+                      <group attrs="{'invisible': [('psg_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('psg_visible', '=', False)]}">
+                                <field name='average_psg_conformity'
+                                       decoration-success="average_psg_conformity == 'pass'" 
+                                       decoration-danger="average_psg_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('psg_visible', '=', False)]}">
+                                <field name="average_psg_nabl"
+                                       decoration-success="average_psg_nabl == 'pass'" 
+                                       decoration-danger="average_psg_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+
+                     <group attrs="{'invisible': [('psg_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='true_porosity' col="4"/>
+                       
+                    </group>
+
+                      <group attrs="{'invisible': [('psg_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('psg_visible', '=', False)]}">
+                                <field name='true_porosity_conformity'
+                                       decoration-success="true_porosity_conformity == 'pass'" 
+                                       decoration-danger="true_porosity_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('psg_visible', '=', False)]}">
+                                <field name="true_porosity_nabl"
+                                       decoration-success="true_porosity_nabl == 'pass'" 
+                                       decoration-danger="true_porosity_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+
+
+
+
+                      <group attrs="{'invisible': [('dry_dencity_natural_visible', '=', False)]}">
+                        <h1>
+                            <field name="dry_dencity_natural_name" readonly="1" nolabel="1"/>
+                            <field name="dry_dencity_natural_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('dry_dencity_natural_visible', '=', False)]}">
+                        <field name="child_lines_dry_dencity_natural" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='mass_oven'/>
+                                <field name='volume_sample'/>
+                                <field name='dry_dencity'/>
+                                <field name='dry_dencity_sample'/>
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('dry_dencity_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='average_dry_dencity_natural' col="4"/>
+                       
+                    </group>
+
+                     <group attrs="{'invisible': [('dry_dencity_natural_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('dry_dencity_natural_visible', '=', False)]}">
+                                <field name='average_dry_dencity_natural_conformity'
+                                       decoration-success="average_dry_dencity_natural_conformity == 'pass'" 
+                                       decoration-danger="average_dry_dencity_natural_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('dry_dencity_natural_visible', '=', False)]}">
+                                <field name="average_dry_dencity_natural_nabl"
+                                       decoration-success="average_dry_dencity_natural_nabl == 'pass'" 
+                                       decoration-danger="average_dry_dencity_natural_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+
+
+
+                     <group attrs="{'invisible': [('moisture_natural_visible', '=', False)]}">
+                        <h1>
+                            <field name="moisture_natural_name" readonly="1" nolabel="1"/>
+                            <field name="moisture_natural_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('moisture_natural_visible', '=', False)]}">
+                        <field name="child_lines_moisture_natural" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='mass_sample'/>
+                                <field name='volume_oven'/>
+                                <field name='moisture_content'/>
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('moisture_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_moisture' col="4"/>
+                       
+                    </group>
+
+                         <group attrs="{'invisible': [('moisture_natural_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('moisture_natural_visible', '=', False)]}">
+                                <field name='avg_moisture_conformity'
+                                       decoration-success="avg_moisture_conformity == 'pass'" 
+                                       decoration-danger="avg_moisture_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('moisture_natural_visible', '=', False)]}">
+                                <field name="avg_moisture_nabl"
+                                       decoration-success="avg_moisture_nabl == 'pass'" 
+                                       decoration-danger="avg_moisture_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+                     
+
+
+                      <group attrs="{'invisible': [('scratch_natural_visible', '=', False)]}">
+                        <h1>
+                            <field name="scratch_natural_name" readonly="1" nolabel="1"/>
+                            <field name="scratch_natural_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('scratch_natural_visible', '=', False)]}">
+                        <field name="child_lines_scratch_natural" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='scratch_hardness'/>
+                              
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('scratch_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_scratch' col="4"/>
+                       
+                    </group>
+
+
+                     <group attrs="{'invisible': [('scratch_natural_visible', '=', False)]}">
+
+                     <group style="width:25%" attrs="{'invisible': [('scratch_natural_visible', '=', False)]}">
+                                <field name='avg_scratch_conformity'
+                                       decoration-success="avg_scratch_conformity == 'pass'" 
+                                       decoration-danger="avg_scratch_conformity == 'fail'" 
+                                       readonly="1"/>
+                        </group>
+                          <group style="width:25%" attrs="{'invisible': [('scratch_natural_visible', '=', False)]}">
+                                <field name="avg_scratch_nabl"
+                                       decoration-success="avg_scratch_nabl == 'pass'" 
+                                       decoration-danger="avg_scratch_nabl == 'fail'" 
+                                       readonly="1"/>
+                            </group>
+                        </group>
+
+
+
+
+                       <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}">
+                        <h1>
+                            <field name="compressive_natural_name" readonly="1" nolabel="1"/>
+                            <field name="compressive_natural_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}">
+                        <field name="child_lines_compressive_natural1" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='condition'/>
+                                 <field name='bearing_surface'/>
+                                  <field name='max_compressive'/>
+                                  <field name='uniaxial_compressive'/>
+                                  <field name='kg'/>
+                              
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_uniaxial_compressive' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_kg' col="4"/>
+                       
+                    </group>
+
+
+
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}">
+                        <field name="child_lines_compressive_natural2" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='condition1'/>
+                                 <field name='bearing_surface1'/>
+                                  <field name='max_compressive1'/>
+                                  <field name='uniaxial_compressive1'/>
+                                  <field name='kg1'/>
+                              
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_uniaxial_compressive2' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_kg2' col="4"/>
+                       
+                    </group>
+
+
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}">
+                        <field name="child_lines_compressive_natural3" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='condition3'/>
+                                 <field name='bearing_surface3'/>
+                                  <field name='max_compressive3'/>
+                                  <field name='uniaxial_compressive3'/>
+                                  <field name='kg3'/>
+                              
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_uniaxial_compressive3' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_kg3' col="4"/>
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}">
+                        <field name="child_lines_compressive_natural4" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='condition4'/>
+                                 <field name='bearing_surface4'/>
+                                  <field name='max_compressive4'/>
+                                  <field name='uniaxial_compressive4'/>
+                                  <field name='kg4'/>
+                              
+                
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_uniaxial_compressive4' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='avg_kg4' col="4"/>
+                       
+                    </group>
+
+
+
+                      <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='dry_state_perpendicular' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='dry_state_paraller' col="4"/>
+                       
+                    </group>
+
+                      <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='wet_state_perpendicular' col="4"/>
+                       
+                    </group>
+                     <group attrs="{'invisible': [('compressive_natural_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        <field name='wet_state_paraller' col="4"/>
+                       
+                    </group>
+                   
+
+
+                   
+                   
+
+
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
+                    
+                     
+
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
