@@ -361,7 +361,9 @@
                         <field name="child_lines_compressive_natural1" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
-                                <field name='condition'/>
+                                 <field name='condition'/>
+                                <field name='length'/>
+                                <field name='width'/>
                                  <field name='bearing_surface'/>
                                   <field name='max_compressive'/>
                                   <field name='uniaxial_compressive'/>
@@ -391,6 +393,8 @@
                             <tree editable="bottom">
                                 <field name='sr_no'/>
                                 <field name='condition1'/>
+                                <field name='length1'/>
+                                <field name='width1'/>
                                  <field name='bearing_surface1'/>
                                   <field name='max_compressive1'/>
                                   <field name='uniaxial_compressive1'/>
@@ -419,6 +423,8 @@
                             <tree editable="bottom">
                                 <field name='sr_no'/>
                                 <field name='condition3'/>
+                                <field name='length3'/>
+                                <field name='width3'/>
                                  <field name='bearing_surface3'/>
                                   <field name='max_compressive3'/>
                                   <field name='uniaxial_compressive3'/>
@@ -446,6 +452,8 @@
                             <tree editable="bottom">
                                 <field name='sr_no'/>
                                 <field name='condition4'/>
+                                  <field name='length4'/>
+                                <field name='width4'/>
                                  <field name='bearing_surface4'/>
                                   <field name='max_compressive4'/>
                                   <field name='uniaxial_compressive4'/>

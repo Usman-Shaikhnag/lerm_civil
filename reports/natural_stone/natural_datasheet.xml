@@ -521,6 +521,12 @@
 							<td colspan="1" style="text-align:center;">Condition
 							</td>
 
+							<td colspan="1" style="text-align:center;">Length ,mm
+							</td>
+
+							<td colspan="1" style="text-align:center;">Width ,mm
+							</td>
+
                             <td colspan="1" style="text-align:center;">Bearing Surface Area, mm x mm
 							</td>
                             <td colspan="1" style="text-align:center;">Max Compressive Load for Failure, KN
@@ -545,6 +551,12 @@
 							</td>
 							<td colspan="1">
 								<span t-esc="r['condition']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['length']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['width']" />
 							</td>
                             <td colspan="1">
 								<span t-esc="r['bearing_surface']" />
@@ -595,6 +607,11 @@
 
 							<td colspan="1" style="text-align:center;">Condition
 							</td>
+							<td colspan="1" style="text-align:center;">Length ,mm
+							</td>
+
+							<td colspan="1" style="text-align:center;">Width ,mm
+							</td>
 
                             <td colspan="1" style="text-align:center;">Bearing Surface Area, mm x mm
 							</td>
@@ -620,6 +637,12 @@
 							</td>
 							<td colspan="1">
 								<span t-esc="r['condition1']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['length1']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['width1']" />
 							</td>
                             <td colspan="1">
 								<span t-esc="r['bearing_surface1']" />
@@ -669,6 +692,12 @@
 							<td colspan="1" style="text-align:center;">Condition
 							</td>
 
+							<td colspan="1" style="text-align:center;">Length ,mm
+							</td>
+
+							<td colspan="1" style="text-align:center;">Width ,mm
+							</td>
+
                             <td colspan="1" style="text-align:center;">Bearing Surface Area, mm x mm
 							</td>
                             <td colspan="1" style="text-align:center;">Max Compressive Load for Failure, KN
@@ -693,6 +722,12 @@
 							</td>
 							<td colspan="1">
 								<span t-esc="r['condition3']" />
+							</td>
+								<td colspan="1">
+								<span t-esc="r['length3']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['width3']" />
 							</td>
                             <td colspan="1">
 								<span t-esc="r['bearing_surface3']" />
@@ -743,6 +778,12 @@
 							<td colspan="1" style="text-align:center;">Condition
 							</td>
 
+								<td colspan="1" style="text-align:center;">Length ,mm
+							</td>
+
+							<td colspan="1" style="text-align:center;">Width ,mm
+							</td>
+
                             <td colspan="1" style="text-align:center;">Bearing Surface Area, mm x mm
 							</td>
                             <td colspan="1" style="text-align:center;">Max Compressive Load for Failure, KN
@@ -767,6 +808,12 @@
 							</td>
 							<td colspan="1">
 								<span t-esc="r['condition4']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['length4']" />
+							</td>
+							<td colspan="1">
+								<span t-esc="r['width4']" />
 							</td>
                             <td colspan="1">
 								<span t-esc="r['bearing_surface4']" />
