@@ -816,6 +816,22 @@ class GsbMechanical(models.Model):
     vl_of_modul = fields.Float('Volume of Mould in cc')
     chart_image_density = fields.Binary("Line Chart", compute="_compute_chart_image_density", store=True)
 
+    mmd = fields.Float(string="MMD gm/cc", compute="_compute_max_dry_density_heavy", store=True)
+    omc = fields.Float(string="OMC %", compute="_compute_max_omc_heavy", store=True)
+
+    @api.depends('density_relation_table.dry_density')
+    def _compute_max_dry_density_heavy(self):
+        for record in self:
+            max_dry_density_heavy = max(record.density_relation_table.mapped('dry_density'), default=0.0)
+            record.mmd = max_dry_density_heavy
+
+    @api.depends('density_relation_table.dry_density', 'density_relation_table.moisture', 'mmd')
+    def _compute_max_omc_heavy(self):
+        for record in self:
+            max_dry_density_light_omc = record.mmd
+            corresponding_moisture_heavy = next((line.moisture for line in record.density_relation_table if line.dry_density == max_dry_density_light_omc), 0.0)
+            record.omc = corresponding_moisture_heavy
+
 
 
     def generate_line_chart_density(self):

@@ -333,6 +333,12 @@
                     <field name="chart_image_density" widget="image" readonly="1" />
                     </group>
                 </group>
+
+                 <group attrs="{'invisible': [('density_relation_visible', '=', False)]}">
+                     <field name='mmd'/>
+                     <field name='omc'/>
+              
+                    </group>
                 
 
 
