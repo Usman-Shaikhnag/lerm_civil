@@ -179,8 +179,8 @@ class MechanicalRockLine(models.Model):
     parent_id = fields.Many2one('mechanical.rock',string="Parent Id")
    
     sr_no = fields.Integer(string="Specimen NO.", readonly=True, copy=False, default=1)
-    # location = fields.Char(string="Location")
-    # sample_no = fields.Char(string="Sample Number")
+    location = fields.Char(string="Location")
+    sample_no = fields.Char(string="Sample Number")
     depth = fields.Char(string="Depth in (mtr)", size=100) 
     ssd_weight = fields.Float(string="SSD weight of sample in kg, Msat",digits=(16, 3))
     wt_sample_water = fields.Float(string="Weight of sample in water in kg, Msub",digits=(16, 3))
