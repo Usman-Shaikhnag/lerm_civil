@@ -580,12 +580,24 @@ class NaturalBuildingStone(models.Model):
     compressive_natural_visible = fields.Boolean("Compressive strength Visible",compute="_compute_visible")   
 
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
-    child_lines_compressive_natural1 = fields.One2many('mechanical.naturalcompressive1.line','parent_id',string="Parameter")
+    child_lines_compressive_natural1 = fields.One2many('mechanical.naturalcompressive1.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural1())
 
     avg_uniaxial_compressive = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values")
     avg_kg = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values")
 
     dry_state_perpendicular = fields.Float(string="Dry State- Perpendicular to the plane",digits=(12,4),compute="_compute_dry_state_perpendicular")
+
+    @api.model
+    def _default_child_lines_compressive_natural1(self):
+        default_lines = [
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+            (0, 0, {'condition': 'Dry / Perpendicular to the Plane'}),
+         
+        ]
+        return default_lines
 
     @api.depends('avg_kg')
     def _compute_dry_state_perpendicular(self):
@@ -607,7 +619,19 @@ class NaturalBuildingStone(models.Model):
                 record.avg_kg = 0.0
 
 
-    child_lines_compressive_natural2 = fields.One2many('mechanical.naturalcompressive2.line','parent_id',string="Parameter")
+    child_lines_compressive_natural2 = fields.One2many('mechanical.naturalcompressive2.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural2())
+
+    @api.model
+    def _default_child_lines_compressive_natural2(self):
+        default_lines = [
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+            (0, 0, {'condition1': 'Dry / Parallel to the Plane'}),
+         
+        ]
+        return default_lines
 
     avg_uniaxial_compressive2 = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values2")
     avg_kg2 = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values2")
@@ -633,7 +657,19 @@ class NaturalBuildingStone(models.Model):
                 record.avg_uniaxial_compressive2 = 0.0
                 record.avg_kg2 = 0.0
 
-    child_lines_compressive_natural3 = fields.One2many('mechanical.naturalcompressive3.line','parent_id',string="Parameter")
+    child_lines_compressive_natural3 = fields.One2many('mechanical.naturalcompressive3.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural3())
+
+    @api.model
+    def _default_child_lines_compressive_natural3(self):
+        default_lines = [
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+            (0, 0, {'condition3': 'Wet / Perpendicular to the Plane'}),
+         
+        ]
+        return default_lines
 
     avg_uniaxial_compressive3 = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values3")
     avg_kg3 = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values3")
@@ -659,7 +695,19 @@ class NaturalBuildingStone(models.Model):
                 record.avg_uniaxial_compressive3 = 0.0
                 record.avg_kg3 = 0.0
 
-    child_lines_compressive_natural4 = fields.One2many('mechanical.naturalcompressive4.line','parent_id',string="Parameter")
+    child_lines_compressive_natural4 = fields.One2many('mechanical.naturalcompressive4.line','parent_id',string="Parameter",default=lambda self: self._default_child_lines_compressive_natural4())
+
+    @api.model
+    def _default_child_lines_compressive_natural4(self):
+        default_lines = [
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+            (0, 0, {'condition4': 'Wet / Parallel to the Plane'}),
+         
+        ]
+        return default_lines
 
     avg_uniaxial_compressive4 = fields.Float(string="Average UniAxial Compressive Strength, N/mm2",digits=(12,2),compute="_compute_average_values4")
     avg_kg4 = fields.Float(string="Average kg/cm2",digits=(12,4),compute="_compute_average_values4")
@@ -1005,9 +1053,11 @@ class CompressivestrengthLine(models.Model):
     sr_no = fields.Integer(string="Sample No.",readonly=True, copy=False, default=1)
 
     condition = fields.Char(string="Condition")
-    bearing_surface = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,1))
+    length = fields.Float(string="Length ,mm",digits=(12,2))
+    width = fields.Float(string="Width ,mm",digits=(12,2))
+    bearing_surface = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,3),compute="_compute_bearing_surface")
     max_compressive = fields.Float(string="Max Compressive Load for Failure, KN",digits=(12,1))
-    uniaxial_compressive = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,1),compute="_compute_compressive_values")
+    uniaxial_compressive = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,3),compute="_compute_compressive_values")
     kg = fields.Float(string="kg/cm2",digits=(12,4),compute="_compute_compressive_values")
 
   
@@ -1022,7 +1072,14 @@ class CompressivestrengthLine(models.Model):
             else:
                 record.uniaxial_compressive = 0.0
                 record.kg = 0.0
-   
+    
+    @api.depends('length', 'width')
+    def _compute_bearing_surface(self):
+        for record in self:
+            if record.length and record.width:
+                record.bearing_surface = record.length * record.width
+            else:
+                record.bearing_surface = 0.0
 
     @api.model
     def create(self, vals):
@@ -1049,10 +1106,20 @@ class CompressivestrengthLine2(models.Model):
     sr_no = fields.Integer(string="Sample No.",readonly=True, copy=False, default=1)
 
     condition1 = fields.Char(string="Condition")
-    bearing_surface1 = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,1))
+    length1 = fields.Float(string="Length ,mm",digits=(12,2))
+    width1 = fields.Float(string="Width ,mm",digits=(12,2))
+    bearing_surface1 = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,3),compute="_compute_bearing_surface1")
     max_compressive1 = fields.Float(string="Max Compressive Load for Failure, KN",digits=(12,1))
-    uniaxial_compressive1 = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,1),compute="_compute_compressive_values1")
+    uniaxial_compressive1 = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,3),compute="_compute_compressive_values1")
     kg1 = fields.Float(string="kg/cm2",digits=(12,4),compute="_compute_compressive_values1")
+
+    @api.depends('length1', 'width1')
+    def _compute_bearing_surface1(self):
+        for record in self:
+            if record.length1 and record.width1:
+                record.bearing_surface1 = record.length1 * record.width1
+            else:
+                record.bearing_surface1 = 0.0
 
   
 
@@ -1093,10 +1160,20 @@ class CompressivestrengthLine3(models.Model):
     sr_no = fields.Integer(string="Sample No.",readonly=True, copy=False, default=1)
 
     condition3 = fields.Char(string="Condition")
-    bearing_surface3 = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,1))
+    length3 = fields.Float(string="Length ,mm",digits=(12,2))
+    width3 = fields.Float(string="Width ,mm",digits=(12,2))
+    bearing_surface3 = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,3),compute="_compute_bearing_surface3")
     max_compressive3 = fields.Float(string="Max Compressive Load for Failure, KN",digits=(12,1))
-    uniaxial_compressive3 = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,1),compute="_compute_compressive_values3")
+    uniaxial_compressive3 = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,3),compute="_compute_compressive_values3")
     kg3 = fields.Float(string="kg/cm2",digits=(12,4),compute="_compute_compressive_values3")
+
+    @api.depends('length3', 'width3')
+    def _compute_bearing_surface3(self):
+        for record in self:
+            if record.length3 and record.width3:
+                record.bearing_surface3 = record.length3 * record.width3
+            else:
+                record.bearing_surface3 = 0.0
 
   
 
@@ -1137,10 +1214,20 @@ class CompressivestrengthLine4(models.Model):
     sr_no = fields.Integer(string="Sample No.",readonly=True, copy=False, default=1)
 
     condition4 = fields.Char(string="Condition")
-    bearing_surface4 = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,1))
+    length4 = fields.Float(string="Length ,mm",digits=(12,2))
+    width4 = fields.Float(string="Width ,mm",digits=(12,2))
+    bearing_surface4 = fields.Float(string="Bearing Surface Area, mm x mm",digits=(12,3),compute="_compute_bearing_surface4")
     max_compressive4 = fields.Float(string="Max Compressive Load for Failure, KN",digits=(12,1))
-    uniaxial_compressive4 = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,1),compute="_compute_compressive_values4")
+    uniaxial_compressive4 = fields.Float(string="UniAxial Compressive Strength, N/mm2",digits=(12,3),compute="_compute_compressive_values4")
     kg4 = fields.Float(string="kg/cm2",digits=(12,4),compute="_compute_compressive_values4")
+
+    @api.depends('length4', 'width4')
+    def _compute_bearing_surface4(self):
+        for record in self:
+            if record.length4 and record.width4:
+                record.bearing_surface4 = record.length4 * record.width4
+            else:
+                record.bearing_surface4 = 0.0
 
   
 
