@@ -259,7 +259,16 @@
     'views/sample_test_request.xml',
     'views/mechanical/natural_building_stone.xml',
     'reports/natural_stone/natural_datasheet.xml',
-    'reports/natural_stone/natural_report.xml'
+    'reports/natural_stone/natural_report.xml',
+    'views/mechanical/tiles_chequered.xml',
+    'reports/tile_chequered/tile_chequered_datasheet.xml',
+    'reports/tile_chequered/tile_chequered_report.xml',
+    'views/mechanical/cement_chequerd_tile.xml',
+    'reports/cement_chequerd_tile/cement_tile_datasheet.xml',
+    'reports/cement_chequerd_tile/cement_chequerd_report.xml',
+    'views/mechanical/morter_cube.xml',
+    'reports/mortar_cube/mortar_cube_datasheet.xml',
+    'reports/mortar_cube/mortar_cube_report.xml'
 
 
     # 'views/portal_template.xml'
