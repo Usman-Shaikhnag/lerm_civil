@@ -464,6 +464,8 @@ hod.lerm_civil.access_mechanical_cement_chequered_wet_transverse_line,access_mec
 hod.lerm_civil.access_mechanical_morter_cube,access_mechanical_morter_cube,lerm_civil.model_mechanical_morter_cube,base.group_user,1,0,0,0
 hod.lerm_civil.access_mechanical_morter_cube_line,access_mechanical_morter_cube_line,lerm_civil.model_mechanical_morter_cube_line,base.group_user,1,0,0,0
 
+hod.lerm_civil.access_pile_integrity,access_pile_integrity,lerm_civil.model_pile_integrity,base.group_user,1,0,0,0
+hod.lerm_civil.access_pile_integrity_line,access_pile_integrity_line,lerm_civil.model_pile_integrity_line,base.group_user,1,0,0,0
 
 
 
@@ -716,6 +718,9 @@ quality.lerm_civil.access_mechanical_cement_chequered_water_absorption_line,acce
 quality.lerm_civil.access_mechanical_cement_chequered_wet_transverse_line,access_mechanical_cement_chequered_wet_transverse_line,lerm_civil.model_mechanical_cement_chequered_wet_transverse_line,base.group_user,1,0,0,0
 quality.lerm_civil.access_mechanical_morter_cube,access_mechanical_morter_cube,lerm_civil.model_mechanical_morter_cube,base.group_user,1,0,0,0
 quality.lerm_civil.access_mechanical_morter_cube_line,access_mechanical_morter_cube_line,lerm_civil.model_mechanical_morter_cube_line,base.group_user,1,0,0,0
+
+quality.lerm_civil.access_pile_integrity,access_pile_integrity,lerm_civil.model_pile_integrity,base.group_user,1,0,0,0
+quality.lerm_civil.access_pile_integrity_line,access_pile_integrity_line,lerm_civil.model_pile_integrity_line,base.group_user,1,0,0,0
 
 
 
@@ -979,6 +984,9 @@ technician.lerm_civil.access_mechanical_cement_chequered_water_absorption_line,a
 technician.lerm_civil.access_mechanical_cement_chequered_wet_transverse_line,access_mechanical_cement_chequered_wet_transverse_line,lerm_civil.model_mechanical_cement_chequered_wet_transverse_line,base.group_user,1,1,1,1
 technician.lerm_civil.access_mechanical_morter_cube,access_mechanical_morter_cube,lerm_civil.model_mechanical_morter_cube,base.group_user,1,1,1,1
 technician.lerm_civil.access_mechanical_morter_cube_line,access_mechanical_morter_cube_line,lerm_civil.model_mechanical_morter_cube_line,base.group_user,1,1,1,1
+
+technician.lerm_civil.access_pile_integrity,access_pile_integrity,lerm_civil.model_pile_integrity,base.group_user,1,1,1,1
+technician.lerm_civil.access_pile_integrity_line,access_pile_integrity_line,lerm_civil.model_pile_integrity_line,base.group_user,1,1,1,1
 
 
 
