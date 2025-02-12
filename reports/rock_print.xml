@@ -407,7 +407,7 @@
 
 					</div>
 				
-					<table>
+					<!-- <table>
 					<t t-set="i" t-value="0"/>
 						<thead>
 							<tr>
@@ -432,11 +432,7 @@
 										Result
 									</span>
 								</th>
-								<!-- <th style="max-width: 250px; text-align: center; width: 10%;">
-									<span>
-										<span t-esc="eln.material.specifications"/>
-									</span>
-								</th> -->
+							
 								<th style="text-align: center; width: 25%;">
 									<span style="font-weight: bold;">
 										<span t-esc="eln.material.method_reference"/>
@@ -467,19 +463,13 @@
 							</td>
 
 
-							<!-- <td style="text-align: center; vertical-align: middle;">
-								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a4eb1d5e-9d64-48cd-8277-ad734e0edd84')]).parameter_table" t-as="parameter">
-									<t t-if="parameter.grade.id == eln.grade_id.id">
-										<span t-field="parameter.permissable_limit"/>
-									</t>
-								</t>
-							</td> -->
+					
 							<td style="text-align: center;">
 									<span>
 										<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a4eb1d5e-9d64-48cd-8277-ad734e0edd84')]).parameter_table" t-as="parameter">
-											<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+										
 												<span t-field="parameter.specification"/>
-											<!-- </t> -->
+										
 										</t>
 									</span>
 								</td>
@@ -507,9 +497,9 @@
 
 							<td style="text-align: center; vertical-align: middle;">
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','71e24ae1-b9a9-41cb-86a5-89d87312f3d6')]).parameter_table" t-as="parameter">
-									<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+								
 										<span t-field="parameter.specification"/>
-									<!-- </t> -->
+								
 								</t>
 							</td>
 							
@@ -537,9 +527,9 @@
 
 							<td style="text-align: center; vertical-align: middle;">
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','87ec776a-11eb-45ef-addf-e183edabd6dd')]).parameter_table" t-as="parameter">
-									<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+								
 										<span t-field="parameter.specification"/>
-									<!-- </t> -->
+								
 								</t>
 							</td>
 							
@@ -565,9 +555,9 @@
 
 							<td style="text-align: center; vertical-align: middle;">
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','bf5d3d97-9a52-4242-9a36-2e40e5fc8247')]).parameter_table" t-as="parameter">
-									<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+								
 										<span t-field="parameter.specification"/>
-									<!-- </t> -->
+								
 								</t>
 							</td>
 							
@@ -593,9 +583,9 @@
 
 							<td style="text-align: center; vertical-align: middle;">
 								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a1f9c5d0-0bc7-41a6-a2bb-0fe9d898008d')]).parameter_table" t-as="parameter">
-									<!-- <t t-if="parameter.grade.id == eln.grade_id.id"> -->
+								
 										<span t-field="parameter.specification"/>
-									<!-- </t> -->
+									
 								</t>
 							</td>
 							
@@ -603,121 +593,169 @@
 						</tr>
 						
 					</tbody>
-				</table>
-				<!-- <table>
-					<thead>
-							<tr>
-								
-								<th style="text-align: center; width: 25%;">
-									<span style="font-weight: bold;">
-										Parameter
-									</span>
-								</th>
-								
-
-								<th style="text-align: center; width: 10%;">
-									<span style="font-weight: bold;">
-										Observation
-									</span>
-								</th>
-
-							</tr>
-					</thead>
-					<tbody>
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>Location</span>
-							</td>
-							
-							<td  style="text-align: center;">
-								<span t-esc="data.location"/>
-							</td>
-	
-						</tr>
-
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>Sample No</span>
-							</td>
-							
-							<td style="text-align: center;">
-								<span t-esc="data.sr_no"/>
-							</td>
-	
-						</tr>
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>Depth in (mtr)</span>
-							</td>
-							
-							<td style="text-align: center;">
-								<span t-esc="data.depth"/>
-							</td>
-						</tr>
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>Dia in mm</span>
-							</td>
-							
-							<td style="text-align: center;">
-								<span t-esc="data.diameter"/>
-							</td>
-
-						</tr>
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>Length in mm</span>
-							</td>
-							
-							<td style="text-align: center;">
-								<span t-esc="data.length"/>
-							</td>
-	
-						</tr>
-
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>L/D Ratio</span>
-							</td>
-							
-							<td style="text-align: center;">
-								<span t-esc="data.ld_ratio"/>
-							</td>
-
-						</tr>
-
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>Area in mm2</span>
-							</td>
-							
-							<td style="text-align: center;">
-								<span t-esc="data.area"/>
-							</td>
-							
-						</tr>
-						<tr t-if="data.usc_visible">
-							
-							<td  >
-								<span>Load in KN</span>
-							</td>
-							
-							<td style="text-align: center;">
-								<span t-esc="data.load"/>
-							</td>
-	
-						</tr>
-						
-					</tbody>
-					
 				</table> -->
+				
+			<div t-if="data.usc_visible" style="margin-top:20px;">
+						<p><strong>Protocol</strong> : IS : 9143-1979<![CDATA[&nbsp;]]></p>
+					</div>
+
+				<table t-if="data.usc_visible" style="margin-top:30px;">
+							<thead>
+								<tr style="font-weight: bold;">
+									<th>Parameter</th>
+									
+									<t t-foreach="range(len(data.child_lines1))" t-as="i">
+										<th>Observation-<t t-esc="i + 1"/></th>
+									</t>
+								</tr>
+							</thead>
+							<tbody>
+							   		
+									<tr>
+									<td>Location</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.location" /></td>
+									</t>
+								</tr>
+								<tr>
+									<td>Sample NO</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.sr_no" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Depth in (mtr)</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.depth" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Dia. in mm</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.diameter" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Length in mm</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.length" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>L/D ratio</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.ld_ratio" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Area in mm2</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.area" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Load in KN</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.load" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>UCS in N/mm2</td>
+									<t t-foreach="data.child_lines1" t-as="r">
+									<td><span t-esc="r.usc" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+							
+							</tbody>
+							
+
+							</table>
+
+
+
+					<div  t-if="data.porosity_visible or data.specific_gravity_visible or data.dry_density_visible or data.water_absorption_visible" style="margin-top:20px;">
+						<p><strong>Protocol</strong> : IS : 13030-1991<![CDATA[&nbsp;]]></p>
+					</div>
+
+				<table  t-if="data.porosity_visible or data.specific_gravity_visible or data.dry_density_visible or data.water_absorption_visible" style="margin-top:30px;">
+							<thead>
+								<tr style="font-weight: bold;">
+									<th>Parameter</th>
+									
+									<t t-foreach="range(len(data.child_lines))" t-as="i">
+										<th>Observation-<t t-esc="i + 1"/></th>
+									</t>
+								</tr>
+							</thead>
+							<tbody>
+							   		
+									<tr>
+									<td>Location</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.location" /></td>
+									</t>
+								</tr>
+								<tr>
+									<td>Sample NO</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.sample_no" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Depth in (mtr)</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.depth" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>SSD weight of sample in kg, Msat</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.ssd_weight" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Weight of sample in water in kg, Msub</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.wt_sample_water" /></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Oven dry weight of sample in kg, Ms</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.oven_dry_wt" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Porosity = (Msat-Ms)/(Msat-Msub)*100 in %</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.porosity" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Water Absorption = (Msat-Ms)/Ms*100 in %</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.water_absorption" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+								<tr>
+									<td>Dry Density = Ms/(Msat-Msub) gm/cc</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.dry_density" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+
+								<tr>
+									<td>Saturated Specific Gravity = Ms/(Msat-Msub)</td>
+									<t t-foreach="data.child_lines" t-as="r">
+									<td><span t-esc="r.saturated_spc_gravity" t-options='{"widget": "float", "precision": 2}'/></td>
+								</t>
+								</tr>
+							
+							</tbody>
+							
+
+							</table>
+			
 
 					<div style="page-break-inside: avoid;">
 						<div style="margin-top:20px" class="noteContainer">

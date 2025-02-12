@@ -40,6 +40,48 @@ class Soil(models.Model):
     chart_image_cbr = fields.Binary("Line Chart", compute="_compute_chart_image_cbr", store=True)
 
 
+    # def generate_line_chart_cbr(self):
+    #     # Prepare data for the chart
+    #     x_values = []
+    #     y_values = []
+    #     for line in self.soil_table:
+    #         x_values.append(line.penetration)
+    #         y_values.append(line.load)
+        
+    #     # Create the line chart
+    #     plt.plot(x_values, y_values, marker='o')
+    #     plt.xlabel('Penetration')
+    #     plt.ylabel('Load')
+    #     plt.title('CBR')
+
+
+    #     plt.ylim(bottom=0, top=max(y_values) + 10)
+
+    #     for i in range(len(x_values)):
+    #         plt.plot([x_values[i], x_values[i]], [0, y_values[i]], color='black', linestyle='--', alpha=0.5)
+    #         if i < len(x_values) - 1:
+    #             plt.plot([x_values[i], x_values[i + 1]], [y_values[i], y_values[i + 1]], color='black', linestyle='-', alpha=0.5)
+
+
+        
+    #     buffer = io.BytesIO()
+    #     plt.savefig(buffer, format='png')
+    #     plt.close()  # Close the figure to free up resources
+    #     buffer.seek(0)
+    
+    #     # Convert the chart image to base64
+    #     chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+    #     return chart_image
+    
+    # @api.depends('soil_table')
+    # def _compute_chart_image_cbr(self):
+    #     try:
+    #         for record in self:
+    #             chart_image = record.generate_line_chart_cbr()
+    #             record.chart_image_cbr = chart_image
+    #     except:
+    #         pass 
+
     def generate_line_chart_cbr(self):
         # Prepare data for the chart
         x_values = []
@@ -56,13 +98,6 @@ class Soil(models.Model):
 
 
         plt.ylim(bottom=0, top=max(y_values) + 10)
-
-        for i in range(len(x_values)):
-            plt.plot([x_values[i], x_values[i]], [0, y_values[i]], color='black', linestyle='--', alpha=0.5)
-            if i < len(x_values) - 1:
-                plt.plot([x_values[i], x_values[i + 1]], [y_values[i], y_values[i + 1]], color='black', linestyle='-', alpha=0.5)
-
-
         
         buffer = io.BytesIO()
         plt.savefig(buffer, format='png')
@@ -80,7 +115,7 @@ class Soil(models.Model):
                 chart_image = record.generate_line_chart_cbr()
                 record.chart_image_cbr = chart_image
         except:
-            pass 
+            pass
 
 
     # FSI

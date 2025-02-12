@@ -1359,11 +1359,11 @@
 						<tr>
 							<td colspan="3">MDD :</td>
 							<td colspan="3">
-								<span t-esc="mdd"/> <![CDATA[&nbsp;]]> gm/cc
+								<span t-esc="data.mmd" t-options='{"widget": "float", "precision": 2}'/> <![CDATA[&nbsp;]]> gm/cc
 							</td>
 							<td colspan="3">OMC :</td>
 							<td colspan="3">
-								<span t-esc="omc"/> <![CDATA[&nbsp;]]> %
+								<span t-esc="data.omc" t-options='{"widget": "float", "precision": 2}'/> <![CDATA[&nbsp;]]> %
 							</td>
 						</tr>
 					</table>	
