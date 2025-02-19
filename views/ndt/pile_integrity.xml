@@ -53,7 +53,12 @@
                         </div>
                     </group>
 
-                    <group >
+                    <group>
+                       <field name="procedure" />
+                       
+                    </group>
+
+                    <!-- <group >
                         <field name="procedure_id"  >
                         <tree editable="bottom">
                           <field name="serial_no"/>
@@ -61,15 +66,15 @@
                      
                         </tree>
                         </field>
-                    </group>
+                    </group> -->
 
                      <group >
-                          <field name="influences_result"/>
+                          <field name="influences_result"  widget="html"/>
                          
                          
                     </group>
                     <group style=" margin-top: 20px;">
-                         <field name="interpretation_result"/>
+                         <field name="interpretation_result" widget="html"/>
                     </group>
 
                      <group class="oe_center" style="text-align: center; margin-top: 20px;">
@@ -112,15 +117,21 @@
                         </field>
                     </group>
 
+                     <group >
+                          <field name="pile_report_upload" widget="many2many_binary" />
+                          <!-- uptill -->
+                      </group>
+
+
+                    <group style=" margin-top: 20px;">
+                         <field name="test_result" widget="html"/>
+                    </group>
                 <!-- <group>
-                    <field name="name"/>
-                </group> -->
-                <group>
                     <field name="graph_image" widget="image" readonly="1" />
                 </group>
                 <footer>
                     <button name="regenerate_graph" type="object" string="Generate Graph" class="btn-primary"/>
-                </footer>
+                </footer> -->
                      
           
                    

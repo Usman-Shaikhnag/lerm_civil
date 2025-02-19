@@ -149,3 +149,24 @@ class MyReportName(ReportController):
             )
             raise werkzeug.exceptions.InternalServerError(response=res) from e
 
+
+
+    @http.route(['/download_report/<int:eln_id>'], type='http', auth="public", website=True)
+    def report_download_eln(self, eln_id):
+        # import wdb; wdb.set_trace()
+
+        eln = request.env['lerm.eln'].sudo().search([('id', '=', eln_id)], limit=1)
+        print("Hello worlddddd")
+        if not eln:
+            return request.not_found()
+
+        pdf_data = request.env.ref('lerm_civil.aac_block_mech_report').sudo()._render_qweb_pdf([eln.id])[0]
+        
+        pdf_base64 = base64.b64encode(pdf_data)
+
+        headers = [
+            ('Content-Type', 'application/pdf'),
+            ('Content-Disposition', 'attachment; filename="Cement_Report_%s.pdf"' % eln_id)
+        ]
+
+        return request.make_response(base64.b64decode(pdf_base64), headers=headers)

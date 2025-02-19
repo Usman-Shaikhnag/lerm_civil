@@ -161,5 +161,11 @@ from .report import door_ds_report
 from . import sample_test_request
 from . mechanical import natural_building_stone
 from .report import natural_stone_ds_report
+from .mechanical import tile_chequerd
+from .report import tile_chequerd_ds_report
+from .mechanical import cement_chequerd_tile
+from .report import cement_chequerd_tile_ds_report
+from .mechanical import morter_cube
+from .report import mortar_cube_ds_report
 
 # from .import dash_bord
