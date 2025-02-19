@@ -166,7 +166,7 @@
 							</td>
 
                             <td>
-								<span t-field="data.average_flatness"/>
+								<span t-field="data.deviation_flatness"/>
 							</td>
                             
 							<td>
@@ -214,7 +214,7 @@
 							</td>
 
                             <td>
-								<span t-field="data.average_perpendicularity"/>
+								<span t-field="data.deviation_perpendicularity"/>
 							</td>
                             
 							<td>
@@ -262,7 +262,7 @@
 							</td>
 
                             <td>
-								<span t-field="data.average_straightness"/>
+								<span t-field="data.deviation_length_straightness"/>
 							</td>
                             
 							<td>

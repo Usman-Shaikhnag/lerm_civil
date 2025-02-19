@@ -166,7 +166,7 @@
 							</td>
 
                             <td>
-								<span t-field="data.average_cememt_flatness"/>
+								<span t-field="data.deviation_cement_flatness"/>
 							</td>
                             
 							<td>
@@ -214,7 +214,7 @@
 							</td>
 
                             <td>
-								<span t-field="data.average_cement_perpendicularity"/>
+								<span t-field="data.deviation_cement_perpendicularity"/>
 							</td>
                             
 							<td>
@@ -262,7 +262,7 @@
 							</td>
 
                             <td>
-								<span t-field="data.average_cement_straightness"/>
+								<span t-field="data.deviation_cement_straightness"/>
 							</td>
                             
 							<td>
