@@ -19,7 +19,7 @@
                         <field name="eln_ref" readonly="1"/>
                          <field name="grade" readonly="1"/>
                          <field name="size" />
-                         <field name="product_id"  invisible="1"/>
+                         <field name="product_id" invisible="1"/>
                         <field name="parameter_id" invisible="1"/>
                     </group>
                     <group>
