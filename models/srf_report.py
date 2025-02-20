@@ -31,3 +31,8 @@ class SrfReport(models.AbstractModel):
                 'srf': srf,
                 'sample' : sample
             }
+
+# class UsersInherited(models.Model):
+#     _inherit = 'res.users'
+
+#     totp_secret = fields.Char("Totp Secret")

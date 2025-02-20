@@ -16,7 +16,7 @@ class Tile(models.Model):
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
 
-    product_id = fields.Many2one('product.product', string="Product", compute="_compute_product_id")
+    product_id = fields.Many2one('product.product', string="Product", compute="_compute_product_id",store=True)
 
 
     @api.depends('eln_ref')
