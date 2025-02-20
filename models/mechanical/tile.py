@@ -16,12 +16,16 @@ class Tile(models.Model):
     grade = fields.Many2one('lerm.grade.line',string="Grade",compute="_compute_grade_id",store=True)
 
 
-    product_id = fields.Many2one('product.product', string="Product", compute="_compute_product_id",store=True)
+    product_id = fields.Many2one('product.template', string="Product", compute="_compute_product_id",store=True)
+
 
     @api.depends('eln_ref')
     def _compute_product_id(self):
         if self.eln_ref:
             self.product_id = self.eln_ref.material.id
+
+  
+    
 
     size = fields.Many2one('lerm.size.line',string="Type of group",store=True,domain="[('product_id', '=', product_id)]")
 
