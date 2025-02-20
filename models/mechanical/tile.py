@@ -18,6 +18,7 @@ class Tile(models.Model):
 
     product_id = fields.Many2one('product.product', string="Product", compute="_compute_product_id")
 
+
     @api.depends('eln_ref')
     def _compute_product_id(self):
         if self.eln_ref:
