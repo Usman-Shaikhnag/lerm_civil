@@ -900,8 +900,8 @@
                             <tr cols="12">
                                 <td colspan="6"><b>OBSERVATIONS :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                  	<!-- <span t-esc="data.observations_chemical"/> -->
-                                     <span t-esc="dict(data._fields['observations_chemical'].selection).get(data.observations_chemical)"/>
+                                  	<span t-esc="data.observations_alkalis"/>
+                                     <!-- <span t-esc="dict(data._fields['observations_alkalis'].selection).get(data.observations_alkalis)"/> -->
                                 </td>
                             </tr>
                       

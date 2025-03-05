@@ -201,7 +201,7 @@
 							</td>
 
 						</tr>
-						<tr t-if="data.dimension_visible and (data.deviation_thickness_nabl == 'pass' and nabl or (data.deviation_thickness_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
+						<tr t-if="data.deviation_thickness_visible and (data.deviation_thickness_nabl == 'pass' and nabl or (data.deviation_thickness_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl)">
                             <!-- <td><div><span>B</span></div></td> -->
 							 <td >
 								<div>
@@ -715,7 +715,7 @@
 							</td>
 						</tr>
 
-							<tr t-if="data.crazing_visible ">
+						<tr t-if="data.crazing_visible ">
                             <td >
 								<div>
 									<span t-esc="i + 1" />
@@ -736,13 +736,7 @@
 								</span>
 							</td>
 								<td>
-								<!-- <span>
-									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','0157651d-76f3-428a-9a89-f47593d1fd42')]).parameter_table" t-as="parameter">
-										<t t-if="parameter.grade.id == eln.grade_id.id">
-                                                <span t-field="parameter.permissable_limit"/>
-                                        </t>
-									</t>
-								</span> -->
+								
 									<span t-field="data.requirement_crazing"/>
 							</td>
 
@@ -757,7 +751,6 @@
 							</td>
 
 							<td t-if="eln.conformity">
-								<!-- <span t-field="data.breaking_strenght_conformity"/> -->
 							</td>
 
 						</tr>
