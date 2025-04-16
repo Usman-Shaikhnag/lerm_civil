@@ -268,7 +268,8 @@
     'reports/cement_chequerd_tile/cement_chequerd_report.xml',
     'views/mechanical/morter_cube.xml',
     'reports/mortar_cube/mortar_cube_datasheet.xml',
-    'reports/mortar_cube/mortar_cube_report.xml'
+    'reports/mortar_cube/mortar_cube_report.xml',
+    # 'reports/demo_dsreport/datashet.xml'
 
 
     # 'views/portal_template.xml'

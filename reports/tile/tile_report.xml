@@ -167,7 +167,7 @@
 								</span>
 							</td>
 							<td>
-								<span t-field="data.deviation_length_width"/>
+								<span t-field="data.deviation_length_width" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td>
 								<span>
@@ -215,7 +215,7 @@
 								</span>
 							</td>
 							<td>
-								<span t-field="data.deviation_thickness"/>
+								<span t-field="data.deviation_thickness" t-options='{"widget": "float", "precision": 2}' />
 							</td>
 							<td>
 								<span>
@@ -298,7 +298,7 @@
 								</span>
 							</td>
 							   <td>
-								<span t-field="data.deviation_straightness"/>
+								<span t-field="data.deviation_straightness" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 
                             
@@ -348,7 +348,7 @@
 								</span>
 							</td>
 							    <td>
-								<span t-field="data.deviation_rectangularity"/>
+								<span t-field="data.deviation_rectangularity" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td>
 								<span>
@@ -398,7 +398,7 @@
 								</span>
 							</td>
 							     <td>
-								<span t-field="data.deviation_centre_curvature"/>
+								<span t-field="data.deviation_centre_curvature" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td>
 								<span>
@@ -448,7 +448,7 @@
 								</span>
 							</td>
 							   <td>
-								<span t-field="data.deviation_edge_curvature"/>
+								<span t-field="data.deviation_edge_curvature" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td>
 								<span>
@@ -498,7 +498,7 @@
 								</span>
 							</td>
 							   <td>
-								<span t-field="data.deviation_warpage"/>
+								<span t-field="data.deviation_warpage" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td>
 								<span>
@@ -600,7 +600,7 @@
 								</span>
 							</td>
 							  <td>
-								<span t-field="data.average_water_bulk"/>
+								<span t-field="data.average_water_bulk" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td>
 								<span>
@@ -641,7 +641,7 @@
 								</span>
 							</td>
 							 <td>
-								<span t-field="data.individual_water_bulk"/>
+								<span t-field="data.individual_water_bulk" t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                             <td>
 								<span>
@@ -690,7 +690,7 @@
 								</span>
 							</td>
 							  <td>
-							<span t-field="data.bulk_density"/>
+							<span t-field="data.bulk_density" t-options='{"widget": "float", "precision": 1}'/>
 							</td>
                              <td>
 								<span>
