@@ -91,6 +91,8 @@ class Tile(models.Model):
     deviation_length = fields.Float(string="Deviation in Length %", compute="_compute_deviation_length",digits=(16,2))
     deviation_width = fields.Float(string="Deviation in Width %", compute="_compute_deviation_width",digits=(16,2))
     deviation_length_width = fields.Float(string="Deviation in Length & Width %", compute="_compute_deviation_length_width",digits=(16,2))
+
+    deviation_thickness_visible = fields.Boolean("Dimension Visible",compute="_compute_visible") 
     deviation_thickness = fields.Float(string="Deviation in Thickness %", compute="_compute_deviation_thickness",digits=(16,2))
 
     deviation_length_width_conformity = fields.Selection([
@@ -1657,6 +1659,7 @@ class Tile(models.Model):
             record.observations_alkalis_visible = False
             record.surface_quality_visible = False
             record.scratch_hardness_visible = False
+            record.deviation_thickness_visible = False
             
             for sample in record.sample_parameters:
                 print("Internal Ids",sample.internal_id)
@@ -1701,6 +1704,9 @@ class Tile(models.Model):
 
                 if sample.internal_id == "ecfb0b0b-0774-4296-af7b-6151fbf4f968":
                     record.scratch_hardness_visible = True
+                
+                if sample.internal_id == "35777f82-79c0-44a8-9379-f40dd33235uyt":
+                    record.deviation_thickness_visible = True
 
 
 

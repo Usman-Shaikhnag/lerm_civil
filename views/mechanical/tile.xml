@@ -88,14 +88,33 @@
                         <field name='deviation_length' col="4"/>
                         <field name='deviation_width'  col="4"/> 
                         <field name='deviation_length_width' col="4"/>
+                        <!-- <field name='deviation_thickness' col="4"/> -->
+                    </group>
+
+
+                    <group attrs="{'invisible': [('deviation_thickness_visible', '=', False)]}">
+                        <h1>
+                            <!-- <field name="dimension_name1" readonly="1" nolabel="1"/> -->
+                            <field name="deviation_thickness_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+                    <group attrs="{'invisible': [('deviation_thickness_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
+                       
                         <field name='deviation_thickness' col="4"/>
                     </group>
 
                      <group attrs="{'invisible': [('dimension_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
                         <field name="requirement_length_width" />
+                        <!-- <field name="requirement_thickness" /> -->
+                        
+                    </group>
+
+                     <group attrs="{'invisible': [('deviation_thickness_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
                         <field name="requirement_thickness" />
                         
                     </group>
+
 
                      <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
                      <group attrs="{'invisible': [('dimension_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
@@ -113,14 +132,14 @@
                         </group>
 
 
-                          <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
-                     <group attrs="{'invisible': [('dimension_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
+                          <group attrs="{'invisible': [('deviation_thickness_visible', '=', False)]}">
+                     <group attrs="{'invisible': [('deviation_thickness_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
                                 <field name='deviation_thickness_conformity'
                                        decoration-success="deviation_thickness_conformity == 'pass'" 
                                        decoration-danger="deviation_thickness_conformity == 'fail'" 
                                        readonly="1"/>
                         </group>
-                          <group attrs="{'invisible': [('dimension_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
+                          <group attrs="{'invisible': [('deviation_thickness_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
                                 <field name="deviation_thickness_nabl"
                                        decoration-success="deviation_thickness_nabl == 'pass'" 
                                        decoration-danger="deviation_thickness_nabl == 'fail'" 
