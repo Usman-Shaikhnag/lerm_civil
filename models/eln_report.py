@@ -27,6 +27,7 @@ class ElnReport(models.AbstractModel):
             eln = self.env['lerm.eln'].sudo().browse(docids)
         print()
         qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+        # add link here with sample id
         qr.add_data(eln.kes_no)
         qr.make(fit=True)
         qr_image = qr.make_image()
