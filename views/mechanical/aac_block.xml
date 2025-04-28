@@ -59,6 +59,27 @@
                             <field name="average_height"/>
                         </group>
                     </group>
+
+
+                    <group attrs="{'invisible': [('dimension_visible', '=', False)]}">
+                        <group style="white-space: nowrap; width:70%;">
+                            <field name="length_grade1"/>
+                             <field name="length_grade2"/>
+                    
+                        </group>
+
+                           <group  style="white-space: nowrap; width:70%;">
+                            <field name="width_grade1"/>
+                             <field name="width_grade2"/>
+                    
+                        </group>
+
+                         <group style="white-space: nowrap; width:70%;">
+                            <field name="height_grade1"/>
+                             <field name="height_grade2"/>
+                    
+                        </group>
+                    </group>
                     
                     
 
@@ -87,6 +108,16 @@
                         
                             <field name="moisture_nabl"/>
                         </group>
+                    </group>
+
+                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <group style="white-space: nowrap; width:70%;">
+                            <field name="moisture_grade1"/>
+                             <field name="moisture_grade2"/>
+                    
+                        </group>
+
+                          
                     </group>
 
                      
@@ -123,6 +154,15 @@
                             <field name="density_nabl"/>
                         </group>
                     </group>
+                    <group attrs="{'invisible': [('moisture_visible', '=', False)]}">
+                        <group style="white-space: nowrap; width:70%;">
+                            <field name="density_grade1"/>
+                             <field name="density_grade2"/>
+                    
+                        </group>
+
+                          
+                    </group>
 
                     <!-- Drying Shrinkage  -->
                     <group attrs="{'invisible': [('drying_shrinkage_visible', '=', False)]}">
@@ -149,6 +189,15 @@
                             <field name="drying_shrinkage_confirmity"/>
                        
                             <field name="drying_shrinkage_aac_nabl"/>
+                        </group>
+
+                    </group>
+
+                     <group attrs="{'invisible': [('drying_shrinkage_visible', '=', False)]}">
+                        <group style="white-space: nowrap; width:70%;">
+                            <field name="drying_grade1"/>
+                             <field name="drying_grade2"/>
+                    
                         </group>
                     </group>
                     
@@ -177,6 +226,15 @@
                             <field name="compressive_strength_confirmity"/>
                        
                             <field name="compressive_strength_nabl"/>
+                           
+                        </group>
+                 
+                    </group>
+                    <group attrs="{'invisible': [('drying_shrinkage_visible', '=', False)]}">
+                        <group style="white-space: nowrap; width:70%;">
+                            <field name="compressive_grade1"/>
+                             <field name="compressive_grade2"/>
+                    
                         </group>
                     </group>
                      <button

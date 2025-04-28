@@ -33,3 +33,31 @@ class AccountMoveInheritedLerm(models.Model):
             record.sudo().write({
             'invoice_number' :None
             })
+
+    # Field to set Invoice Salesperson
+    invoice_user_id = fields.Many2one(
+        'res.users', 
+        string='Salesperson', 
+        readonly=False,
+        help='Salesperson for this invoice.')
+
+    @api.onchange('partner_id')
+    def _onchange_partner_id_set_salesperson(self):
+        """
+        Automatically fetch and set the `user_id` (Salesperson) from the partner
+        to the invoice_user_id field in account.move when the partner is selected.
+        """
+        for record in self:
+            if record.partner_id:
+                record.invoice_user_id = record.partner_id.user_id
+
+
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    # Field to set Salesperson (user_id)
+    user_id = fields.Many2one(
+        'res.users', 
+        string='Salesperson', 
+        help='Default salesperson for this customer.')
