@@ -1326,5 +1326,18 @@
 </record>
 
 
+  <!-- <record id="demo_datasheet_action" model="ir.actions.report">
+        <field name="name">Demo Datasheet</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">lerm_civil.demo_datasheet</field>
+        <field name="report_file">lerm_civil.demo_datasheet</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>  -->
+   
+   
+
+
 
 </odoo>

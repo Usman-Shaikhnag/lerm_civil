@@ -182,6 +182,7 @@
 
                         <group attrs="{'invisible': [('straightness_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
                         <field name='average_straightness' col="4"/>
+                         <field name='maximum_straightness' col="4"/>
                          <field name='deviation_straightness' col="4"/>
                       
                     </group>
@@ -243,6 +244,7 @@
 
                         <group attrs="{'invisible': [('rectangularity_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
                         <field name='average_rectangularity' col="4"/>
+                         <field name='maximum_rectangularity' col="4"/>
                          <field name='deviation_rectangularity' col="4"/>
                       
                     </group>
@@ -303,6 +305,7 @@
 
                         <group attrs="{'invisible': [('centre_curvature_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
                         <field name='average_centre_curvature' col="4"/>
+                        <field name='maximum_centre_curvature' col="4"/>
                          <field name='deviation_centre_curvature' col="4"/>
                       
                     </group>
@@ -365,6 +368,7 @@
 
                         <group attrs="{'invisible': [('edge_curvature_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
                         <field name='average_edge_curvature' col="4"/>
+                           <field name='maximum_edge_curvature' col="4"/>
                          <field name='deviation_edge_curvature' col="4"/>
                       
                     </group>
@@ -424,6 +428,7 @@
 
                     <group attrs="{'invisible': [('warpage_visible', '=', False)]}" style="white-space: nowrap; width:70%;">
                         <field name='average_warpage' col="4"/>
+                        <field name='maximum_warpage' col="4"/>
                          <field name='deviation_warpage' col="4"/>
                       
                     </group>

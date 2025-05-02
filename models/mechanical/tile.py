@@ -47,14 +47,14 @@ class Tile(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines = fields.One2many('mechanical.dimension.tile.line','parent_id',string="Parameter")
 
-    length = fields.Float(string="Length(mm)")
-    width = fields.Float(string="Width(mm)")
-    thickness = fields.Float(string="Thickness(mm)")
+    length = fields.Float(string="Length(mm)",digits=(16,3))
+    width = fields.Float(string="Width(mm)",digits=(16,3))
+    thickness = fields.Float(string="Thickness(mm)",digits=(16,3))
     diagonal = fields.Float(string="Diagonal (mm)")
-    average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,2))
-    average_width = fields.Float(string="Average Width", compute="_compute_average_width",digits=(16,2))
+    average_length = fields.Float(string="Average Length", compute="_compute_average_length",digits=(16,3))
+    average_width = fields.Float(string="Average Width", compute="_compute_average_width",digits=(16,3))
     # plan_area = fields.Float(string="Plan Area", compute="_compute_plan_area", digits=(16, 1))
-    average_thickness = fields.Float(string="Average Thickness",compute="_compute_average_thickness", digits=(16, 2))
+    average_thickness = fields.Float(string="Average Thickness",compute="_compute_average_thickness", digits=(16, 3))
 
 
     @api.depends('child_lines.length1', 'child_lines.length2', 'child_lines.length3', 'child_lines.length4')
@@ -283,9 +283,22 @@ class Tile(models.Model):
 
     average_straightness = fields.Float(string="Average", compute="_compute_average_straightness",digits=(16,3))
 
+    maximum_straightness = fields.Float(string="Maximum Straightness mm",compute="_compute_maximum_straightness",store=True,digits=(16,3))
+
     deviation_straightness = fields.Float(string="Deviation from Straightness, %",compute="_compute_deviation_straightness", digits=(16,3))
 
     requirement_straightness = fields.Char(string="Requirement ,Deviation from Straightness, %",compute="_compute_requirement_straightness")
+
+    @api.depends('child_lines_straightness.straightness1', 'child_lines_straightness.straightness2',
+                 'child_lines_straightness.straightness3', 'child_lines_straightness.straightness4')
+    def _compute_maximum_straightness(self):
+        for tile in self:
+            max_value = 0.0
+            for line in tile.child_lines_straightness:
+                max_in_line = max(line.straightness1, line.straightness2, line.straightness3, line.straightness4)
+                if max_in_line > max_value:
+                    max_value = max_in_line
+            tile.maximum_straightness = max_value
 
 
     @api.depends('size')
@@ -322,11 +335,11 @@ class Tile(models.Model):
             else:
                 record.average_straightness = 0.0
 
-    @api.depends('average_straightness', 'sample_size')
+    @api.depends('maximum_straightness', 'sample_size')
     def _compute_deviation_straightness(self):
         for record in self:
             if record.sample_size and record.sample_size > 0:
-                record.deviation_straightness = (record.average_straightness / record.sample_size) * 100
+                record.deviation_straightness = (record.maximum_straightness / record.sample_size) * 100
             else:
                 record.deviation_straightness = 0.0
 
@@ -399,6 +412,19 @@ class Tile(models.Model):
     deviation_rectangularity = fields.Float(string="Deviation from Rectangularity  %",compute="_compute_deviation_rectangularity", digits=(16,3))
     requirement_rectangularity = fields.Char(string="Requirement ,Deviation from Rectangularity, %",compute="_compute_requirement_rectangularity")
 
+    maximum_rectangularity = fields.Float(string="Maximum Rectangularity mm",compute="_compute_maximum_rectangularity",store=True,digits=(16,3))
+
+    @api.depends('child_lines_rectangularity.rectangularity1', 'child_lines_rectangularity.rectangularity2',
+                 'child_lines_rectangularity.rectangularity3', 'child_lines_rectangularity.rectangularity4')
+    def _compute_maximum_rectangularity(self):
+        for tile in self:
+            max_value = 0.0
+            for line in tile.child_lines_rectangularity:
+                max_in_line = max(line.rectangularity1, line.rectangularity2, line.rectangularity3, line.rectangularity4)
+                if max_in_line > max_value:
+                    max_value = max_in_line
+            tile.maximum_rectangularity = max_value
+
 
     @api.depends('size')
     def _compute_requirement_rectangularity(self):
@@ -434,11 +460,11 @@ class Tile(models.Model):
             else:
                 record.average_rectangularity = 0.0
 
-    @api.depends('average_rectangularity', 'rectangularity_sample_size')
+    @api.depends('maximum_rectangularity', 'rectangularity_sample_size')
     def _compute_deviation_rectangularity(self):
         for record in self:
             if record.rectangularity_sample_size and record.rectangularity_sample_size > 0:
-                record.deviation_rectangularity = (record.average_rectangularity / record.rectangularity_sample_size) * 100
+                record.deviation_rectangularity = (record.maximum_rectangularity / record.rectangularity_sample_size) * 100
             else:
                 record.deviation_rectangularity = 0.0
 
@@ -514,6 +540,20 @@ class Tile(models.Model):
     deviation_centre_curvature = fields.Float(string="Maximum Centre Curvature, mm ",compute="_compute_deviation_centre_curvature", digits=(16,3))
     requirement_centre_curvature = fields.Char(string="Requirement ,Maximum Centre Curvature,%",compute="_compute_requirement_centre_curvature")
 
+    maximum_centre_curvature = fields.Float(string="Maximum Centre Curvature,mm",compute="_compute_maximum_centre_curvature",store=True,digits=(16,3))
+
+    @api.depends('child_lines_centre_curvature.centre_curvature1', 'child_lines_centre_curvature.centre_curvature2',
+                 'child_lines_centre_curvature.centre_curvature3', 'child_lines_centre_curvature.centre_curvature4')
+    def _compute_maximum_centre_curvature(self):
+        for tile in self:
+            max_value = 0.0
+            for line in tile.child_lines_centre_curvature:
+                max_in_line = max(line.centre_curvature1, line.centre_curvature2, line.centre_curvature3, line.centre_curvature4)
+                if max_in_line > max_value:
+                    max_value = max_in_line
+            tile.maximum_centre_curvature = max_value
+
+
 
     @api.depends('size')
     def _compute_requirement_centre_curvature(self):
@@ -549,11 +589,11 @@ class Tile(models.Model):
             else:
                 record.average_centre_curvature = 0.0
 
-    @api.depends('average_centre_curvature', 'centre_curvature_diagonal')
+    @api.depends('maximum_centre_curvature', 'centre_curvature_diagonal')
     def _compute_deviation_centre_curvature(self):
         for record in self:
             if record.centre_curvature_diagonal and record.centre_curvature_diagonal > 0:
-                record.deviation_centre_curvature = (record.average_centre_curvature / record.centre_curvature_diagonal) * 100
+                record.deviation_centre_curvature = (record.maximum_centre_curvature / record.centre_curvature_diagonal) * 100
             else:
                 record.deviation_centre_curvature = 0.0
 
@@ -629,6 +669,19 @@ class Tile(models.Model):
     deviation_edge_curvature = fields.Float(string="Maximum Edge Curvature, mm ",compute="_compute_deviation_edge_curvature", digits=(16,3))
     requirement_edge_curvature = fields.Char(string="Requirement, Maximum Edge Curvature,%",compute="_compute_requirement_edge_curvature")
 
+    maximum_edge_curvature = fields.Float(string="Maximum edge Curvature,mm",compute="_compute_maximum_edge_curvature",store=True,digits=(16,3))
+
+    @api.depends('child_lines_edge_curvature.edge_curvature1', 'child_lines_edge_curvature.edge_curvature2',
+                 'child_lines_edge_curvature.edge_curvature3', 'child_lines_edge_curvature.edge_curvature4')
+    def _compute_maximum_edge_curvature(self):
+        for tile in self:
+            max_value = 0.0
+            for line in tile.child_lines_edge_curvature:
+                max_in_line = max(line.edge_curvature1, line.edge_curvature2, line.edge_curvature3, line.edge_curvature4)
+                if max_in_line > max_value:
+                    max_value = max_in_line
+            tile.maximum_edge_curvature = max_value
+
     @api.depends('size')
     def _compute_requirement_edge_curvature(self):
         """Fetch multiple permissable_limit values from lerm.parameter.master where internal_id matches"""
@@ -663,11 +716,11 @@ class Tile(models.Model):
             else:
                 record.average_edge_curvature = 0.0
 
-    @api.depends('average_edge_curvature', 'edge_curvature_sample_size')
+    @api.depends('maximum_edge_curvature', 'edge_curvature_sample_size')
     def _compute_deviation_edge_curvature(self):
         for record in self:
             if record.edge_curvature_sample_size and record.edge_curvature_sample_size > 0:
-                record.deviation_edge_curvature = (record.average_edge_curvature / record.edge_curvature_sample_size) * 100
+                record.deviation_edge_curvature = (record.maximum_edge_curvature / record.edge_curvature_sample_size) * 100
             else:
                 record.deviation_edge_curvature = 0.0
 
@@ -741,6 +794,19 @@ class Tile(models.Model):
     deviation_warpage = fields.Float(string="Maximum warpage, % ",compute="_compute_deviation_warpage", digits=(16,3))
     requirement_warpage = fields.Char(string="Requirement, Maximum Warpage, %",compute="_compute_requirement_warpage")
 
+    maximum_warpage = fields.Float(string="Maximum Warpage mm",compute="_compute_maximum_warpage",store=True,digits=(16,3))
+
+    @api.depends('child_lines_warpage.warpage1', 'child_lines_warpage.warpage2',
+                 'child_lines_warpage.warpage3', 'child_lines_warpage.warpage4')
+    def _compute_maximum_warpage(self):
+        for tile in self:
+            max_value = 0.0
+            for line in tile.child_lines_warpage:
+                max_in_line = max(line.warpage1, line.warpage2, line.warpage3, line.warpage4)
+                if max_in_line > max_value:
+                    max_value = max_in_line
+            tile.maximum_warpage = max_value
+
 
     @api.depends('size')
     def _compute_requirement_warpage(self):
@@ -776,11 +842,11 @@ class Tile(models.Model):
             else:
                 record.average_warpage = 0.0
 
-    @api.depends('average_warpage', 'warpage_diagonal')
+    @api.depends('maximum_warpage', 'warpage_diagonal')
     def _compute_deviation_warpage(self):
         for record in self:
             if record.warpage_diagonal and record.warpage_diagonal > 0:
-                record.deviation_warpage = (record.average_warpage / record.warpage_diagonal) * 100
+                record.deviation_warpage = (record.maximum_warpage / record.warpage_diagonal) * 100
             else:
                 record.deviation_warpage = 0.0
 
@@ -850,7 +916,7 @@ class Tile(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_water_bulk = fields.One2many('mechanical.water.bulk.tile.line','parent_id',string="Parameter")
 
-    average_water_bulk = fields.Float(string="Water Absorption, % (average) ",compute="_compute_average_water_bulk",digits=(16,1))
+    average_water_bulk = fields.Float(string="Water Absorption, % (average) ",compute="_compute_average_water_bulk",digits=(16,2))
 
 
     average_water_bulk_conformity = fields.Selection([
@@ -905,7 +971,7 @@ class Tile(models.Model):
                     else:
                         record.average_water_bulk_nabl = 'fail'
 
-    individual_water_bulk = fields.Float(string="Water Absorption, % (Individual) ",compute="_compute_individual_water_bulk",digits=(16,1))
+    individual_water_bulk = fields.Float(string="Water Absorption, % (Individual) ",compute="_compute_individual_water_bulk",digits=(16,2))
 
     individual_water_bulk_conformity = fields.Selection([
             ('pass', 'Pass'),
@@ -1767,22 +1833,22 @@ class DimensionTile(models.Model):
     parent_id = fields.Many2one('mechanical.tile',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
-    length1 = fields.Float(string="Length, mm 1")
-    length2 = fields.Float(string="Length, mm 2")
-    length3 = fields.Float(string="Length, mm 3")
-    length4 = fields.Float(string="Length, mm 4")
+    length1 = fields.Float(string="Length, mm 1",digits=(12,3))
+    length2 = fields.Float(string="Length, mm 2",digits=(12,3))
+    length3 = fields.Float(string="Length, mm 3",digits=(12,3))
+    length4 = fields.Float(string="Length, mm 4",digits=(12,3))
 
-    width1 = fields.Float(string="Width, mm 1")
-    width2 = fields.Float(string="Width, mm 2")
-    width3 = fields.Float(string="Width, mm 3")
-    width4 = fields.Float(string="Width, mm 4")
+    width1 = fields.Float(string="Width, mm 1",digits=(12,3))
+    width2 = fields.Float(string="Width, mm 2",digits=(12,3))
+    width3 = fields.Float(string="Width, mm 3",digits=(12,3))
+    width4 = fields.Float(string="Width, mm 4",digits=(12,3))
 
-    thickness1 = fields.Float(string="Thickness, mm 1")
-    thickness2 = fields.Float(string="Thickness, mm 2")
-    thickness3 = fields.Float(string="Thickness, mm 3")
-    thickness4 = fields.Float(string="Thickness, mm 4")
-    thickness5 = fields.Float(string="Thickness, mm 5")
-    thickness6 = fields.Float(string="Thickness, mm 6")
+    thickness1 = fields.Float(string="Thickness, mm 1",digits=(12,3))
+    thickness2 = fields.Float(string="Thickness, mm 2",digits=(12,3))
+    thickness3 = fields.Float(string="Thickness, mm 3",digits=(12,3))
+    thickness4 = fields.Float(string="Thickness, mm 4",digits=(12,3))
+    thickness5 = fields.Float(string="Thickness, mm 5",digits=(12,3))
+    thickness6 = fields.Float(string="Thickness, mm 6",digits=(12,3))
 
   
 

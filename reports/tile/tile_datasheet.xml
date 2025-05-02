@@ -97,48 +97,48 @@
 								</div>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['length1']" />
+								<span t-esc="r['length1']" t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['length2']" />
+								<span t-esc="r['length2']"   t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['length2']" />
+								<span t-esc="r['length2']"   t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['length2']" />
+								<span t-esc="r['length2']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
 
                             <td colspan="1">
-								<span t-esc="r['width1']" />
+								<span t-esc="r['width1']"   t-options='{"widget": "float", "precision": 3}' />
 							</td>
                              <td colspan="1">
-								<span t-esc="r['width2']" />
+								<span t-esc="r['width2']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
                              <td colspan="1">
-								<span t-esc="r['width3']" />
+								<span t-esc="r['width3']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
                              <td colspan="1">
-								<span t-esc="r['width4']" />
+								<span t-esc="r['width4']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
 
                               <td colspan="1">
-								<span t-esc="r['thickness1']" />
+								<span t-esc="r['thickness1']"  t-options='{"widget": "float", "precision": 3}'  />
 							</td>
                               <td colspan="1">
-								<span t-esc="r['thickness2']" />
+								<span t-esc="r['thickness2']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
                               <td colspan="1">
-								<span t-esc="r['thickness3']" />
+								<span t-esc="r['thickness3']"  t-options='{"widget": "float", "precision": 3}'  />
 							</td>
                               <td colspan="1">
-								<span t-esc="r['thickness4']" />
+								<span t-esc="r['thickness4']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
                               <td colspan="1">
-								<span t-esc="r['thickness5']" />
+								<span t-esc="r['thickness5']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
                               <td colspan="1">
-								<span t-esc="r['thickness6']" />
+								<span t-esc="r['thickness6']"  t-options='{"widget": "float", "precision": 3}' />
 							</td>
 
 							
@@ -150,19 +150,19 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Average Length in mm:</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_length" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.average_length" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
                                 <td colspan="6"><b>Average Width in mm:</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_width" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.average_width" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
                                 <td colspan="6"><b>Average Thickness in mm:</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_thickness" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.average_thickness" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                            
@@ -172,25 +172,25 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Deviation in Length:</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.deviation_length" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.deviation_length" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
                                 <td colspan="6"><b>Deviation in Width:</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.deviation_width" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.deviation_width" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
                                 <td colspan="6"><b>Deviation in Length &amp; Width:</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.deviation_length_width" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.deviation_length_width" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                              <tr cols="12">
                                 <td colspan="6"><b>Deviation in Thickness:</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.deviation_thickness" t-options='{"widget": "float", "precision": 2}'/>
+                                    <span t-field="data.deviation_thickness" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                            
@@ -245,16 +245,16 @@
 								</div>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['straightness1']" />
+								<span t-esc="r['straightness1']"  t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['straightness2']" />
+								<span t-esc="r['straightness2']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['straightness3']" />
+								<span t-esc="r['straightness3']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['straightness4']" />
+								<span t-esc="r['straightness4']" t-options='{"widget": "float", "precision": 3}' />
 							</td>
 
                        
@@ -268,6 +268,13 @@
                                 <td colspan="6"><b>Average:</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_straightness" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                            </tr>
+
+                            <tr cols="12">
+                                <td colspan="6"><b>Maximum Straightness mm :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.maximum_straightness" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
@@ -330,16 +337,16 @@
 								</div>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['rectangularity1']" />
+								<span t-esc="r['rectangularity1']" t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['rectangularity2']" />
+								<span t-esc="r['rectangularity2']"  t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['rectangularity3']" />
+								<span t-esc="r['rectangularity3']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['rectangularity4']" />
+								<span t-esc="r['rectangularity4']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
 
                        
@@ -353,6 +360,13 @@
                                 <td colspan="6"><b>Average:</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_rectangularity" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                            </tr>
+
+                            <tr cols="12">
+                                <td colspan="6"><b>Maximum Rectangularity mm :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.maximum_rectangularity" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
@@ -422,16 +436,16 @@
 								</div>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['centre_curvature1']" />
+								<span t-esc="r['centre_curvature1']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['centre_curvature2']" />
+								<span t-esc="r['centre_curvature2']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['centre_curvature3']" />
+								<span t-esc="r['centre_curvature3']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['centre_curvature4']" />
+								<span t-esc="r['centre_curvature4']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
 
                        
@@ -445,6 +459,12 @@
                                 <td colspan="6"><b>Average:</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.average_centre_curvature" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Maximum Centre Curvature,mm:</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.maximum_centre_curvature" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
                             <tr cols="12">
@@ -513,16 +533,16 @@
 								</div>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['edge_curvature1']" />
+								<span t-esc="r['edge_curvature1']" t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['edge_curvature2']" />
+								<span t-esc="r['edge_curvature2']" t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['edge_curvature3']" />
+								<span t-esc="r['edge_curvature3']" t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['edge_curvature4']" />
+								<span t-esc="r['edge_curvature4']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
 
                        
@@ -540,6 +560,12 @@
                             </tr>
                             <tr cols="12">
                                 <td colspan="6"><b>Maximum edge Curvature % :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.maximum_edge_curvature" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                            </tr>
+                              <tr>
+                                     <td colspan="6"><b>Edge Curvature % :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.deviation_edge_curvature" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
@@ -605,16 +631,16 @@
 								</div>
 							</td>
 							<td colspan="1">
-								<span t-esc="r['warpage1']" />
+								<span t-esc="r['warpage1']"  t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['warpage2']" />
+								<span t-esc="r['warpage2']" t-options='{"widget": "float", "precision": 3}' />
 							</td>
                             <td colspan="1">
-								<span t-esc="r['warpage3']" />
+								<span t-esc="r['warpage3']" t-options='{"widget": "float", "precision": 3}'/>
 							</td>
                             <td colspan="1">
-								<span t-esc="r['warpage4']" />
+								<span t-esc="r['warpage4']"  t-options='{"widget": "float", "precision": 3}'/>
 							</td>
 
                        
@@ -630,12 +656,21 @@
                                     <span t-field="data.average_warpage" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
-                            <tr cols="12">
+                             <tr cols="12">
                                 <td colspan="6"><b>Maximum warpage % :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.maximum_warpage" t-options='{"widget": "float", "precision": 3}'/>
+                                </td>
+                            </tr>
+
+                            <tr cols="12">
+                                <td colspan="6"><b>Warpage % :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.deviation_warpage" t-options='{"widget": "float", "precision": 3}'/>
                                 </td>
                             </tr>
+
+                            
                            
                            
                         </table>
