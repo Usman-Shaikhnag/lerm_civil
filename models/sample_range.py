@@ -99,6 +99,9 @@ class SampleRangeLine(models.Model):
         ('3-in_report', 'In-Report'),
     ], string='State',default='1-allotment_pending')
 
+    customer_portal_sample = fields.Many2one('customer.sample.line',string="Customer Portal Sample", readonly=True)
+
+
 
     @api.depends('material_id')
     def compute_material_id_lab_name(self):

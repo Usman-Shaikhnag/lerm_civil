@@ -26,6 +26,7 @@
     'views/lab_master.xml',
     'views/contractor.xml',
     'views/employee.xml',
+    'views/customer_sample_request.xml',
     # 'views/mechanical/sieve_analysis.xml',
     'views/mechanical/free_swell_index.xml',
     'views/mechanical/soil_cbr.xml',
@@ -287,6 +288,9 @@
     'assets': {
     'web.assets_backend':[
         '/lerm_civil/static/src/js/spreadsheet.js'
+    ],
+    'web.assets_frontend': [
+        'lerm_civil/static/src/js/portal_request.js',
     ],
     'web.report_assets_common': [
             '/lerm_civil/static/src/css/eln_report.scss',

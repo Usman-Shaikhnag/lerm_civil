@@ -1052,3 +1052,10 @@ report.print_reports_wizard,print_reports_wizard,model_print_reports_wizard,lerm
 report.ulr_reports_wizard,ulr_reports_wizard,model_ulr_reports_wizard,lerm_civil.kes_report,1,1,1,1
 report.sample_reports_wizard,sample_reports_wizard,model_sample_reports_wizard,lerm_civil.kes_report,1,1,1,1
 
+
+lerm.customer_sample_request,customer_sample_requests,model_customer_sample_requests,lerm_civil.kes_admin_access_group,1,1,1,1
+lerm.customer_sample_line,customer_sample_line,model_customer_sample_line,lerm_civil.kes_admin_access_group,1,1,1,1
+
+lerm.portal_user_master,portal_user_master,model_portal_user_master,lerm_civil.kes_admin_access_group,1,1,1,1
+lerm.child_user_master,child_user_master,model_child_user_master,lerm_civil.kes_admin_access_group,1,1,1,1
+

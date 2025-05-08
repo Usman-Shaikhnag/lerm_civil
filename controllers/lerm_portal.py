@@ -1,5 +1,5 @@
 from odoo.addons.portal.controllers.portal import CustomerPortal , pager
-from odoo.http import request
+from odoo.http import request,content_disposition
 from odoo import http
 from werkzeug.utils import secure_filename
 import base64
@@ -25,150 +25,430 @@ _logger = logging.getLogger(__name__)
 
 class LermSampleController(http.Controller):
     
+    @http.route('/sampleRequestList', type='http', auth='user', website=True)
+    def sample_request_list(self, **kwargs):
+        user = request.env.user
+        partner_id = user.partner_id
 
-
-    @http.route('/sample/create', type='http', auth='user', website=True)
-    def create_sample_form(self, **kwargs):
-        # Fetch all necessary data for the form
-        disciplines = request.env['lerm_civil.discipline'].sudo().search([])
-        groups = request.env['lerm_civil.group'].sudo().search([])
-        materials = request.env['product.template'].sudo().search([])
-        # samples = request.env['lerm.srf.sample'].sudo().search([])
-        samples = request.env['sample.test.request'].sudo().search([])
-        parameters = request.env['lerm.parameter.master'].sudo().search([])
-        # customer = request.env['res.partner'].sudo().search([])
-        product_id = kwargs.get('product_id')
-
-        grade_ids = []
-        size_ids = []
-
-        if product_id:
-            product_id = int(product_id)
-            grade_ids = request.env['lerm.grade.line'].sudo().search([('product_id', '=', product_id)])
-            size_ids = request.env['lerm.size.line'].sudo().search([('product_id', '=', product_id)])
-
+        child_users = request.env['portal.user.master'].sudo().search([('customer','=',partner_id.id)]).child_users
+        partner_ids = [partner_id.id]
+        for child in child_users:
+            partner_ids.append(child.partner_id.id)
         
-
-        return request.render('lerm_civil.create_sample_form', {
-            'disciplines': disciplines,
-            'groups': groups,
-            'materials': materials,
-            'samples': samples,
-            'parameters': parameters,
-            'grade_ids': grade_ids,
-            'size_ids': size_ids,  # Pass sizes to the view
-            # 'customer': customer,  # Pass sizes to the view
+        # Get pagination parameters from URL
+        page = int(kwargs.get('page', 1))
+        limit = 10  # Number of items per page
+        
+        # Get total count of records
+        total = request.env['customer.sample.requests'].sudo().search_count([
+            ('partner_id', 'in', partner_ids)
+        ])
+        
+        # Calculate pagination values
+        total_pages = max((total + limit - 1) // limit, 1)
+        page = max(min(page, total_pages), 1)
+        offset = (page - 1) * limit
+        
+        # Search with pagination and order by date descending (newest first)
+        csr = request.env['customer.sample.requests'].sudo().search([
+            ('partner_id', 'in', partner_ids)
+        ], order='create_date desc', limit=limit, offset=offset)
+        
+        return request.render('lerm_civil.sample_requests_list', {
+            'csr': csr,
+            'partner': partner_id,
+            'page': page,
+            'total_pages': total_pages,
+            'total': total,
+            'offset': offset,
+            'limit': limit,
         })
 
-    @http.route('/sample/create/submit', type='http', auth='user', methods=['POST'], website=True, csrf=True)
-    def submit_sample_form(self, **kwargs):
-        discipline_id = kwargs.get('discipline_id')
-        group_id = kwargs.get('group_id')  # Ensure this matches the form
-        material_id = kwargs.get('material_id')
-        # grade_ids = request.httprequest.form.getlist('grade_ids')  # Ensure it returns a list
-        grade_ids = kwargs.get('grade_ids')  # Single value
-        size_ids = kwargs.get('size_ids')  # Single value
-        # customer_id = kwargs.get('customer_id')  # Single value
-        # size_ids = request.httprequest.form.getlist('size_ids')
-        parameters = request.httprequest.form.getlist('parameters')
-    
+    @http.route('/viewReports', type='http', auth='user', website=True)
+    def view_reports_list(self, **kwargs):
+        user = request.env.user
+        partner_id = user.partner_id
 
-        # Create the sample record if all required fields are present
-        if discipline_id and group_id and material_id:
-            request.env['sample.test.request'].sudo().create({
-                'discipline_id': int(discipline_id),
-                # 'customer_id': int(customer_id),
-                'group_id': int(group_id),
-                'material_id': int(material_id),
-                # 'grade_ids': [(6, 0, [int(grade_id) for grade_id in grade_ids if grade_id])] if grade_ids else [],
-                'grade_ids': int(grade_ids) if grade_ids else None, 
-                # 'size_ids': [(6, 0, [int(size_id) for size_id in size_ids if size_id])] if size_ids else [],
-                'parameters': [(6, 0, list(map(int, parameters)))] if parameters else [],
-                'size_ids': int(size_ids) if size_ids else None, 
+        child_users = request.env['portal.user.master'].sudo().search([('customer','=',partner_id.id)]).child_users
+        partner_ids = [partner_id.id]
+        for child in child_users:
+            partner_ids.append(child.partner_id.id)
+
+        total = request.env['lerm.srf.sample'].sudo().search_count([('srf_id.customer','in',partner_ids),('state','=','4-in_report'),('display_report_portal','=',True)])
+        page = int(kwargs.get('page', 1))
+        limit = 10  # Number of items per page
+        total_pages = max((total + limit - 1) // limit, 1)
+        page = max(min(page, total_pages), 1)
+        offset = (page - 1) * limit
+        samples = request.env['lerm.srf.sample'].sudo().search([('srf_id.customer','in',partner_ids),('state','=','4-in_report'),('display_report_portal','=',True)],order='create_date desc', limit=limit, offset=offset)
+
+        return request.render('lerm_civil.sample_reports_list', {
+            'samples': samples,
+            'partner': partner_id,
+            'page': page,
+            'total_pages': total_pages,
+            'total': total,
+            'offset': offset,
+            'limit': limit,
+        })
+
+
+        
+    
+    @http.route('/sampleRequests', type='http', auth='user', website=True)
+    def sampleRequests(self, **kwargs):
+        user = request.env.user
+        partner_id = user.partner_id
+        child_users = request.env['portal.user.master'].sudo().search([('customer','=',partner_id.id)]).child_users
+        partner_ids = [partner_id.id]
+        for child in child_users:
+            partner_ids.append(child.partner_id.id)
+        # import wdb; wdb.set_trace()
+        
+        projects = request.env['res.partner.project'].sudo().search([('contact_id', 'in', partner_ids)])
+        customers = request.env['res.partner'].sudo().search([('id', 'in', partner_ids)])
+        
+        
+        return request.render('lerm_civil.sample_requests_form', {
+            'projects': projects,
+            'customers':customers
+        })
+    
+    @http.route('/viewSampleRequests/<int:csr_id>', type='http', auth='user', website=True)
+    def viewSampleRequests(self,csr_id, **kwargs):
+        csr = request.env['customer.sample.requests'].sudo().search([('id','=',int(csr_id))],limit=1)
+        return request.render('lerm_civil.view_sample_request', {
+            'csr': csr
+        })
+    
+    @http.route('/deleteSampleRequest/<int:csr_id>', type='http', auth='user', website=True)
+    def deleteSampleRequest(self,csr_id, **kwargs):
+        csr = request.env['customer.sample.requests'].sudo().search([('id','=',int(csr_id))],limit=1)
+        samples = csr.samples
+        if samples:
+            samples.sudo().unlink()
+        if csr:
+            csr.sudo().unlink()
+
+        return request.redirect('/sampleRequestList')
+
+    @http.route('/lerm/get_projects', methods=["POST"], type="json", auth='user')
+    def get_projects(self):
+
+        # import wdb; wdb.set_trace()
+        try:
+            # Manually parse JSON data
+            data = request.httprequest.get_data()
+            import json
+            request_json = json.loads(data)
             
-            })
+            alias_id = request_json.get('customer_id')
+            if not alias_id:
+                return request.make_json_response({'error': 'alias_id missing'})
+                
+            projects = request.env['res.partner.project'].sudo().search([
+                ('contact_id', '=', int(alias_id))
+            ])
+            
+            return {
+                'projects': [{
+                    'id': project.id,
+                    'name': project.project_name  
+                } for project in projects]
+            }
+        except Exception as e:
+            return request.make_json_response({'error': str(e)})
 
-        # Redirect to the form to see the updated samples
-        return request.redirect('/sample/create?success=1')
+    
+    @http.route('/lerm/get_groups', methods=["POST"], type="json", auth='user')
+    def get_groups(self):
 
-    # @http.route('/sample/create/submit', type='http', auth='user', methods=['POST'], website=True, csrf=True)
-    # def submit_sample_form(self, **kwargs):
-    #     discipline_id = kwargs.get('discipline_id')
-    #     group_id = kwargs.get('group_id')
-    #     material_id = kwargs.get('material_id')
-    #     grade_id = kwargs.get('grade_ids')  # Single value
-    #     size_id = kwargs.get('size_ids')  # Single value
-    #     parameters = request.httprequest.form.getlist('parameters')  # List of selected parameters
+        # import wdb; wdb.set_trace()
+        try:
+            # Manually parse JSON data
+            data = request.httprequest.get_data()
+            import json
+            request_json = json.loads(data)
+            
+            discipline_id = request_json.get('discipline_id')
+            if not discipline_id:
+                return request.make_json_response({'error': 'discipline_id missing'})
+                
+            groups = request.env['lerm_civil.group'].sudo().search([
+                ('discipline', '=', int(discipline_id))
+            ])
+            
+            return {
+                'groups': [{
+                    'id': group.id,
+                    'name': group.group  
+                } for group in groups]
+            }
+        except Exception as e:
+            return request.make_json_response({'error': str(e)})
+        
+    @http.route('/lerm/get_products', methods=["POST"], type="json", auth='user')
+    def get_products(self):
 
-    #     if discipline_id and group_id and material_id:
-    #         # Iterate over the parameters and create a line for each
-    #         for parameter_id in parameters:
-    #             request.env['sample.test.line'].sudo().create({
-    #                 'discipline_id': int(discipline_id),
-    #                 'group_id': int(group_id),
-    #                 'material_id': int(material_id),
-    #                 'grade_ids': int(grade_id) if grade_id else None,
-    #                 'size_ids': int(size_id) if size_id else None,
-    #                 'parameters': [(4, int(parameter_id))],  # Add parameter to Many2many field
-    #             })
+        # import wdb; wdb.set_trace()
+        try:
+            # Manually parse JSON data
+            data = request.httprequest.get_data()
+            import json
+            request_json = json.loads(data)
+            
+            group_id = request_json.get('group_id')
+            if not group_id:
+                return request.make_json_response({'error': 'group_id missing'})
+                
+            products = request.env['product.template'].sudo().search([
+                ('group', '=', int(group_id))
+            ])
+            
+            return {
+                'products': [{
+                    'id': product.id,
+                    'name': product.name  
+                } for product in products]
+            }
+        except Exception as e:
+            return request.make_json_response({'error': str(e)})
+        
+    @http.route('/lerm/get_parameters', methods=["POST"], type="json", auth='user')
+    def get_parameters(self):
 
-    #     # Redirect to the form with a success message
-    #     return request.redirect('/sample/create?success=1')
+        # import wdb; wdb.set_trace()
+        try:
+            # Manually parse JSON data
+            data = request.httprequest.get_data()
+            import json
+            request_json = json.loads(data)
+            
+            product_id = request_json.get('product_id')
+            if not product_id:
+                return request.make_json_response({'error': 'product_id missing'})
+            
+            grades = request.env['lerm.grade.line'].sudo().search([('product_id','=',int(product_id))])
+            sizes = request.env['lerm.size.line'].sudo().search([('product_id','=',int(product_id))])
+
+                
+            parameters = request.env['lerm.parameter.master'].sudo().search([
+                ('material', '=', int(product_id))
+            ])
+            
+            return {
+                'parameters': [{
+                    'id': parameter.id,
+                    'name': parameter.parameter_name  
+                } for parameter in parameters],
+                'grades':[{
+                    'id': grade.id,
+                    'name': grade.grade  
+                } for grade in grades],
+                'sizes':[{
+                    'id': size.id,
+                    'name': size.size  
+                } for size in sizes]
+            }
+        except Exception as e:
+            return request.make_json_response({'error': str(e)})
+    
+    @http.route('/createSampleRequest', type='http', auth='user', methods=['POST'], website=True, csrf=True)
+    def custom_request_create(self, **kwargs):
+        user = request.env.user
+        partner_id = user.partner_id
+
+        alias_data = kwargs.get('customer_id')
+        billing_customer_data = kwargs.get('billing_customer_id')
+
+        alias_id = request.env['res.partner'].sudo().search([('id','=',int(alias_data))])
+        # import wdb; wdb.set_trace()
+
+        if billing_customer_data != '':
+
+            billing_customer_id = request.env['res.partner'].sudo().search([('id','=',int(billing_customer_data))]).id
+        else:
+            billing_customer_id = False
 
 
 
 
+        sample_count = sum(1 for key in kwargs if key.startswith("product_name_"))
+        samples = []
 
-   
-    @http.route('/customers', type='http', auth='user', website=True)
-    def customer_list(self, **kwargs):
-        # Fetch all necessary data for the form
-        customer = request.env['res.partner'].sudo().search([])
-        samples = request.env['sample.test.request'].sudo().search([])
-      
+        for i in range(sample_count):
+            parameter_ids = [int(p) for p in kwargs.get(f"parameter_line_{i}", "").split(",") if p]
 
-        return request.render('lerm_civil.customer_create_template', {
-            'customer': customer,
-            'samples': samples,
-          
+            # import wdb; wdb.set_trace()
+            sample = {
+                "discipline_id": int(kwargs.get(f"discipline_id_{i}")) if kwargs.get(f"discipline_id_{i}") else False,
+                "group_id": int(kwargs.get(f"group_id_{i}")) if kwargs.get(f"group_id_{i}") else False,
+                "product_id": int(kwargs.get(f"product_name_{i}")),
+                "product_description":kwargs.get(f"description_{i}"),
+                # "quantity":kwargs.get(f"quantity_{i}"),
+                "grade_id": int(kwargs.get(f"grade_id_{i}")) if kwargs.get(f"grade_id_{i}") else False,
+                "size_id": int(kwargs.get(f"size_id_{i}")) if kwargs.get(f"size_id_{i}") else False,
+                "parameters": [(6, 0, parameter_ids)],
+            }
+            samples.append((0, 0, sample))  # Proper One2many format
+
+        date = kwargs.get("request_date")
+        project_id = int(kwargs.get("project_id"))
+
+        request.env['customer.sample.requests'].sudo().create({
+            'partner_id': alias_id.id,
+            'billing_customer':billing_customer_id,
+            'project': project_id,
+            'date': date,
+            'samples': samples  # One2many field
         })
 
-    @http.route('/customers/create/submit', auth='user', website=True, methods=['POST'], csrf=True)
-    def customer_create_submit(self, **kwargs):
-        """
-        Create a new customer based on form submission.
-        """
-        
-        customer_id = kwargs.get('customer_id')
-        if customer_id:
-                # Create a sample test request associated with the new customer
-                request.env['sample.test.request'].sudo().create({
-                 'customer_id': int(customer_id),
-                    # You can add additional fields here if needed
-                })
-        return request.redirect('/customers')
+        return request.redirect('/sampleRequestList')
 
 
 
+    @http.route('/download/sample/report/nabl/<int:sam_req_id>', type='http', auth='user', website=True)
+    def download_sample_report(self, sam_req_id, **kw):
+        sample = request.env['lerm.srf.sample'].sudo().search([('customer_portal_sample','=', sam_req_id)], limit=1)
+        if not sample:
+            return request.not_found()
 
+        # Get ELN and report template name
+        eln = request.env["lerm.eln"].sudo().search([('sample_id', '=', sample.id)], limit=1)
+        if not eln:
+            return request.not_found()
 
+        if eln.is_product_based_calculation:
+            template = eln.material.product_based_calculation[0].main_report_template
+        else:
+            template = eln.parameters_result.parameter[0].main_report_template
 
+        template_name = template.report_name
+
+        # Render PDF
+        pdf_content, content_type = request.env.ref(template.xml_id).sudo()._render_qweb_pdf([sample.id], data={
+            'fromsample': True,
+            'inreport': sample.state,
+            'nabl': True,
+            'fromEln': False,
+            'report_wizard':True,
+            'sample':sample.id
+        })
+
+        # Return HTTP Response
+        filename = str(sample.material_id.lab_name)+" Report"
+        # filename = "Report.pdf"
+        return request.make_response(pdf_content, headers=[
+            ('Content-Type', 'application/pdf'),
+            ('Content-Disposition', content_disposition(filename))
+        ])
     
 
+    @http.route('/download/sample/report/nonnabl/<int:sam_req_id>', type='http', auth='user', website=True)
+    def download_sample_nonnabl_report(self, sam_req_id, **kw):
+        sample = request.env['lerm.srf.sample'].sudo().search([('customer_portal_sample','=', sam_req_id)], limit=1)
+        if not sample:
+            return request.not_found()
 
-    @http.route('/sample/delete', type='http', auth='user', methods=['POST'], website=True, csrf=True)
-    def delete_sample(self, **kwargs):
-        sample_id = kwargs.get('sample_id')
-        if sample_id:
-            sample = request.env['sample.test.request'].sudo().browse(int(sample_id))
-            if sample.exists():
-                sample.unlink()
-        return request.redirect('/sample/create')
+        # Get ELN and report template name
+        eln = request.env["lerm.eln"].sudo().search([('sample_id', '=', sample.id)], limit=1)
+        if not eln:
+            return request.not_found()
 
+        if eln.is_product_based_calculation:
+            template = eln.material.product_based_calculation[0].main_report_template
+        else:
+            template = eln.parameters_result.parameter[0].main_report_template
 
+        template_name = template.report_name
 
-   
+        # Render PDF
+        pdf_content, content_type = request.env.ref(template.xml_id).sudo()._render_qweb_pdf([sample.id], data={
+            'fromsample': True,
+            'inreport': sample.state,
+            'nabl': False,
+            'fromEln': False,
+            'report_wizard':True,
+            'sample':sample.id
+        })
 
-
-
+        # Return HTTP Response
+        filename = str(sample.material_id.lab_name)+" Report"
+        # filename = "Report.pdf"
+        return request.make_response(pdf_content, headers=[
+            ('Content-Type', 'application/pdf'),
+            ('Content-Disposition', content_disposition(filename))
+        ])
     
+
+    @http.route('/downloadSampleReportNabl/<int:sample_id>', type='http', auth='user', website=True)
+    def downloadNabl_report(self, sample_id, **kw):
+        sample = request.env['lerm.srf.sample'].sudo().search([('id','=', sample_id)], limit=1)
+        if not sample:
+            return request.not_found()
+
+        # Get ELN and report template name
+        eln = request.env["lerm.eln"].sudo().search([('sample_id', '=', sample.id)], limit=1)
+        if not eln:
+            return request.not_found()
+
+        if eln.is_product_based_calculation:
+            template = eln.material.product_based_calculation[0].main_report_template
+        else:
+            template = eln.parameters_result.parameter[0].main_report_template
+
+        template_name = template.report_name
+
+        # Render PDF
+        pdf_content, content_type = request.env.ref(template.xml_id).sudo()._render_qweb_pdf([sample.id], data={
+            'fromsample': True,
+            'inreport': sample.state,
+            'nabl': True,
+            'fromEln': False,
+            'report_wizard':True,
+            'sample':sample.id
+        })
+
+        # Return HTTP Response
+        filename = str(sample.material_id.lab_name)+" Report"
+        # filename = "Report.pdf"
+        return request.make_response(pdf_content, headers=[
+            ('Content-Type', 'application/pdf'),
+            ('Content-Disposition', content_disposition(filename))
+        ])
+    
+    @http.route('/downloadSampleReportNonNabl/<int:sample_id>', type='http', auth='user', website=True)
+    def download_nonNabl_report(self, sample_id, **kw):
+        sample = request.env['lerm.srf.sample'].sudo().search([('id','=', sample_id)], limit=1)
+        if not sample:
+            return request.not_found()
+
+        # Get ELN and report template name
+        eln = request.env["lerm.eln"].sudo().search([('sample_id', '=', sample.id)], limit=1)
+        if not eln:
+            return request.not_found()
+
+        if eln.is_product_based_calculation:
+            template = eln.material.product_based_calculation[0].main_report_template
+        else:
+            template = eln.parameters_result.parameter[0].main_report_template
+
+        template_name = template.report_name
+
+        # Render PDF
+        pdf_content, content_type = request.env.ref(template.xml_id).sudo()._render_qweb_pdf([sample.id], data={
+            'fromsample': True,
+            'inreport': sample.state,
+            'nabl': False,
+            'fromEln': False,
+            'report_wizard':True,
+            'sample':sample.id
+        })
+
+        # Return HTTP Response
+        filename = str(sample.material_id.lab_name)+" Report"
+        # filename = "Report.pdf"
+        return request.make_response(pdf_content, headers=[
+            ('Content-Type', 'application/pdf'),
+            ('Content-Disposition', content_disposition(filename))
+        ])

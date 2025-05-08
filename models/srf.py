@@ -170,6 +170,8 @@ class SrfForm(models.Model):
     date_casting = fields.Date(string="Date of Casting")
     date_editable = fields.Boolean(string="SRF Date editable",default=False,compute="_compute_date_editable")
     active = fields.Boolean(string="Active",default=True)
+    customer_portal_request = fields.Many2one('customer.sample.line',string="Customer Portal Request", readonly=True)
+
 
 
     def _compute_date_editable(self):
