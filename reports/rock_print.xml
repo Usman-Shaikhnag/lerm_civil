@@ -26,12 +26,7 @@
                             <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td colspan="6">Age at Test: <span t-field="data.age_of_days"></span>
-                            </td>
-                            <td colspan="6">Sample Conditioning: <span t-field="data.sample_condition"></span>
-                            </td>
-                        </tr> -->
+                       
                     </table>
 					
 					<table>
@@ -50,12 +45,10 @@
                             </td>
                         </tr>
 					</table>
-                    <!-- Specific Gravity, Water Absorption, Porosity & Dry Density	-->
 
                     <div style="margin-top:20px">
                         <div style="text-align:center;font-size:18px">
                             Specific Gravity, Water Absorption, Porosity and Dry Density 
-							<!-- added -->
 							<span>
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a4eb1d5e-9d64-48cd-8277-ad734e0edd84')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -138,12 +131,10 @@
 						</tr>
 					</table>
 
-						<!--Start UCS -->
 
 					<div style="margin-top:20px" t-if="data.usc_visible">
                         <div style="text-align:center;font-size:18px">
                             UCS 
-							<!-- added -->
 							<span>
 									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','a1f9c5d0-0bc7-41a6-a2bb-0fe9d898008d')]).parameter_table" t-as="parameter">
 										<t t-if="parameter.grade.id == eln.grade_id.id">
@@ -215,7 +206,6 @@
                    	
                    
                     
-                    <!-- authorizeRowDataSheet -->
                     
                     <div class="authorizeRowDataSheet">
 						<div>
