@@ -10,6 +10,8 @@ class CustomerSampleRequests(models.Model):
     date = fields.Date('Date')
     billing_customer = fields.Many2one('res.partner')
     samples = fields.One2many('customer.sample.line','csr_id',string="Samples")
+    attachment = fields.Binary("Attachment")
+    attachment_name = fields.Char("Attachent Name")
 
     state = fields.Selection([
         ('draft', "Draft"),
@@ -25,7 +27,9 @@ class CustomerSampleRequests(models.Model):
                 'srf_date':record.date,
                 'name_work':record.project.id,
                 'billing_customer':record.billing_customer.id,
-                'customer_portal_request':record.id
+                'customer_portal_request':record.id,
+                'attachment':record.attachment,
+                'attachment_name':record.attachment_name
             })
             srf_id = srf.id
             sample_records = record.samples
@@ -69,85 +73,8 @@ class CustomerSampleRequests(models.Model):
 
 
 
-
-            # sample_range = self.env['sample.range.line'].create({
-            #         'srf_id': self.env.context.get('active_id'),
-            #         'group_id':group_id,
-            #         'product_alias':self.product_alias.id,
-            #         'discipline_id': discipline_id,
-            #         # 'lab_l_id': lab_l_id,
-            #         'lab_no_value':lab_no_value,
-            #         'material_id' : self.material_id.id,
-            #         'size_id':size_id,
-            #         'brand':brand,
-            #         'grade_id':grade_id,
-            #         'sample_received_date':sample_received_date,
-            #         'location':location,
-            #         'sample_condition':sample_condition,
-            #         'sample_reject_reason':sample_reject_reason,
-            #         'has_witness':has_witness,
-            #         'witness':witness,
-            #         'department_id':self.department_id,
-            #         'conformity':conformity,
-            #         'scope':scope,
-            #         'sample_description':sample_description,
-            #         'parameters':parameters,
-            #         'discipline_id':discipline_id.id,
-            #         'casting':casting,
-            #         'sample_qty':sample_qty,
-            #         'client_sample_id':client_sample_id,
-            #         'casting_date':self.date_casting,
-            #         'volume':volume,
-            #         'product_name':product_name.id,
-            #         'main_name':self.main_name,
-            #         'price':self.price,
-            #         'date_casting':self.date_casting
-
-            #     })
-            #     for i in range(self.sample_qty):
-            #         self.env["lerm.srf.sample"].create({
-            #             'srf_id': self.env.context.get('active_id'),
-            #             'group_id':group_id,
-                       
-            #             # 'alias':alias,
-            #             'discipline_id': discipline_id,
-            #             # 'lab_l_id': lab_l_id,
-            #             'lab_no_value':lab_no_value,
-            #             'material_id' : self.material_id.id,
-            #             'size_id':size_id,
-            #             'brand':brand,
-            #             'grade_id':grade_id,
-            #             'sample_received_date':sample_received_date,
-            #             'location':location,
-            #             'sample_condition':sample_condition,
-            #             'sample_reject_reason':sample_reject_reason,
-            #             'has_witness':has_witness,
-            #             'witness':witness,
-            #             'department_id':self.department_id,
-            #             'conformity':conformity,
-            #             'scope':scope,
-            #             'sample_description':sample_description,
-            #             'parameters':parameters,
-            #             'discipline_id':discipline_id.id,
-            #             'casting':casting,
-            #             'sample_range_id':sample_range.id,
-            #             'client_sample_id':client_sample_id,
-            #             'casting_date':self.date_casting,
-            #             'days_casting':self.days_casting,
-            #             'casting':self.casting,
-            #             'volume':volume,
-            #             'product_name':product_name.id,
-            #             'main_name':self.main_name,
-            #             'price':self.price,
-            #             'date_casting':self.date_casting,
-            #             'product_alias':self.product_alias.id,
-            #             'lab_location':lab_location,
-            #             'location_name':location_name,
-
-            #         })
-
-
-
+    def reset_draft(self):
+        self.state = 'draft'
 class CustomerSampleLines(models.Model):
     _name = 'customer.sample.line'
 

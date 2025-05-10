@@ -260,6 +260,9 @@ class LermSampleController(http.Controller):
 
         alias_data = kwargs.get('customer_id')
         billing_customer_data = kwargs.get('billing_customer_id')
+        attachment = kwargs.get('attachment')
+
+        
 
         alias_id = request.env['res.partner'].sudo().search([('id','=',int(alias_data))])
         # import wdb; wdb.set_trace()
@@ -295,13 +298,21 @@ class LermSampleController(http.Controller):
         date = kwargs.get("request_date")
         project_id = int(kwargs.get("project_id"))
 
-        request.env['customer.sample.requests'].sudo().create({
+        data = {
             'partner_id': alias_id.id,
             'billing_customer':billing_customer_id,
             'project': project_id,
             'date': date,
             'samples': samples  # One2many field
-        })
+        }
+
+        if attachment:
+            attachment_filename = attachment.filename
+            attachment_binary  = base64.b64encode(attachment.read())
+            data['attachment'] = attachment_binary
+            data['attachment_name'] = attachment_filename
+
+        request.env['customer.sample.requests'].sudo().create(data)
 
         return request.redirect('/sampleRequestList')
 

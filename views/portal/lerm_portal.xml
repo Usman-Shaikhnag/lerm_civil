@@ -16,6 +16,10 @@
                 <t t-set="url" t-value="'/viewReports'" />
                 <t t-set="title" t-value="'View Reports'" />
             </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="url" t-value="'/viewDocuments'" />
+                <t t-set="title" t-value="'Documents'" />
+            </t>
 
           
         </xpath>
@@ -206,13 +210,17 @@
                                         <!-- Project Selection -->
                                         <div class="form-group row">
                                             <label class="col-md-1 col-form-label">Project</label>
-                                            <div class="col-md-11">
+                                            <div class="col-md-5">
                                                 <select id="project_select" name="project_id" class="form-control" required="1">
                                                     <option value="">-- Select Project --</option>
                                                     <t t-foreach="projects" t-as="project">
                                                         <option t-att-value="project.id" t-esc="project.project_name"/>
                                                     </t>
                                                 </select>
+                                            </div>
+                                            <label class="col-md-1 col-form-label">Attachment</label>
+                                            <div class="col-md-5">
+                                                <input type="file" id="attachment" name="attachment" class="form-control"/>
                                             </div>
                                         </div>
                                         
@@ -232,6 +240,10 @@
                                                     </t>
                                                 </select>
                                             </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            
                                         </div>
                                         
                                         <!-- One2Many Table -->
@@ -831,7 +843,12 @@
                         product_select.value = ""
                         grade_select.value = ""
                         size_select.value = ""
-
+                        
+                        const selected_parameters = document.getElementById('selected_parameters');
+                        while (selected_parameters.firstChild) {
+                            selected_parameters.removeChild(selected_parameters.firstChild);
+                        }
+                        
 
                     }
                 </script>
