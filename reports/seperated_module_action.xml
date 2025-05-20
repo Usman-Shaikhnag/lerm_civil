@@ -308,4 +308,94 @@
         <field name="binding_type">report</field>
     </record>
 
+
+
+     <record id="pt_grout_datasheet1_action" model="ir.actions.report">
+        <field name="name">PT Grout DataSheet 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">pt_grout.pt_grout_datasheet1</field>
+        <field name="report_file">pt_grout.pt_grout_datasheet1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+     <record id="lerm_ptgrout_report1_action" model="ir.actions.report">
+        <field name="name">Pt Grout Report 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">pt_grout.lerm_ptgrout_report1</field>
+        <field name="report_file">pt_grout.lerm_ptgrout_report1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+     <record id="lerm_paver_block_datasheet1_action" model="ir.actions.report">
+        <field name="name">Paver Block DataSheet 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">paver_block.lerm_paver_block_datasheet1</field>
+        <field name="report_file">paver_block.lerm_paver_block_datasheet1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+     <record id="paver_block_report1_action" model="ir.actions.report">
+        <field name="name">Paver Block Report 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">paver_block.paver_block_report1</field>
+        <field name="report_file">paver_block.paver_block_report1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+
+     <record id="wmm_mech_datasheet1_action" model="ir.actions.report">
+        <field name="name">WMM DataSheet 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">wmm.wmm_mech_datasheet1</field>
+        <field name="report_file">wmm.wmm_mech_datasheet1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <record id="wmm_mec_report1_action" model="ir.actions.report">
+        <field name="name">WMM Report 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">wmm.wmm_mec_report1</field>
+        <field name="report_file">wmm.wmm_mec_report1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <record id="wpt_datasheet1_action" model="ir.actions.report">
+        <field name="name">WPT Datasheet 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">wpt.wpt_datasheet1</field>
+        <field name="report_file">wpt.wpt_datasheet1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <record id="wpt_report1_action" model="ir.actions.report">
+        <field name="name">WPT Report 1</field>
+        <field name="model">lerm.eln</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">wpt.wpt_report1</field>
+        <field name="report_file">wpt.wpt_report1</field>
+        <field name="binding_model_id" ref="model_lerm_eln"/>
+        <field name="binding_type">report</field>
+    </record>
+
 </odoo>

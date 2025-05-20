@@ -389,6 +389,126 @@ class SrfForm(models.Model):
    
 
    
+    # def confirm_srf(self):
+    #     srf_ids=[]
+        
+    #     # import wdb; wdb.set_trace()
+        
+    #     count = self.env['lerm.srf.sample'].search_count([('srf_id.srf_date','=',self.srf_date),('kes_no','!=','New'),('status','=','2-confirmed')]) 
+
+    #     for record in self.sample_range_table:
+    #         sam_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample')]).number_next_actual
+    #         kes_next_number = self.env['ir.sequence'].search([('code','=','lerm.srf.sample.kes')]).number_next_actual
+            
+
+
+
+    #         sample_range = "SAM/"+str(sam_next_number)+"-"+str(sam_next_number+record.sample_qty-1)
+    #         kes_range = "KES/"+str(count+1)+"-"+str(count+1+record.sample_qty-1)
+    #         record.write({'sample_range': sample_range , 'kes_range': kes_range })
+    #         samples = self.env['lerm.srf.sample'].search([('sample_range_id','=',record.id)])
+            
+
+
+
+            
+    #         for sample in samples:
+    #             # import wdb; wdb.set_trace()
+    #             sample_id = self.env['ir.sequence'].next_by_code('lerm.srf.sample') or 'New'
+
+    #             year = str(self.srf_date.year)[-2:]
+    #             month = str(self.srf_date.month).zfill(2)
+    #             day = str(self.srf_date.day).zfill(2)
+    #             count = count + 1
+
+    #             kes_no = "KES"+ year+month+day + str(count).zfill(3) or "New"
+
+    #             # kes_no = "KES"+ str(record.srf_date) + self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') or 'New'
+    #             kes_no_daywise = self.env['ir.sequence'].next_by_code('lerm.sample.daywise.seq') 
+    #             # kes_no = self.env['ir.sequence'].next_by_code('lerm.srf.sample.kes') + kes_no_daywise or 'New'
+    #             # lab_l_id =  self.env['lab.location'].search([('id','=',self.env.context['allowed_company_ids'][0])])
+    #             company =  self.env['res.company'].search([('id','=',self.env.context['allowed_company_ids'][0])])
+    #             # lab_location =  self.env.context['discipline_id']
+    #             # print('<<<<<<<<<<<<<<<<<<<<',lab_location)
+    #             # lab_cert_no = str(sample.lab_certificate_no)
+                
+
+    #             # try: 
+    #             #     sample.received_by_id = self.env.user
+    #             # except:
+    #             #     pass
+
+                
+                
+    #             if sample.scope == 'nabl':
+
+    #                 if sample.lab_location:
+    #                     code = sample.lab_location.ulr_sequence.code
+    #                     srf_date = sample.srf_id.srf_date
+    #                     ulr_no = self.env['ir.sequence'].next_by_code(code) or 'New'
+    #                     for dt in sample.lab_location.ulr_sequence.date_range_ids:
+    #                         from_date = dt.date_from
+    #                         to_date = dt.date_to
+    #                         break
+
+    #                     import wdb; wdb.set_trace()
+
+    #                     lab_loc = sample.location_name.location_code
+    #                     lab_cert_no = sample.lab_location.lab_certificate_no
+    #                     ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+    #                     ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                        
+
+
+    #                 else:
+    #                     srf_date = sample.srf_id.srf_date
+    #                     next_number = ''
+    #                     ulr = self.env['ir.sequence'].sudo().search([('code','=','sample.ulr.seq')])
+    #                     current_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq').split('F')[0].split(')')[-1]
+    #                     for dt in ulr.date_range_ids:
+    #                         # import wdb; wdb.set_trace()
+
+    #                         from_date = dt.date_from
+    #                         to_date = dt.date_to
+    #                         if srf_date >= from_date and srf_date <=to_date:
+    #                             next_number = dt.number_next_actual
+    #                             prefix = ulr.prefix
+    #                             suffix = ulr.suffix
+    #                             lab_location = str(sample.lab_no_value)
+    #                             lab_certificate_no = str(company.lab_certificate_no)
+    #                             prefix = prefix.replace('(lab_certificate_no)', lab_certificate_no)
+    #                             prefix = prefix.replace('(lab_no_value)', lab_location)
+    #                             prefix = prefix.replace('%(y)s', str(srf_date.year)[-2:])
+    #                             ulr_no = str(prefix)+str(next_number).zfill(8)+str(suffix)
+    #                             next_number = next_number +1
+    #                             dt.write({'number_next_actual':next_number})
+    #                             break
+
+
+                                
+
+
+
+
+
+    #                     # lab_loc = str(sample.lab_no_value)
+    #                     # lab_cert_no = str(company.lab_certificate_no)
+    #                     # # lab_loc = company.lab_seq_no
+    #                     # ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+    #                     # ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+    #                     # ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+    #             else:
+    #                 ulr_no = ''
+    #             # import wdb ; wdb.set_trace()
+              
+             
+        
+
+              
+                
+    #             sample.write({'sample_no':sample_id,'kes_no':kes_no,'status':'2-confirmed','ulr_no':ulr_no})
+    #             self.env.cr.commit()
+
     def confirm_srf(self):
         srf_ids=[]
         
@@ -431,7 +551,7 @@ class SrfForm(models.Model):
                 # lab_location =  self.env.context['discipline_id']
                 # print('<<<<<<<<<<<<<<<<<<<<',lab_location)
                 # lab_cert_no = str(sample.lab_certificate_no)
-                
+                # import wdb; wdb.set_trace()
 
                 # try: 
                 #     sample.received_by_id = self.env.user
@@ -439,64 +559,16 @@ class SrfForm(models.Model):
                 #     pass
 
                 
+
                 
                 if sample.scope == 'nabl':
-
-                    if sample.lab_location:
-                        code = sample.lab_location.ulr_sequence.code
-                        srf_date = sample.srf_id.srf_date
-                        ulr_no = self.env['ir.sequence'].next_by_code(code) or 'New'
-                        for dt in sample.lab_location.ulr_sequence.date_range_ids:
-                            from_date = dt.date_from
-                            to_date = dt.date_to
-                            break
-
-                        import wdb; wdb.set_trace()
-
-                        lab_loc = sample.location_name.location_code
-                        lab_cert_no = sample.lab_location.lab_certificate_no
-                        ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                        ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
-                        
-
-
-                    else:
-                        srf_date = sample.srf_id.srf_date
-                        next_number = ''
-                        ulr = self.env['ir.sequence'].sudo().search([('code','=','sample.ulr.seq')])
-                        current_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq').split('F')[0].split(')')[-1]
-                        for dt in ulr.date_range_ids:
-                            # import wdb; wdb.set_trace()
-
-                            from_date = dt.date_from
-                            to_date = dt.date_to
-                            if srf_date >= from_date and srf_date <=to_date:
-                                next_number = dt.number_next_actual
-                                prefix = ulr.prefix
-                                suffix = ulr.suffix
-                                lab_location = str(sample.lab_no_value)
-                                lab_certificate_no = str(company.lab_certificate_no)
-                                prefix = prefix.replace('(lab_certificate_no)', lab_certificate_no)
-                                prefix = prefix.replace('(lab_no_value)', lab_location)
-                                prefix = prefix.replace('%(y)s', str(srf_date.year)[-2:])
-                                ulr_no = str(prefix)+str(next_number).zfill(8)+str(suffix)
-                                next_number = next_number +1
-                                dt.write({'number_next_actual':next_number})
-                                break
-
-
-                                
-
-
-
-
-
-                        # lab_loc = str(sample.lab_no_value)
-                        # lab_cert_no = str(company.lab_certificate_no)
-                        # # lab_loc = company.lab_seq_no
-                        # ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
-                        # ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
-                        # ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
+                
+                    lab_loc = str(sample.lab_no_value)
+                    lab_cert_no = str(company.lab_certificate_no)
+                    # lab_loc = company.lab_seq_no
+                    ulr_no = self.env['ir.sequence'].next_by_code('sample.ulr.seq') or 'New'
+                    ulr_no = ulr_no.replace('(lab_certificate_no)', lab_cert_no)                
+                    ulr_no = ulr_no.replace('(lab_no_value)', lab_loc)
                 else:
                     ulr_no = ''
                 # import wdb ; wdb.set_trace()
@@ -551,7 +623,7 @@ class SrfForm(models.Model):
         self.write({'state': '2-confirm'})
         # for record in self:
 
-    # name_of_work = fields.Many2one('res.partner.project',string='Name of Work')
+       # name_of_work = fields.Many2one('res.partner.project',string='Name of Work')
 
     @api.depends('customer')
     def compute_contact_ids(self):
