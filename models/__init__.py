@@ -15,6 +15,7 @@ from . import enviroment_register
 from . import employee
 from . import invoice
 from . import lab_master
+from . import customer_sample_request
 
 from .report import cement_report
 from .report import flyash_report
@@ -170,3 +171,4 @@ from .report import mortar_cube_ds_report
 # from .report import demo_datasheet
 
 # from .import dash_bord
+from . import ir_sequence_inherit

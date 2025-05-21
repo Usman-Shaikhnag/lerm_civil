@@ -139,6 +139,9 @@ class LermSampleForm(models.Model):
     approveby_signature_required = fields.Boolean("Approved by Signature")
     page_break = fields.Integer("Page break",default=6)
 
+    display_report_portal = fields.Boolean("Display on Portal")
+    customer_portal_sample = fields.Many2one('customer.sample.line',string="Customer Portal Sample", readonly=True)
+
 
 
     invoice_number = fields.Many2one(

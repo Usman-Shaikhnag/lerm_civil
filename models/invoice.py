@@ -12,6 +12,7 @@ class AccountMoveInheritedLerm(models.Model):
     #     # return res
 
     def action_post(self):
+        self.invoice_user_id = self.partner_id.user_id.id
         for rec in self.invoice_line_ids.report_no1:
             rec.sudo().write({
                 'invoice_status' : '2-invoiced'

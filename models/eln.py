@@ -1207,6 +1207,3 @@ class UpdateResultChild(models.TransientModel):
 
 
 
-
-
-
