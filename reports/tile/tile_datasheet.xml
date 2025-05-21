@@ -698,14 +698,14 @@
 							<td rowspan="2">Sr no 
 							</td>
 
-							<td colspan="1" style="text-align:center;">Length
+							<td colspan="1" style="text-align:center;">Mass of the dry tile M1 (g)
 							</td>
 
-                            <td colspan="1" style="text-align:center;">Width
+                            <td colspan="1" style="text-align:center;">Mass of the wet tile  M2(g)
 							</td>
-                            <td colspan="1" style="text-align:center;">Thickness
+                            <td colspan="1" style="text-align:center;">Water absorption  ((M2-M1)/M1)*100  (%)
 							</td>
-                            <td colspan="1" style="text-align:center;">Oven Dry Weight
+                            <!-- <td colspan="1" style="text-align:center;">Oven Dry Weight
 							</td>
                             <td colspan="1" style="text-align:center;">Wet Weight
 							</td>
@@ -713,7 +713,7 @@
 							</td>
                             <td colspan="1" style="text-align:center;">bulk density
 
-							</td>
+							</td> -->
 
                          
 						</tr>
@@ -723,34 +723,22 @@
 
 						<t t-set="i" t-value="0"/>
 						<tr t-foreach="data.child_lines_water_bulk" t-as="r">
-							<td colspan="1">
+							<td colspan="1" style="text-align:center;">
 								<div>
 									<span t-esc="i + 1" />
 									<t t-set="i" t-value="i+1"/>
 								</div>
 							</td>
-							<td colspan="1">
-								<span t-esc="r['lenght']" />
+							<td colspan="1" style="text-align:center;">
+								<span t-esc="r['mass_dry']" />
 							</td>
-                            <td colspan="1">
-								<span t-esc="r['width']" />
+                            <td colspan="1" style="text-align:center;">
+								<span t-esc="r['mass_wet']" />
 							</td>
-                            <td colspan="1">
-								<span t-esc="r['thickness']" />
+                            <td colspan="1" style="text-align:center;">
+								<span t-esc="r['water_obsorption']" />
 							</td>
-                            <td colspan="1">
-								<span t-esc="r['oven_dry']" />
-							</td>
-                            <td colspan="1">
-								<span t-esc="r['wet_weight']" />
-							</td>
-                            <td colspan="1">
-								<span t-esc="r['water_obsorption']"  t-options='{"widget": "float", "precision": 2}'/>
-							</td>
-                            <td colspan="1">
-								<span t-esc="r['bulk_density']" />
-							</td>
-                       
+                          
                        
 							
 						</tr>
@@ -771,8 +759,94 @@
                                 </td>
                             </tr>
 
-                              <tr cols="12">
+                              <!-- <tr cols="12">
                                 <td colspan="6"><b>Bulk Density g/cc :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.bulk_density" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                            </tr> -->
+                           
+                           
+                        </table>
+                </div>
+
+
+
+                    <!-- bulk density  -->
+                    
+                <div t-if="data.bulk_visible" style="margin-top:20px">
+                        <div style="text-align:center;font-size:18px">
+                              <span t-field="env['lerm.parameter.master'].search([('internal_id','=','25489lku-2bb3-4821-958d-ec2c81db5698')]).parameter_name"/>
+                            <span>
+								<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','25489lku-2bb3-4821-958d-ec2c81db5698')]).parameter_table" t-as="parameter">
+									<t t-if="parameter.grade.id == eln.grade_id.id">
+										<span t-field="parameter.specification"/>
+									</t>
+								</t>
+							</span>
+                        </div>
+                   
+                    <table style="margin-top:20px">
+					<thead style="background-color: #d3d3d3;">
+						<tr cols="12">
+							<td rowspan="2">Sr no 
+							</td>
+
+							<td colspan="1" style="text-align:center;">Mass of the dry tile(g) (m1)
+							</td>
+
+                            <td colspan="1" style="text-align:center;">Mass of the wet tile(g) (m2)
+							</td>
+                            <td colspan="1" style="text-align:center;">Mass of suspended tile (g) (m3)
+							</td>
+                            <td colspan="1" style="text-align:center;">V = exterior volume, in cm3 (m2-m3)
+							</td>
+                           
+                            <td colspan="1" style="text-align:center;">bulk density
+
+							</td>
+
+                         
+						</tr>
+						
+						</thead>
+						  <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.child_lines_bulk" t-as="r">
+							<td colspan="1" style="text-align:center;">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td>
+							<td colspan="1" style="text-align:center;">
+								<span t-esc="r['mass_dry1']" />
+							</td>
+                            <td colspan="1" style="text-align:center;">
+								<span t-esc="r['mass_wet1']" />
+							</td>
+                            <td colspan="1" style="text-align:center;">
+								<span t-esc="r['mass_suspended']" />
+							</td>
+                             <td colspan="1" style="text-align:center;">
+								<span t-esc="r['exterior_volume']" t-options='{"widget": "float", "precision": 3}' />
+							</td>
+                             <td colspan="1" style="text-align:center;">
+								<span t-esc="r['bulk_density']" t-options='{"widget": "float", "precision": 3}' />
+							</td>
+                          
+                       
+							
+						</tr>
+						</tbody>
+					</table>
+
+                    <table style="margin-top:5px">
+                            
+
+                              <tr cols="12">
+                                <td colspan="6" ><b>Bulk Density g/cc :</b></td>
                                 <td colspan="6" style="text-align: center;">
                                     <span t-field="data.bulk_density" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>

@@ -908,7 +908,7 @@ class Tile(models.Model):
 
      # water absorption and bulk density
 
-    water_ab_bulk_name = fields.Char("Name",default="Water Absorption And Bulk Density")
+    water_ab_bulk_name1 = fields.Char("Name",default="Water Absorption")
     water_bulk_visible = fields.Boolean("water absorption and bulk density Visible",compute="_compute_visible")   
 
    
@@ -916,7 +916,7 @@ class Tile(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_water_bulk = fields.One2many('mechanical.water.bulk.tile.line','parent_id',string="Parameter")
 
-    average_water_bulk = fields.Float(string="Water Absorption, % (average) ",compute="_compute_average_water_bulk",digits=(16,2))
+    average_water_bulk = fields.Float(string="Water Absorption, % (average) ",compute="_compute_average_water_bulk",digits=(16,1))
 
 
     average_water_bulk_conformity = fields.Selection([
@@ -971,7 +971,7 @@ class Tile(models.Model):
                     else:
                         record.average_water_bulk_nabl = 'fail'
 
-    individual_water_bulk = fields.Float(string="Water Absorption, % (Individual) ",compute="_compute_individual_water_bulk",digits=(16,2))
+    individual_water_bulk = fields.Float(string="Water Absorption, % (Individual) ",compute="_compute_individual_water_bulk",digits=(16,1),store=True)
 
     individual_water_bulk_conformity = fields.Selection([
             ('pass', 'Pass'),
@@ -1026,7 +1026,15 @@ class Tile(models.Model):
                         record.individual_water_bulk_nabl = 'fail'
 
 
-    bulk_density = fields.Float(string="Bulk Density, g/cc",compute="_compute_bulk_density",digits=(16,2))
+    #    Bulk Density
+    bulk_name1 = fields.Char("Name",default="Bulk Density")
+    bulk_visible = fields.Boolean(" bulk density Visible",compute="_compute_visible")   
+
+   
+
+    parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
+    child_lines_bulk = fields.One2many('mechanical.bulk.tile.line','parent_id',string="Parameter")
+    bulk_density = fields.Float(string="Bulk Density, g/cc",compute="_compute_bulk_density1",digits=(16,2))
 
     requirement_water = fields.Char(string="Requirement, Water Absorption, % (Average)",compute="_compute_requirement_water")
     requirement_water_individual = fields.Char(string="Requirement, Water Absorption, % (Individual)",compute="_compute_requirement_water_individual")
@@ -1092,15 +1100,29 @@ class Tile(models.Model):
                     record.requirement_water = ", ".join(str(p.permissable_limit or "0.0") for p in matching_params)
 
 
-    @api.depends('child_lines_water_bulk.water_obsorption')
+    # @api.depends('child_lines_water_bulk.water_obsorption')
+    # def _compute_individual_water_bulk(self):
+    #     for record in self:
+    #         # Fetch the maximum water_obsorption value from child lines
+    #         max_value = max(
+    #             (line.water_obsorption for line in record.child_lines_water_bulk if line.water_obsorption), 
+    #             default=0.0
+    #         )
+    #         record.individual_water_bulk = max_value
+
+
+    @api.depends('child_lines_water_bulk.water_obsorption', 'water_group')
     def _compute_individual_water_bulk(self):
         for record in self:
-            # Fetch the maximum water_obsorption value from child lines
-            max_value = max(
-                (line.water_obsorption for line in record.child_lines_water_bulk if line.water_obsorption), 
-                default=0.0
-            )
-            record.individual_water_bulk = max_value
+            values = [line.water_obsorption for line in record.child_lines_water_bulk if line.water_obsorption is not None]
+            if not values:
+                record.individual_water_bulk = 0.0
+            elif record.water_group in ['bia', 'bib', 'biia', 'biib']:
+                record.individual_water_bulk = max(values)
+            elif record.water_group == 'biii':
+                record.individual_water_bulk = min(values)
+            else:
+                record.individual_water_bulk = 0.0
 
     @api.depends('size')
     def _compute_requirement_water_individual(self):
@@ -1141,12 +1163,12 @@ class Tile(models.Model):
                     record.requirement_bulk = ", ".join(str(p.permissable_limit or "0.0") for p in matching_params)
 
 
-    @api.depends('child_lines_water_bulk.bulk_density')
-    def _compute_bulk_density(self):
+    @api.depends('child_lines_bulk.bulk_density')
+    def _compute_bulk_density1(self):
         for record in self:
             # Calculate the average of bulk_density across child lines
-            total = sum(line.bulk_density for line in record.child_lines_water_bulk if line.bulk_density)
-            count = len(record.child_lines_water_bulk)
+            total = sum(line.bulk_density for line in record.child_lines_bulk if line.bulk_density)
+            count = len(record.child_lines_bulk)
             record.bulk_density = total / count if count > 0 else 0.0
 
 
@@ -1726,6 +1748,7 @@ class Tile(models.Model):
             record.surface_quality_visible = False
             record.scratch_hardness_visible = False
             record.deviation_thickness_visible = False
+            record.bulk_visible = False
             
             for sample in record.sample_parameters:
                 print("Internal Ids",sample.internal_id)
@@ -1773,6 +1796,9 @@ class Tile(models.Model):
                 
                 if sample.internal_id == "35777f82-79c0-44a8-9379-f40dd33235uyt":
                     record.deviation_thickness_visible = True
+
+                if sample.internal_id == "25489lku-2bb3-4821-958d-ec2c81db5698":
+                    record.bulk_visible = True
 
 
 
@@ -2056,31 +2082,41 @@ class WaterAndBulkTile(models.Model):
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
 
-    lenght = fields.Float(string="Length, mm",digits=(12,2))
-    width = fields.Float(string="Width, mm",digits=(12,2))
-    thickness = fields.Float(string="Thickness, mm",digits=(12,2))
-    oven_dry = fields.Float(string="Oven Dry Weight, g",digits=(12,3))
-    wet_weight = fields.Float(string="Wet Weight, g",digits=(12,3))
-    water_obsorption = fields.Float(string="Water Absorption , %",compute="_compute_water_absorption",digits=(12,3))
-    bulk_density = fields.Float(string="Bulk Density ,g/cc",compute="_compute_bulk_density",digits=(12,3))
+    mass_dry = fields.Float(string="Mass of the dry tile M1 (g)",digits=(12,1))
+    mass_wet = fields.Float(string="Mass of the wet tile  M2(g)",digits=(12,1))
+    water_obsorption = fields.Float(string="water absorption  ((M2-M1)/M1)*100  (%)",compute="_compute_water_absorption",digits=(12,2),store=True)
+    # oven_dry = fields.Float(string="Oven Dry Weight, g",digits=(12,3))
+    # wet_weight = fields.Float(string="Wet Weight, g",digits=(12,3))
+    # water_obsorption = fields.Float(string="Water Absorption , %",compute="_compute_water_absorption",digits=(12,3))
+    # bulk_density = fields.Float(string="Bulk Density ,g/cc",compute="_compute_bulk_density",digits=(12,3))
 
 
-    @api.depends('wet_weight', 'oven_dry')
+    # @api.depends('wet_weight', 'oven_dry')
+    # def _compute_water_absorption(self):
+    #     for record in self:
+    #         if record.oven_dry and record.oven_dry > 0:  # Ensure oven_dry is not zero to avoid division by zero
+    #             record.water_obsorption = ((record.wet_weight - record.oven_dry) / record.oven_dry) * 100
+    #         else:
+    #             record.water_obsorption = 0.0  # Default to 0 if calculation is invalid
+
+    # @api.depends('oven_dry', 'lenght', 'width', 'thickness')
+    # def _compute_bulk_density(self):
+    #     for record in self:
+    #         if record.lenght > 0 and record.width > 0 and record.thickness > 0:  # Ensure dimensions are valid
+    #             volume = record.lenght * record.width * record.thickness
+    #             record.bulk_density = (record.oven_dry / volume) * 1000
+    #         else:
+    #             record.bulk_density = 0.0  # Default to 0 if dimensions are invalid
+
+
+
+    @api.depends('mass_dry', 'mass_wet')
     def _compute_water_absorption(self):
         for record in self:
-            if record.oven_dry and record.oven_dry > 0:  # Ensure oven_dry is not zero to avoid division by zero
-                record.water_obsorption = ((record.wet_weight - record.oven_dry) / record.oven_dry) * 100
+            if record.mass_dry:
+                record.water_obsorption = ((record.mass_wet - record.mass_dry) / record.mass_dry) * 100
             else:
-                record.water_obsorption = 0.0  # Default to 0 if calculation is invalid
-
-    @api.depends('oven_dry', 'lenght', 'width', 'thickness')
-    def _compute_bulk_density(self):
-        for record in self:
-            if record.lenght > 0 and record.width > 0 and record.thickness > 0:  # Ensure dimensions are valid
-                volume = record.lenght * record.width * record.thickness
-                record.bulk_density = (record.oven_dry / volume) * 1000
-            else:
-                record.bulk_density = 0.0  # Default to 0 if dimensions are invalid
+                record.water_obsorption = 0.0
 
    
 
@@ -2098,6 +2134,55 @@ class WaterAndBulkTile(models.Model):
                 vals['sr_no'] = max_serial_no + 1
 
         return super(WaterAndBulkTile, self).create(vals)
+
+    def _reorder_serial_numbers(self):
+        # Reorder the serial numbers based on the positions of the records in child_lines
+        records = self.sorted('id')
+        for index, record in enumerate(records):
+            record.sr_no = index + 1
+
+
+
+
+
+class BulkTile(models.Model):
+    _name = "mechanical.bulk.tile.line"
+    parent_id = fields.Many2one('mechanical.tile',string="Parent Id")
+   
+    sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
+
+    mass_dry1 = fields.Float(string="Mass of the dry tile(g) (m1)",digits=(12,2))
+    mass_wet1 = fields.Float(string="Mass of the wet tile(g) (m2)",digits=(12,2))
+    mass_suspended = fields.Float(string="Mass of suspended tile (g) (m3)",digits=(12,2))
+    exterior_volume = fields.Float(string="V = exterior volume, in cm3 (m2-m3)",digits=(12,2),compute="_compute_exterior_volume")
+    bulk_density = fields.Float(string="Bulk Density ,g/cc",compute="_compute_bulk_density",digits=(12,2))
+
+
+    @api.depends('mass_wet1', 'mass_suspended')
+    def _compute_exterior_volume(self):
+        for record in self:
+            record.exterior_volume = record.mass_wet1 - record.mass_suspended if record.mass_wet1 and record.mass_suspended else 0.0
+
+    @api.depends('mass_dry1', 'exterior_volume')
+    def _compute_bulk_density(self):
+        for record in self:
+            if record.exterior_volume:
+                record.bulk_density = record.mass_dry1 / record.exterior_volume
+            else:
+                record.bulk_density = 0.0
+
+
+
+    @api.model
+    def create(self, vals):
+        # Set the serial_no based on the existing records for the same parent
+        if vals.get('parent_id'):
+            existing_records = self.search([('parent_id', '=', vals['parent_id'])])
+            if existing_records:
+                max_serial_no = max(existing_records.mapped('sr_no'))
+                vals['sr_no'] = max_serial_no + 1
+
+        return super(BulkTile, self).create(vals)
 
     def _reorder_serial_numbers(self):
         # Reorder the serial numbers based on the positions of the records in child_lines

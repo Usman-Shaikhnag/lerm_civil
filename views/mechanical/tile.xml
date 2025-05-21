@@ -459,7 +459,7 @@
 
                        <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}">
                         <h1>
-                            <field name="water_ab_bulk_name" readonly="1" nolabel="1"/>
+                            <field name="water_ab_bulk_name1" string="Water Absorption" readonly="1" nolabel="1"/>
                             <field name="water_bulk_visible" invisible="1"/>
                         </h1>
                     </group>
@@ -471,13 +471,13 @@
                         <field name="child_lines_water_bulk" nolabel="1" >
                             <tree editable="bottom">
                                 <field name='sr_no'/>
-                                <field name='lenght'/>
-                                <field name='width'/>
-                                <field name='thickness'/>
-                                <field name='oven_dry'/>
+                                <field name='mass_dry'/>
+                                <field name='mass_wet'/>
+                                <field name='water_obsorption'/>
+                                <!-- <field name='oven_dry'/>
                                    <field name='wet_weight'/>
                                 <field name='water_obsorption'/>
-                                <field name='bulk_density'/>
+                                <field name='bulk_density'/> -->
 
                                
                             </tree>
@@ -490,7 +490,6 @@
                     <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
                         <field name='average_water_bulk' col="4"/>
                          <field name='individual_water_bulk' col="4"/>
-                          <field name='bulk_density' col="4"/>
                       
                     </group>
 
@@ -503,7 +502,6 @@
                      <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
                         <field name='requirement_water' col="4"/>
                          <field name='requirement_water_individual' col="4"/>
-                          <field name='requirement_bulk' col="4"/>
                       
                     </group>
                     
@@ -539,14 +537,61 @@
                     </group>
 
 
-                    <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}">
-                     <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
+
+                     <!-- bulk density  -->
+
+                       <group attrs="{'invisible': [('bulk_visible', '=', False)]}">
+                        <h1>
+                            <field name="bulk_name1" readonly="1" nolabel="1"/>
+                            <field name="bulk_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+               
+
+
+                       <group attrs="{'invisible': [('bulk_visible', '=', False)]}">
+                        <field name="child_lines_bulk" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='mass_dry1'/>
+                                <field name='mass_wet1'/>
+                                <field name='mass_suspended'/>
+                                <field name='exterior_volume'/>
+                                   <field name='bulk_density'/>
+                               
+
+                               
+                            </tree>
+                           
+                         </field> 
+                           
+                       
+                    </group>
+
+                    <group attrs="{'invisible': [('bulk_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                        
+                          <field name='bulk_density' col="4"/>
+                      
+                    </group>
+
+
+                     <group attrs="{'invisible': [('bulk_visible', '=', False)]}"  style="white-space: nowrap; width:70%;">
+                     
+                     
+                          <field name='requirement_bulk' col="4"/>
+                      
+                    </group>
+
+
+                    <group attrs="{'invisible': [('bulk_visible', '=', False)]}">
+                     <group attrs="{'invisible': [('bulk_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
                                 <field name='bulk_density_conformity'
                                        decoration-success="bulk_density_conformity == 'pass'" 
                                        decoration-danger="bulk_density_conformity == 'fail'" 
                                        readonly="1"/>
                         </group>
-                          <group attrs="{'invisible': [('water_bulk_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
+                          <group attrs="{'invisible': [('bulk_visible', '=', False)]}" style="white-space: nowrap; width:70%;width:25%">
                                 <field name="bulk_density_nabl"
                                        decoration-success="bulk_density_nabl == 'pass'" 
                                        decoration-danger="bulk_density_nabl == 'fail'" 
