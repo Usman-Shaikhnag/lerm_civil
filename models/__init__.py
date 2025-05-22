@@ -172,3 +172,4 @@ from .report import mortar_cube_ds_report
 # from .report import demo_datasheet
 
 # from .import dash_bord
+from . import ir_sequence_inherit
