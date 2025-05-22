@@ -93,6 +93,45 @@ class LermSampleController(http.Controller):
         })
 
 
+    @http.route('/viewDocuments', type='http', auth='user', website=True)
+    def shared_documents_list(self, **kwargs):
+        user = request.env.user
+        partner_id = user.partner_id
+
+        child_users = request.env['portal.user.master'].sudo().search([('customer','=',partner_id.id)]).child_users
+        partner_ids = [partner_id.id]
+        for child in child_users:
+            partner_ids.append(child.partner_id.id)
+        
+        # Get pagination parameters from URL
+        page = int(kwargs.get('page', 1))
+        limit = 10  # Number of items per page
+        
+        # Get total count of records
+        total = request.env['partner.document'].sudo().search_count([
+            ('partner_id', 'in', partner_ids)
+        ])
+        
+        # Calculate pagination values
+        total_pages = max((total + limit - 1) // limit, 1)
+        page = max(min(page, total_pages), 1)
+        offset = (page - 1) * limit
+        
+        # Search with pagination and order by date descending (newest first)
+        records = request.env['partner.document'].sudo().search([
+            ('partner_id', 'in', partner_ids)
+        ], order='create_date desc', limit=limit, offset=offset)
+        
+        return request.render('lerm_civil.shared_documents_list', {
+            'records': records,
+            'partner': partner_id,
+            'page': page,
+            'total_pages': total_pages,
+            'total': total,
+            'offset': offset,
+            'limit': limit,
+        })
+
         
     
     @http.route('/sampleRequests', type='http', auth='user', website=True)
@@ -463,3 +502,25 @@ class LermSampleController(http.Controller):
             ('Content-Type', 'application/pdf'),
             ('Content-Disposition', content_disposition(filename))
         ])
+    
+    @http.route('/downloadDocument/<int:record_id>', type='http', auth='user', website=True)
+    def download_document(self, record_id, **kwargs):
+        document = request.env['partner.document'].sudo().browse(record_id)
+        if not document.exists():
+            return request.not_found()
+
+        # Set filename (fallback if no name)
+        filename = document.document_name or "document"
+        # Detect file type from base64 (if you want you can be more precise)
+        file_data = document.document
+        if not file_data:
+            return request.not_found()
+
+        file_content = base64.b64decode(file_data)
+        return request.make_response(
+            file_content,
+            headers=[
+                ('Content-Type', 'application/octet-stream'),
+                ('Content-Disposition', f'attachment; filename="{filename}"'),
+            ]
+        )

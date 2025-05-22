@@ -26,6 +26,7 @@
     'views/lab_master.xml',
     'views/contractor.xml',
     'views/employee.xml',
+    'views/partner_document.xml',
     'views/customer_sample_request.xml',
     # 'views/mechanical/sieve_analysis.xml',
     'views/mechanical/free_swell_index.xml',

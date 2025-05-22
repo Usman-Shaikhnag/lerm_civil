@@ -1058,4 +1058,5 @@ lerm.customer_sample_line,customer_sample_line,model_customer_sample_line,lerm_c
 
 lerm.portal_user_master,portal_user_master,model_portal_user_master,lerm_civil.kes_admin_access_group,1,1,1,1
 lerm.child_user_master,child_user_master,model_child_user_master,lerm_civil.kes_admin_access_group,1,1,1,1
+lerm.partner_document,partner_document,model_partner_document,lerm_civil.kes_admin_access_group,1,1,1,1
 

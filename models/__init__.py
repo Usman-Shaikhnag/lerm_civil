@@ -16,6 +16,7 @@ from . import employee
 from . import invoice
 from . import lab_master
 from . import customer_sample_request
+from . import partner_document
 
 from .report import cement_report
 from .report import flyash_report

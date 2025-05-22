@@ -1081,4 +1081,91 @@
 
 
     </template>
+
+
+    <template id="shared_documents_list" name="Shared Documents List">
+        <t t-call="portal.portal_layout">
+            <div class="container">
+                
+                <!-- Pagination controls at the top -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <span t-if="page &gt; 1">
+                            <a t-att-href="'/viewDocuments?page=%s' % (page-1)" class="btn btn-sm btn-outline-primary">
+                                Previous
+                            </a>
+                        </span>
+                        <span class="mx-2">Page <t t-esc="page"/> of <t t-esc="total_pages"/></span>
+                        <span t-if="page &lt; total_pages">
+                            <a t-att-href="'/viewDocuments?page=%s' % (page+1)" class="btn btn-sm btn-outline-primary">
+                                Next
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <span class="text-muted">
+                            Showing <t t-esc="offset+1"/> to <t t-esc="min(offset+limit, total)"/> of <t t-esc="total"/> records
+                        </span>
+                    </div>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Document</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="records or []" t-as="record">
+                            <tr>
+                                
+                                <td><t t-esc="record.name"/></td>
+                                
+                               
+                                <td>
+                                    <a t-attf-href="/downloadDocument/{{record.id}}" class="btn btn-sm btn-outline-info mr-2">
+                                        <i class="fa fa-download"></i> Download Document
+                                    </a>
+                                    
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="not records">
+                            <tr>
+                                <td colspan="5" class="text-center">No documents found</td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <!-- Pagination controls at the bottom -->
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center">
+                        <span t-if="page &gt; 1">
+                            <a t-att-href="'/viewDocuments?page=%s' % (page-1)" class="btn btn-sm btn-outline-primary">
+                                Previous
+                            </a>
+                        </span>
+                        <t t-foreach="range(1, total_pages+1)" t-as="p">
+                            <a t-attf-href="/viewDocuments?page={{p}}"
+                            t-att-class="'btn btn-sm ' + ('btn-primary' if p == page else 'btn-outline-primary')">
+                                <t t-esc="p"/>
+                            </a>
+                        </t>
+                        <span t-if="page &lt; total_pages">
+                            <a t-att-href="'/viewDocuments?page=%s' % (page+1)" class="btn btn-sm btn-outline-primary">
+                                Next
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            
+        </t>
+
+
+    </template>
 </odoo>
