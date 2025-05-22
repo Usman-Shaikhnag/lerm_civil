@@ -1330,10 +1330,20 @@ class CreateSampleWizard(models.TransientModel):
         @api.onchange('technicians')
         def onchange_technicians(self):
             users = self.env.ref('lerm_civil.kes_technician_access_group').users
+            mechanical_technicians = self.env.ref('lerm_civil.kes_mechanical').users
+            chemical_technicians = self.env.ref('lerm_civil.kes_chemical').users
+            ndt_technicians = self.env.ref('lerm_civil.kes_ndt').users
+
             ids = []
             for user_id in users:
                 ids.append(user_id.id)
-            print("IDS " + str(ids))
+            for user_id in mechanical_technicians:
+                ids.append(user_id.id)
+            for user_id in chemical_technicians:
+                ids.append(user_id.id)
+            for user_id in ndt_technicians:
+                ids.append(user_id.id)
+            # print("IDS " + str(ids))
             # import wdb; wdb.set_trace()
 
             return {'domain': {'technicians': [('id', 'in', ids)]}}

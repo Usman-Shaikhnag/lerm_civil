@@ -361,7 +361,7 @@
 
     <menuitem id="lerm_transaction_data"
         name="Lab Operations"
-        groups="lerm_civil.kes_technician_access_group,lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by"
+        groups="lerm_civil.kes_technician_access_group,lerm_civil.kes_hod_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by,lerm_civil.kes_mechanical,lerm_civil.kes_chemical,lerm_civil.kes_ndt"
         parent="lerm_root"
         sequence="10" />
 
@@ -386,7 +386,7 @@
 
     <menuitem id="lerm_eln"
         name="Laboratory Notebook"
-        groups="lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_hod_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager"
+        groups="lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_hod_access_group,lerm_civil.kes_checked_by,lerm_civil.kes_quality_manager,lerm_civil.kes_mechanical,lerm_civil.kes_chemical,lerm_civil.kes_ndt"
         parent="lerm_transaction_data"
         action="test_eln_action"
         sequence="16" />
