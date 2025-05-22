@@ -12,6 +12,8 @@
                     <field name="customer" />
                     <field name="from_date" />
                     <field name="to_date" />
+                    <field name="state" />
+
                     
                 </group>
                 <footer>
@@ -24,6 +26,10 @@
                             type="object"
                             name="discard_print"
                             string="Discard"/>
+                    <button
+                            type="object"
+                            name="action_view_samples"
+                            string="View"/>
                 </footer>
             </sheet>
             </form>

@@ -10,6 +10,14 @@ class SampleReportsWizard(models.TransientModel):
     customer = fields.Many2one('res.partner',string="Customer")
     from_date = fields.Date('From Date')
     to_date = fields.Date('To Date')
+    state = fields.Selection([
+        ('1-allotment_pending', 'Assignment Pending'),
+        ('2-alloted', 'Alloted'),
+        ('3-pending_verification','Pending Verification'),
+        ('5-pending_approval','Pending Approval'),
+        ('4-in_report', 'In-Report'),
+        ('6-cancelled', 'Cancelled'),
+    ], string='State',default='4-in_report')
 
     def print_srf_reports(self):
 
@@ -29,3 +37,23 @@ class SampleReportsWizard(models.TransientModel):
 
     def discard_print(self):
         return {'type': 'ir.actions.act_window_close'}
+    
+    def action_view_samples(self):
+        # Search domain
+        domain = [
+            ('srf_id.srf_date', '>=', self.from_date),
+            ('srf_id.srf_date', '<=', self.to_date),
+            ('state', '=', self.state),
+
+        ]
+        if self.customer:
+            domain.append(('srf_id.customer','=',self.customer.id))
+
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Filtered Samples',
+            'res_model': 'lerm.srf.sample',
+            'view_mode': 'tree,form',
+            'domain': domain,
+            'target': 'current',
+        }
