@@ -113,6 +113,44 @@
             <field name="active" eval="True"/>
         </record>
 
+        <record id="technician_eln_record_mechanical" model="ir.rule">
+            <field name="name">Technician can only see their eln</field>
+            <field ref="model_lerm_eln" name="model_id"/>
+            <field name="domain_force">[('technician.id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('kes_mechanical'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="technician_eln_record_chemical" model="ir.rule">
+            <field name="name">Technician can only see their eln</field>
+            <field ref="model_lerm_eln" name="model_id"/>
+            <field name="domain_force">[('technician.id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('kes_chemical'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="technician_eln_record_ndt" model="ir.rule">
+            <field name="name">Technician can only see their eln</field>
+            <field ref="model_lerm_eln" name="model_id"/>
+            <field name="domain_force">[('technician.id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('kes_ndt'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        
+
         <record model="res.groups" id="kes_admin_access_group">
             <field name="name">Lerm Admin</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>

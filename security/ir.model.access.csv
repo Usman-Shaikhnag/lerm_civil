@@ -1249,6 +1249,14 @@ mechanical_lerm_parameter_master_table,lerm_parameter_master_table,lerm_civil.mo
 mechanical_parameter_calculation_wizard,parameter_calculation_wizard,lerm_civil.model_parameter_calculation_wizard,lerm_civil.kes_mechanical,1,1,1,1
 mechanical_lerm_srf_sample_parameter,lerm_srf_sample_parameter,model_lerm_srf_sample_parameter,lerm_civil.kes_mechanical,1,1,1,1
 
+mechanical_lerm_eln,lerm_eln_mechanical,model_lerm_eln,lerm_civil.kes_mechanical,1,1,0,0
+mechanical_eln_spreadsheets,eln_spreadsheets_mechanical,model_eln_spreadsheets,lerm_civil.kes_mechanical,1,0,0,0
+mechanical_lerm_product_based_calculation_mechanical,lerm_product_based_calculation,model_lerm_product_based_calculation,lerm_civil.kes_mechanical,1,0,0,0
+mechanical_ir_model,ir_model_mechanical,base.model_ir_model,lerm_civil.kes_mechanical,1,0,0,0
+mechanical_lerm_civil_srf,lerm_civil_srf_mechanical,model_lerm_civil_srf,lerm_civil.kes_mechanical,1,0,0,0
+mechanical_lerm_civil_group,lerm_civil_group_mechanical,model_lerm_civil_group,lerm_civil.kes_mechanical,1,0,0,0
+
+
 
 kes_access_chemical_crushed_sand,access_chemical_crushed_sand,lerm_civil.model_chemical_crushed_sand,kes_chemical,1,1,1,1
 kes_access_chemical_fine_aggregate,access_chemical_fine_aggregate,lerm_civil.model_chemical_fine_aggregate,kes_chemical,1,1,1,1
@@ -1270,6 +1278,16 @@ chemical_lerm_parameter_master,lerm_parameter_master,lerm_civil.model_lerm_param
 chemical_lerm_parameter_master_table,lerm_parameter_master_table,lerm_civil.model_lerm_parameter_master_table,lerm_civil.kes_chemical,1,1,1,1
 chemical_parameter_calculation_wizard,parameter_calculation_wizard,lerm_civil.model_parameter_calculation_wizard,lerm_civil.kes_chemical,1,1,1,1
 chemical_lerm_srf_sample_parameter,lerm_srf_sample_parameter,model_lerm_srf_sample_parameter,lerm_civil.kes_chemical,1,1,1,1
+
+chemical_lerm_eln,lerm_eln_chemical,model_lerm_eln,lerm_civil.kes_chemical,1,1,0,0
+chemical_eln_spreadsheets,eln_spreadsheets_chemical,model_eln_spreadsheets,lerm_civil.kes_chemical,1,0,0,0
+chemical_lerm_product_based_calculation_chemical,lerm_product_based_calculation,model_lerm_product_based_calculation,lerm_civil.kes_chemical,1,0,0,0
+chemical_ir_model,ir_model_chemical,base.model_ir_model,lerm_civil.kes_chemical,1,0,0,0
+chemical_lerm_civil_srf,lerm_civil_srf_chemical,model_lerm_civil_srf,lerm_civil.kes_chemical,1,0,0,0
+chemical_lerm_civil_group,lerm_civil_group_chemical,model_lerm_civil_group,lerm_civil.kes_chemical,1,0,0,0
+chemical_lerm_dependent_inputs,lerm_dependent_inputs_chemical,model_lerm_dependent_inputs,lerm_civil.kes_chemical,1,1,0,0
+chemical_input_line_wizard,input_line_wizard_chemical,model_input_line_wizard,lerm_civil.kes_chemical,1,1,1,1
+
 
 
 kes_access_ndt_acil_crack_depth,access_ndt_acil_crack_depth,lerm_civil.model_ndt_acil_crack_depth,kes_ndt,1,1,1,1
@@ -1303,6 +1321,7 @@ kes_access_ndt_upv_line,access_ndt_upv_line,lerm_civil.model_ndt_upv_line,kes_nd
 kes_access_ndt_upv_notes,access_ndt_upv_notes,lerm_civil.model_ndt_upv_notes,kes_ndt,1,1,1,1
 
 
+
 ndt_sample_parameters_result,sample_parameters_result,lerm_civil.model_sample_parameters_result,lerm_civil.kes_ndt,1,1,1,1
 ndt_lerm_srf_sample,lerm_srf_sample,model_lerm_srf_sample,lerm_civil.kes_ndt,1,1,0,0
 ndt_lerm_size_line,lerm_size_line,model_lerm_size_line,lerm_civil.kes_ndt,1,0,0,0
@@ -1315,3 +1334,11 @@ ndt_lerm_parameter_master,lerm_parameter_master,lerm_civil.model_lerm_parameter_
 ndt_lerm_parameter_master_table,lerm_parameter_master_table,lerm_civil.model_lerm_parameter_master_table,lerm_civil.kes_ndt,1,1,1,1
 ndt_parameter_calculation_wizard,parameter_calculation_wizard,lerm_civil.model_parameter_calculation_wizard,lerm_civil.kes_ndt,1,1,1,1
 ndt_lerm_srf_sample_parameter,lerm_srf_sample_parameter,model_lerm_srf_sample_parameter,lerm_civil.kes_ndt,1,1,1,1
+
+
+ndt_lerm_eln,lerm_eln_ndt,model_lerm_eln,lerm_civil.kes_ndt,1,1,0,0
+ndt_eln_spreadsheets,eln_spreadsheets_ndt,model_eln_spreadsheets,lerm_civil.kes_ndt,1,0,0,0
+ndt_lerm_product_based_calculation_ndt,lerm_product_based_calculation,model_lerm_product_based_calculation,lerm_civil.kes_ndt,1,0,0,0
+ndt_ir_model,ir_model_ndt,base.model_ir_model,lerm_civil.kes_ndt,1,0,0,0
+ndt_lerm_civil_srf,lerm_civil_srf_ndt,model_lerm_civil_srf,lerm_civil.kes_ndt,1,0,0,0
+ndt_lerm_civil_group,lerm_civil_group_ndt,model_lerm_civil_group,lerm_civil.kes_ndt,1,0,0,0

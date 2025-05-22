@@ -272,7 +272,7 @@
               action="action_partner_document"/>
 
     <menuitem id="lerm_root"
-        groups="lerm_civil.lerm_master,lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by,lerm_civil.kes_report"
+        groups="lerm_civil.lerm_master,lerm_civil.kes_hod_access_group,lerm_civil.kes_technician_access_group,lerm_civil.kes_admin_access_group,lerm_civil.kes_access_srf,lerm_civil.kes_verified_by,lerm_civil.kes_checked_by,lerm_civil.kes_report,lerm_civil.kes_mechanical,lerm_civil.kes_chemical,lerm_civil.kes_ndt"
         name="LERM CIVIL"
         sequence="10" 
         web_icon="lerm_civil,static/description/icon.png"/>
