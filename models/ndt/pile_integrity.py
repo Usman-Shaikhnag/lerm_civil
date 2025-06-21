@@ -17,6 +17,7 @@ from scipy.interpolate import CubicSpline , interp1d , Akima1DInterpolator
 from scipy.optimize import minimize_scalar
 from matplotlib.ticker import MultipleLocator, StrMethodFormatter
 import matplotlib.pyplot as plt
+from math import ceil
 
 
 
@@ -434,6 +435,7 @@ class PileIntegrityReport(models.AbstractModel):
         # plt.tight_layout()
 
         # Save the graph to a binary field
+  
         buf = BytesIO()
         plt.savefig(buf, format='png', dpi=300)
         buf.seek(0)
@@ -450,12 +452,15 @@ class PileIntegrityReport(models.AbstractModel):
         else:
             general_data = self.env['lerm.eln'].sudo().browse(docids)
 
+
+
         return {
             'eln': eln,
             'data': general_data,
             'qrcode': qr_image_base64,
             # 'graph': graph_image_base64,
             'stamp': inreport_value,
-            'nabl': nabl
+            'nabl': nabl,
+           
         }
     

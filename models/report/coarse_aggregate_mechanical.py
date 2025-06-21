@@ -15,6 +15,7 @@ class CoarseAggregateReport(models.AbstractModel):
     @api.model
     def _get_report_values(self, docids, data):
         # eln = self.env['lerm.eln'].sudo().browse(docids)
+        inreport_value = data.get('inreport', None)
         nabl = data.get('nabl')
         if data.get('report_wizard') == True:
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['sample'])])
@@ -22,7 +23,7 @@ class CoarseAggregateReport(models.AbstractModel):
         elif 'active_id' in data.get('context', {}):
             eln = self.env['lerm.eln'].sudo().search([('sample_id','=',data['context']['active_id'])])
         else:
-            eln = self.env['lerm.eln'].sudo().browse(docids)
+            eln = self.env['lerm.eln'].sudo().browse(docids) 
         
         # qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
         # qr.add_data(eln.kes_no)
@@ -58,7 +59,8 @@ class CoarseAggregateReport(models.AbstractModel):
             'eln': eln,
             'data': coarse_data,
             'qrcode': qr_code,
-            'nabl':nabl
+            'nabl':nabl,
+            'stamp' : inreport_value,
         }
 
 

@@ -74,6 +74,7 @@
             <field name="name">Mechanical</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
         </record>
+
         <record model="res.groups" id="kes_chemical">
             <field name="name">Chemical</field>
             <field name="category_id" ref="kes_lerm_access_categories"/>
@@ -235,6 +236,12 @@
         </record>
         <record id="account.menu_account_customer" model="ir.ui.menu">
             <field name="groups" eval="[(4, ref('lerm_civil.kes_admin_access_group')), (3, ref('lerm_civil.group_no_account_access'))]"/>
+        </record> -->
+
+
+         <!-- <record model="res.groups" id="kes_mechanical_seperated">
+            <field name="name">Mechanical Seperated</field>
+            <field name="category_id" ref="kes_lerm_access_categories"/>
         </record> -->
 
     </data>
