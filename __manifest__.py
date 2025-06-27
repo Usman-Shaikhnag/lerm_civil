@@ -271,7 +271,10 @@
     'views/mechanical/morter_cube.xml',
     'reports/mortar_cube/mortar_cube_datasheet.xml',
     'reports/mortar_cube/mortar_cube_report.xml',
-    'reports/seperated_module_action.xml'
+    'reports/seperated_module_action.xml',
+    'views/mechanical/plate_load.xml',
+    'reports/plate_load/plate_load_datasheet.xml',
+    'reports/plate_load/plate_load_report.xml'
     # 'reports/demo_dsreport/datashet.xml'
 
 

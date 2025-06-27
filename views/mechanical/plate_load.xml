@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_plate_load" model="ir.ui.view">
+        <field name="name">mechanical.plate.test.form</field>
+        <field name="model">mechanical.plate.test</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                         <field name="grade" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+
+
+                     
+       
+
+                
+
+                       <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                        <h1>
+                            <field name="plate_load_name" readonly="1" nolabel="1"/>
+                            <field name="plate_load_visible" invisible="1"/>
+                        </h1>
+                    </group>
+
+
+                     <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <group>
+                       <field name="client_name"  style="width:50%;" />
+                        <field name="site_add"  style="width:50%;" />
+                         <field name="months"  style="width:50%;" />
+                          <field name="bearing_plate"  style="width:50%;" />
+                            <field name="jack_capacity"  style="width:50%;" />
+                      </group>
+                      <group>
+                       <field name="reaction_load"  style="width:50%;" />
+                        <field name="bearing_dead"  style="width:50%;" />
+                         <field name="no_cycle1"  style="width:50%;" />
+                          <field name="factor_safty"  style="width:50%;" />
+                          <field name="allowable_net"  style="width:50%;" />
+                      </group>
+                  </group>
+
+                   <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="design_load" string="Design Load (T/m²)" style="margin-right:10px;"/>
+                          <field name="design_load" nolabel="1" style="width:50%;" />
+                      </div>
+                  </group>
+
+                     
+
+                    <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="factore" string="Factor of safety(FOS)" style="margin-right:10px;"/>
+                          <field name="factore" nolabel="1" style="width:50%;" />
+                      </div>
+                  </group>
+
+                       
+                      
+
+                    <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="ultimate" string="Ultimate Load  (T/m²)" style="margin-right:10px;"/>
+                          <field name="ultimate" nolabel="1" style="width:50%;" />
+                      </div>
+                  </group>
+
+                    <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="lenght_plate" string="Length of Plate (m)" style="margin-right:10px;"/>
+                          <field name="lenght_plate" nolabel="1" style="width:50%;" />
+                      </div>
+                      </group>
+                   
+
+                       <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="width_plate" string="Width of Plate (m)" style="margin-right:10px;"/>
+                          <field name="width_plate" nolabel="1" style="width:50%;" />
+                      </div>
+                      </group>
+                        
+
+                       <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="area_plate" string="Area of Plate (m²)" style="margin-right:10px;"/>
+                          <field name="area_plate" nolabel="1" style="width:50%;" />
+                      </div>
+                      </group>
+
+                        <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="ram_area" string="RAM Area (cm²)" style="margin-right:10px;"/>
+                          <field name="ram_area" nolabel="1" style="width:50%;" />
+                      </div>
+                      </group>
+                       
+                       
+
+                      <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="load_intergity" string="Load Intensity (T)" style="margin-right:10px;"/>
+                          <field name="load_intergity" nolabel="1" style="width:50%;" />
+                      </div>
+                      </group>
+
+                       <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                      <div class="oe_inline" style="align-items:center;">
+                          <label for="pressure" string="Pressure (kg/m²)" style="margin-right:10px;"/>
+                          <field name="pressure" nolabel="1" style="width:50%;" />
+                      </div>
+                      </group>
+                   <group>
+                    <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                          <field name="pressure_1"  style="width:50%;" />
+                          <field name="no_cycle"  style="width:50%;" />
+                          <field name="pressure_2"  style="width:50%;" />
+                           <field name="pressure_3"  style="width:50%;" />
+                           <field name="total_pressure"  style="width:50%;" />
+                     </group>
+
+                    
+                    </group>
+                   
+               <h2 style="text-align: center;">Loading</h2>
+                    <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                        <field name="child_lines_plate_load" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='applied_pressure'/>
+                                <field name='load_plate'/>
+                                <field name='pressure_plate'/>
+                                <field name='time'/>
+                                <field name='d1'/>
+                                <field name='d2'/>
+                                <field name='d3'/>
+                                <field name='d4'/>
+                                <field name='avg_sett'/>
+                                <field name='cumulative_sett1'/>
+
+                                
+                            </tree>
+                           
+                         </field> 
+                         <group>
+                          <button name="calculate_cumulative_sett1"
+                                type="object"
+                                string="Calculate Cumulative Settlement"
+                                class="btn-primary"/>
+                         </group>
+                           
+                       
+                 </group>
+
+                 <h2 style="text-align: center;">Unloading</h2>
+           <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                         
+                   <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                        <field name="child_lines_plate_unload" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='applied_pressure1'/>
+                                <field name='load_plate1'/>
+                                <field name='pressure_plate1'/>
+                                <field name='time1'/>
+                                <field name='d11'/>
+                                <field name='d22'/>
+                                <field name='d33'/>
+                                <field name='d44'/>
+                                <field name='avg_sett1'/>
+                                <field name='cumulative_sett11'/>
+
+                                
+                            </tree>
+                           
+                         </field> 
+                </group>
+                         
+                       
+                       
+                 </group>
+
+
+                   <h2 style="text-align: center;">Settlement data And Safe bearing capacity</h2>
+           <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                         
+                   <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                        <field name="child_lines_loadand_cumilitive" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='pressure_plate2'/>
+                                <field name='cumulative_sett2'/>
+                              
+                            </tree>
+                           
+                         </field> 
+                </group>
+                         
+                       
+                       
+                 </group>
+
+                        <h2 >Summary of test</h2>
+                  <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                          <field name="bearing_capacity"  style="width:50%;" />
+                          <field name="factore_safty"  style="width:50%;" />
+                          <field name="ultimate_bearing"  style="width:50%;" />
+                           <field name="maximum_load"  style="width:50%;" />
+                           <field name="allowable"  style="width:50%;" />
+                            <field name="total_settlement"  style="width:50%;" />
+                     </group>
+
+
+                        <h2 >Allowable Bearing Capacity</h2>
+                  <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                          <field name="size_footing"  style="width:50%;" />
+                          <field name="size_plate"  style="width:50%;" />
+                          <field name="settlement_test"  style="width:50%;" />
+                           <field name="settlement_below"  style="width:50%;" />
+                           
+                     </group>
+
+                      <group attrs="{'invisible': [('plate_load_visible', '=', False)]}" style="white-space:nowrap;">
+                          <field name="observation"   />
+                        
+                           
+                     </group>
+                 
+                  
+            <h2 >Load Settlement Curve</h2>
+           <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                         
+                   <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                        <field name="child_lines_loadand_cumilitive1" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name='sr_no'/>
+                                <field name='pressure_plate3'/>
+                                <field name='settlement3'/>
+                              
+                            </tree>
+                           
+                         </field> 
+                </group>
+                      
+                 </group>
+
+                  <group attrs="{'invisible': [('plate_load_visible', '=', False)]}">
+                      <field name="chart_pressure_line" widget="image" readonly="1"/>
+                    </group>
+
+                    <group >
+                          <field name="plate_report_upload" widget="many2many_binary" />
+                          <!-- uptill -->
+                      </group>
+
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
+                    
+                     
+
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>
