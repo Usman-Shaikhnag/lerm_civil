@@ -64,7 +64,7 @@
 					
 						<table style="margin-top:10px;">
 							<tr>
-								<td colspan="12">Customer Party Name :
+								<td colspan="12">#Customer Party Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.customer.name"/><br/>
 									<span t-field="o.srf_id.customer.street"/>
@@ -88,18 +88,16 @@
 											,
 									<span t-field="o.srf_id.site_address.country_id"/>
 								</td> -->
-								<td colspan="12">Project / Site Address : <![CDATA[&nbsp;]]>
+								<td colspan="12">#Project / Site Address : <![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.name_work"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="12">Sample Description : <![CDATA[&nbsp;]]>
+								<td colspan="12">#Sample Description : <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.sample_description"/>
 								</td>
 							</tr>
-
 						</table>
-
 						<table>
 							<tr>
 								<td colspan="6">Test Start Date :<![CDATA[&nbsp;]]>
@@ -110,7 +108,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Sample Id Mark: <![CDATA[&nbsp;]]>
+								<td colspan="6">#Sample Id Mark: <![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.client_sample_id"/>
 								</td>
 								<td colspan="6">Sample Receipt Date :<![CDATA[&nbsp;]]>
@@ -118,31 +116,31 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Size :
+								<td colspan="6">#Size :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.size_id.size"/>
 								</td>
-								<td colspan="6">Grade :
+								<td colspan="6">#Grade :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.grade_id.grade"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Brand :
+								<td colspan="6">#Brand :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.sample_id.brand"/>
 								</td>
-								<td colspan="6">Consultant Name :
+								<td colspan="6">#Consultant Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.consultant_name1"/>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="6">Client Name :
+								<td colspan="6">#Client Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client"/>
 								</td>
-								<td colspan="6">Client Reference :
+								<td colspan="6">#Client Reference :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.srf_id.client_refrence"/>
 								</td>
@@ -157,12 +155,12 @@
 									<span t-field="o.group.group"/>
 								</td>
 							</tr>
+
 							<tr>
 								<td colspan="12">Material/Test Name :
 									<![CDATA[&nbsp;]]>
 									<span t-field="o.material.name"/>
 								</td>
-								
 							</tr>
 						</table>
 					</div>
@@ -173,13 +171,23 @@
 
 
 						<!-- field density -->
-						<div style="page-break-inside: avoid; margin-top: 20px;">
+						<div style="page-break-inside: avoid; margin-top: 5px;">
 							<table t-if="data.field_density_visible" style="width:100%; border-collapse: collapse;">
 								<tr>
 									<td colspan="4" style="text-align:center; letter-spacing: 2px; border: 1px solid black; padding: 10px;">
-										<div>
+										<!-- <div>
 											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','a59bdedd-72cb-40e8-be97-e17fc20ff3fa')]).test_method.test_method"/>
-										</div>
+										</div> -->
+										   <div style="text-align:center;font-size:18px">
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).parameter_name"/> <br></br>
+											<span>
+												<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','2f38ad10-1ebd-4437-ba47-2633e8d9ec27')]).parameter_table" t-as="parameter">
+													<t t-if="parameter.grade.id == eln.grade_id.id">
+														<span t-field="parameter.specification"/>
+													</t>
+												</t>
+											</span>
+                                       </div>
 									</td>
 								</tr>
 								</table>
@@ -187,13 +195,13 @@
 									<div>
 										<table t-if="data.field_density_visible" style="margin-top: 10px; text-align: right;">
 											<tr>
-												<td style="font-weight: bold;">MDD:</td>
+												<td style="font-weight: bold;">MDD gm/cc :</td>
 												<td>
 													<span t-field="data.mmd_fielddencity" t-options='{"widget": "float", "precision": 2}'/>
 												</td>
 											</tr>
 											<tr>
-												<td style="font-weight: bold;">OMC:</td>
+												<td style="font-weight: bold;">OMC % :</td>
 												<td>
 													<span t-field="data.omc_fielddencity" t-options='{"widget": "float", "precision": 2}'/>
 												</td>
@@ -289,7 +297,7 @@
 							</table>
 							<table t-if="data.field_density_visible" style="margin-top:10px;">
 							<tr>
-								<td style="text-align: center; font-weight: bold; padding: 2px;">Average Degree of Compaction</td>
+								<td style="text-align: center; font-weight: bold; padding: 2px;">Average Degree of Compaction % :</td>
 								<td style="text-align: center;">
 									<span t-field="data.avg_degree_of_compaction" t-options='{"widget": "float", "precision": 2}'/>
 								</td>
@@ -323,7 +331,7 @@
 
                             </tr>
 							<t t-set="k" t-value="0"/>
-							<tr t-foreach="data.child_lines" t-as="r" t-if="'pan' != r['sieve_size']">
+							<tr t-foreach="data.child_lines" t-as="r" t-if="'Pan' != r['sieve_size']">
 								
 								<td colspan="2" >
 									<t t-set="k" t-value="k+1"/>
@@ -631,8 +639,18 @@
 									</span>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<div>
+									<!-- <div>
 										<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
+									</div> -->
+									<div>
+										<t t-set="use_remark" t-value="data.remarks_plastic or False" />
+										<t t-if="use_remark">
+											<span t-esc="use_remark" />
+										</t>
+										<t t-else="">
+											<t t-set="plasticity_index_float" t-value="0.0 if data.plasticity_index == 'non-plastic' else float(data.plasticity_index)" />
+											<span t-esc="plasticity_index_float" t-options='{"widget": "float", "precision": 2}' />
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -679,8 +697,18 @@
 									</span>
 								</td>
 								<td colspan="2" style="text-align: center;">
-									<div>
+									<!-- <div>
 										<span t-esc="float(data.plasticity_index) if data.plasticity_index.replace('.', '', 1).isdigit() else data.plasticity_index" />
+									</div> -->
+									<div>
+										<t t-set="use_remark" t-value="data.remarks_plastic or False" />
+										<t t-if="use_remark">
+											<span t-esc="use_remark" />
+										</t>
+										<t t-else="">
+											<t t-set="plasticity_index_float" t-value="0.0 if data.plasticity_index == 'non-plastic' else float(data.plasticity_index)" />
+											<span t-esc="plasticity_index_float" t-options='{"widget": "float", "precision": 2}' />
+										</t>
 									</div>
 								</td>
 								<td colspan="2" style="text-align: center;">
@@ -808,7 +836,7 @@
 
 
 
-							<tr t-if="data.heavy_visible and (data.heavy_table_nabl == 'pass' and nabl or (data.heavy_table_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
+							<!-- <tr t-if="data.heavy_visible and (data.heavy_table_nabl == 'pass' and nabl or (data.heavy_table_nabl == 'fail' or eln.sample_id.scope != 'nabl') and not nabl and not fromEln)">
 								<td colspan="1" style="text-align: center;">
 									<div>
 										<span t-esc="i + 1" />
@@ -984,7 +1012,7 @@
 								</td>
 								
 								
-							</tr>
+							</tr> -->
 
 
  
@@ -1274,7 +1302,7 @@
 					
 					<div style="page-break-inside: avoid;margin-top:20px">
 
-						<table t-if="data.heavy_visible or data.light_omc_visible and fromEln">
+						<table t-if="data.heavy_visible">
 							<tr>
 								<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
 									<div>
@@ -1289,7 +1317,7 @@
 								</div>
 							</tr>
 
-							<table t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top:30px;">
+							<table t-if="data.heavy_visible" style="margin-top:30px;">
 							<thead>
 								<tr>
 									<th>
@@ -1396,7 +1424,7 @@
 							</tbody>
 						</table>
 
-							<table t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top : 10px">
+							<table t-if="data.heavy_visible " style="margin-top : 10px">
 								<tr>
 									<td colspan="3">Weight of Mould in gm (A) :
 									</td>
@@ -1417,11 +1445,11 @@
 							<img t-att-src="'data:image/png;base64,'+str(graphHeavy)" style="max-width: 100%;"/>
 					</div>
 
-					<div  style="margin-top: 10px;">
+					<div t-if="data.heavy_visible" style="margin-top: 10px;">
 						From Graph 
 					</div>
 
-					<table t-if="data.heavy_visible or data.light_omc_visible and fromEln " style="margin-top: 10px;">
+					<table t-if="data.heavy_visible" style="margin-top: 10px;">
 						<tr>
 							<td colspan="3">MDD :</td>
 							<td colspan="3">
@@ -1433,6 +1461,172 @@
 							</td>
 						</tr>
 					</table>	
+
+
+
+
+
+						<div style="page-break-inside: avoid;margin-top:20px">
+
+						<table t-if="data.light_omc_visible">
+							<tr>
+								<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+									<div>
+										DETERMINATION OF WATER CONTENT-DRY 
+									</div>
+									<div>
+										DENSITY RELATION USING LIGHT COMPACTION : Test Method 
+										<span> 
+											<span t-field="env['lerm.parameter.master'].search([('internal_id','=','7485d907-d8ad-4000-9376-439ef2a64c70')]).test_method.test_method"/>
+										</span>
+									</div>
+								</div>
+							</tr>
+
+							<table t-if="data.light_omc_visible " style="margin-top:30px;">
+							<thead>
+								<tr>
+									<th>
+										<span>
+											Determination No.
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Mould + Compacted sample in gm (C)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of compacted sample in gm (D) C-A
+										</span>
+									</th>
+									<th>
+										<span>
+											Bulk Density of sample in gm/cc (E) D/B
+										</span>
+									</th>
+									<th>
+										<span>
+											Container No.
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container in gm (F)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container + wet sample in gm (G)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of Container + dry sample in gm (H)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of dry sample in gm (I)
+										</span>
+									</th>
+									<th>
+										<span>
+											Weight of moisture in gm (J) G-H
+										</span>
+									</th>
+									<th>
+										<span>
+											% Moisture (K) J/I*100
+										</span>
+									</th>
+									<th>
+										<span>
+											Dry density in gm/cc (100*E)/(100+K)
+										</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr t-foreach="data.light_omc_table" t-as="r">
+									<td>
+										<span t-esc="r.determination_no"/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_modul_compact" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_compact" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.bulk_density" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.container_no" t-options='{"widget": "float", "precision": 0}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_container" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_container_wet" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_container_dry" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_dry_sample" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.wt_of_moisture" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.moisture" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.dry_density" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+							<table t-if="data.light_omc_visible" style="margin-top : 10px">
+								<tr>
+									<td colspan="3">Weight of Mould in gm (A) :
+									</td>
+									<td colspan="3">
+										<span t-field="data.wt_of_modul_light_omc" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td colspan="3">Volume of Mould in cc (B) :
+									</td>
+									<td colspan="3">
+										<span t-field="data.vl_of_modul_light_omc" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+								</tr>
+							</table>
+						</table>
+					</div>
+
+					<div t-if="graphLight" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,'+str(graphLight)" style="max-width: 100%;"/>
+					</div>
+
+					<div t-if="data.light_omc_visible" style="margin-top: 10px;">
+						From Graph 
+					</div>
+
+					<table t-if="data.light_omc_visible" style="margin-top: 10px;">
+						<tr>
+							<td colspan="3">MDD :</td>
+							<td colspan="3">
+								<span t-esc="data.mmd_light_omc" t-options='{"widget": "float", "precision": 2}'/> <![CDATA[&nbsp;]]> gm/cc
+							</td>
+							<td colspan="3">OMC :</td>
+							<td colspan="3">
+								<span t-esc="data.omc_light_omc" t-options='{"widget": "float", "precision": 2}'/> <![CDATA[&nbsp;]]> %
+							</td>
+						</tr>
+					</table>
 					
 					<div  style="page-break-inside: avoid;margin-top:20px">
 						<table t-if="data.soil_visible">
@@ -1545,6 +1739,122 @@
 					</div>
 
 
+
+
+
+					<div  >
+						<table t-if="data.soil_infra_visible">
+								<tr>
+									<div style="text-align:center;letter-spacing : 2px;border:1px solid black;padding:10px">
+										<div>
+											LABORATORY DETERMINATION OF CBR : Test Method  : <![CDATA[&nbsp;]]> <span t-field="env['lerm.parameter.master'].search([('internal_id','=','65214fgtr-2065-4532-814a-3a4c1e884305')]).test_method.test_method"/>
+
+										</div>
+										<div>
+											CONDITION SOAKED 1 Div. = 5.88kg
+										</div>
+									</div>
+								</tr>
+						</table>
+
+						<table t-if="data.soil_infra_visible and data.soil_infra_table" style="margin-top:20px;">
+								<thead>
+									<tr>
+										<th>
+											<span>
+												Sr. No
+											</span>
+										</th>
+										<th>
+											<span>
+												Penetration in mm
+											</span>
+										</th>
+
+									
+										<th>
+											<span>
+												Proving Ring Reading Avg.
+											</span>
+										</th>
+
+										<th>
+											<span>
+												Load in Kg
+											</span>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-set="i" t-value="0"/>
+									<tr t-foreach="data.soil_infra_table" t-as="r">
+										<td>
+											<div>
+												<span t-esc="i + 1" />
+												<t t-set="i" t-value="i+1"/>
+											</div>
+										</td>
+										<td>
+											<span t-esc="r.penetration1" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+										
+										<td>
+											<span t-esc="r.proving_reading_avg" />
+										</td>
+										<td>
+											<span t-esc="r.load1" t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+									</tr>
+								</tbody>
+						</table>
+					</div>
+
+					<div t-if="graphCbr1" style="margin-top: 20px;">
+							<img t-att-src="'data:image/png;base64,'+str(graphCbr1)" style="max-width: 100%;"/>
+					</div>
+
+					<div  t-if="data.soil_infra_visible "  style="margin-top: 10px;">
+						CBR From Graph 
+					</div>
+					
+					<div  t-if="data.soil_infra_visible" style="margin-top: 5px;" class="cbrformula">
+
+						<div>
+							<div>
+								CBR at 2.5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load_2inra"/>
+							</div>
+							<div>
+								PS = 1370
+							</div>
+							<div>
+								CBR = <span t-esc="round(load_2inra / 1370 * 100 , 2)"/>
+							</div>
+						</div>
+
+						<div>
+							<div>
+								CBR at 5mm Penetration = (PT/PS) X 100
+							</div>
+							<div>
+								From Graph PT = <span t-esc="load5_infra"/>
+							</div>
+							<div>
+								PS = 2055
+							</div>
+							<div>
+								CBR = <span t-esc="round(load5_infra / 2055 * 100 , 2)"/>
+							</div>
+						</div>
+					</div>
+					
+					<div  t-if="data.soil_infra_visible "  style="margin-top: 10px;">
+						<b>Result: CBR at 2.5 mm Penetration is maximum hence CBR is <span t-esc="round(load_2inra / 1370 * 100 , 2)"/></b>
+					</div>
+
+
 					
 
 					<div style="page-break-inside: avoid;">
@@ -1563,6 +1873,9 @@
 									<li>
 										This Report may not be reproduced in except full/ part without the permission of the Lab Head of the Laboratory.
 									</li>
+										<li>
+											# - Information provided by the customer.
+									</li>
 									<li t-if="eln.has_witness">
 										Test witnessed by : <span t-esc="eln.witness_name"/>
 										
@@ -1573,64 +1886,64 @@
 								</ul>
 							</div>
 						</div>
-					<div style="margin-top:20px; page-break-inside: avoid;" class="signatureContainer girdgird">
-					
-					<div>
-						<div>
-							<b>
-								Checked By
-							</b>
-						</div>
-						<div style="height:30px">
+					<div class="signatureContainer girdgird" style="margin-top:50px;page-break-inside: avoid;">
+							<div>
+								<div>
+									<b>
+										Checked By
+									</b>
+								</div>
+								<div style="height:30px">
 
-						</div>
-						<div>
-							<b>
-								<span t-esc="eln.sample_id.check_by.name"/>
-							</b>
-						</div>
-						<div>
-							<b>
-								(<span t-esc="eln.sample_id.check_by.job_title"/>)
-							</b>
-						</div>
-					</div>
-					<div>
-						<div t-if="stamp and stamp == '4-in_report'">
-							<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
-						</div>
-						<div style="padding-top:5px">
-							Format No. <span t-esc="eln.material.test_format_no"/>
-						</div>
-					</div>
-					<div>
-						<div>
-							<b>
-								Approved By 
-							</b>
-							
-						</div>
-						<div style="height:30px">
+								</div>
+								<div>
+									<b>
+										<span t-esc="eln.sample_id.check_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(<span t-esc="eln.sample_id.check_by.job_title"/>)
+									</b>
+								</div>
+							</div>
+							<div>
+								<div>
+									<img t-attf-src="/lerm_civil/static/src/img/stamp.png" alt="Image"/>
+								</div>
+								<div style="padding-top:5px">
+									Format No. <span t-esc="eln.material.test_format_no"/>
+								</div>
+							</div>
+							<div>
+								<div>
+									<b>
+										Approved By 
+									</b>
+									
+								</div>
+								<div style="height:30px">
 
+								</div>
+								<div>
+									<b>
+									<span t-esc="eln.sample_id.approved_by.name"/>
+									</b>
+								</div>
+								<div>
+									<b>
+										(<span t-esc="eln.sample_id.approved_by.job_title"/>) 
+									</b>
+								</div>
+								
+							</div>
 						</div>
-						<div>
-							<b>
-							<span t-esc="eln.sample_id.approved_by.name"/>
-							</b>
-						</div>
-						<div>
-							<b>
-								(<span t-esc="eln.sample_id.approved_by.job_title"/>)
-							</b>
-						</div>
-						
-					</div>
-				</div>
+					    <!-- </div>  -->
 						<div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div>
 					</div>
-					
+
 				</div>
 			</t>
 		</t>
@@ -1745,7 +2058,99 @@
 								</tr>
 							</tbody>
 						</table>
+
 					</div>
+
+
+					<div style="text-align:center;" t-if="data.soil_infra_visible">
+								<p style="font-size:15px"><b><span t-field="data.soil_infra_name"/></b></p>
+								<span>
+									<t t-foreach="env['lerm.parameter.master'].search([('internal_id','=','65214fgtr-2065-4532-814a-3a4c1e884305')]).parameter_table" t-as="parameter">
+										<t t-if="parameter.grade.id == eln.grade_id.id">
+											<span t-field="parameter.specification"/>
+										</t>
+									</t>
+								</span>
+						</div>
+
+
+					<table style="margin-top:30px;" t-if="data.soil_infra_visible">
+
+						   
+							<thead>
+								<tr>
+									<th>
+										<span>
+											Sr. No
+										</span>
+									</th>
+									<th>
+										<span>
+											Penetration in mm
+										</span>
+									</th>
+
+									<th>
+										<span>
+											Proving Ring Reading 1
+										</span>
+									</th>
+
+										<th>
+										<span>
+											Proving Ring Reading 2
+										</span>
+									</th>
+
+									<th>
+										<span>
+											Proving Ring Reading 3
+										</span>
+									</th>
+
+									<th>
+										<span>
+										Proving Ring Reading Avg.
+										</span>
+									</th>
+
+									<th>
+										<span>
+											Load in Kg
+										</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-set="i" t-value="0"/>
+								<tr t-foreach="data.soil_infra_table" t-as="r">
+									<td>
+										<div>
+											<span t-esc="i + 1" />
+											<t t-set="i" t-value="i+1"/>
+										</div>
+									</td>
+									<td>
+										<span t-esc="r.penetration1" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.proving_reading1" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.proving_reading2" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.proving_reading3" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+									<td>
+										<span t-esc="r.proving_reading_avg" />
+									</td>
+									<td>
+										<span t-esc="r.load1" t-options='{"widget": "float", "precision": 2}'/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
 					<div t-if="data.fsi_visible">
 					     <div style="margin-top:20px" t-if="data.fsi_visible">
@@ -2871,7 +3276,7 @@
   
                     <!-- authorizeRowDataSheet -->
                     
-                     <div class="authorizeRowDataSheet">
+                   <div class="authorizeRowDataSheet">
 						<div>
                             <div>
                                 <b>

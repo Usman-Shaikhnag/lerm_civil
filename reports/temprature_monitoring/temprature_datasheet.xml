@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <template id="temprature_monitoring_datasheet">
+        <t t-call="web.html_container">
+            <!-- <t t-call="lerm_civil.data_sheet_header_design_mix"> -->
+             <t t-call="lerm_civil.mechanical_data_sheet_header">
+        
+                <div style="text-align:center;font-size:18px;font-weight: bold">
+                    TEMPRATURE MONITORING OF CONCRETE DATASHEET
+                </div>
+
+                <div class="container_eln" style="margin-top:5px">
+                    <table style="margin-top:20px">
+                        <tr cols="12">
+                            
+                            <td colspan="6">Job No :
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.kes_no"></span>
+                            </td>
+                            <td colspan="6">Test Start Date: 
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="eln.start_date"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Material: <span t-field="eln.material"></span>
+                            </td>
+                            <td colspan="6">Test End Date: <span t-field="eln.end_date"></span>
+                            </td>
+                        </tr>
+
+                          <tr style="height:50px" cols="12">
+								<td colspan="4">Performed By :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.technician.name"/>
+								</td>
+								<td colspan="4">Witness Name :
+									<![CDATA[&nbsp;]]>
+									<span t-field="eln.witness_name"/>
+								</td>
+								<td colspan="4">Witness Signature :
+									<![CDATA[&nbsp;]]>
+									<span style='padding:20px'></span>
+								</td>
+							</tr>
+                    </table>
+                    <div style="margin-top:20px">
+                    <b> Concrete Pouring and Data Recording :</b><span t-field="data.concrete_pouring" />
+                    </div>
+
+                       <table style="margin-top:20px">
+                       
+                            <tr cols="12">
+                                <td colspan="6"><b>Peak Ambient Temperature  :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.peak_max_temp_ambient" />
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Peak Ambient Temperature Observed At  :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.peak_max_temp_ambient_observed" />
+                                </td>
+                            </tr>
+                           
+                        </table>
+                        <table style="margin-top:10px">
+                       
+                            <tr cols="12">
+                                <td colspan="6"><b>Peak Concrete Temperature  :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.peak_max_temp" />
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Peak Concrete Temperature Observed At  :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.peak_max_temp_middle1_observed" />
+                                </td>
+                            </tr>
+                           
+                        </table>
+
+                         <table style="margin-top:10px">
+                       
+                            <tr cols="12">
+                                <td colspan="6"><b>Maximum Thermal Gradient  :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.peak_max_temp_diff" />
+                                </td>
+                            </tr>
+                            <tr cols="12">
+                                <td colspan="6"><b>Maximum Thermal Gradient Observed At  :</b></td>
+                                <td colspan="6" style="text-align: center;">
+                                    <span t-field="data.peak_max_temp_diff_observed" />
+                                </td>
+                            </tr>
+                           
+                        </table>
+                    
+                  
+                    <table style="margin-top:20px">
+					<thead style="background-color: #d3d3d3;">
+                     <tr cols="12">
+							<td rowspan="3">Day And Date
+							</td>
+
+
+							<td rowspan="3" style="text-align:center;">Time (Hr:Min:Sec)
+							</td>
+
+                            <td colspan="10" style="text-align:center;">Temperature (°C) Recordings at Hourly Interval
+							</td>
+
+
+                            
+						
+						</tr>
+						<tr cols="12">
+						
+
+                            <td colspan="4" style="text-align:center;">Core Zone
+							</td>
+                          
+                            <td colspan="4" style="text-align:center;">Cover Zone
+							</td>
+
+                            <td rowspan="2" style="text-align:center;">Ambient
+							</td>
+
+                            
+						
+						</tr>
+						<tr>
+
+							<td >
+                               bottom
+							</td>
+
+							<td >
+                                middle
+							</td>
+
+                            <td >
+                                top
+							</td>
+
+                            <td >
+                                Thermal Gradient
+							</td>
+
+
+                            <td >
+                               bottom
+							</td>
+
+							<td >
+                                middle
+							</td>
+
+                            <td >
+                                top
+							</td>
+
+                            <td >
+                                  Thermal Gradient
+							</td>
+							
+						</tr>
+						</thead>
+						  <tbody>
+
+						<t t-set="i" t-value="0"/>
+						<tr t-foreach="data.child_lines_temprature" t-as="r">
+							<!-- <td colspan="1" style="text-align: center;">
+								<div>
+									<span t-esc="i + 1" />
+									<t t-set="i" t-value="i+1"/>
+								</div>
+							</td> -->
+                          
+                                <td style="text-align: center;">
+                                    <span t-esc="r['day']" /> 
+                                    <br />
+                                    <span t-esc="r['date'].strftime('%d/%m/%y')" />
+                                </td>
+                
+							<td style="text-align: center;">
+								<span t-esc="r['measurement_time']" />
+							</td>
+                            <td colspan="1" style="text-align: center;">
+								<span t-esc="r['bottom']" />
+							</td>
+                            <td colspan="1" style="text-align: center;">
+								<span t-esc="r['middle']" />
+							</td>
+                            <td colspan="1" style="text-align: center;">
+								<span t-esc="r['top']" />
+							</td>
+
+                            <td colspan="1" style="text-align: center;">
+								<span t-esc="r['temp_diff']" />
+							</td>
+                             <td colspan="1" style="text-align: center;">
+								<span t-esc="r['bottom1']" />
+							</td>
+                             <td colspan="1" style="text-align: center;">
+								<span t-esc="r['middle1']" />
+							</td>
+                             <td colspan="1" style="text-align: center;">
+								<span t-esc="r['top1']" />
+							</td>
+
+                              <td colspan="1" style="text-align: center;">
+								<span t-esc="r['temp_diff1']" />
+							</td>
+                              <td  style="text-align: center;">
+								<span t-esc="r['ambient']" />
+							</td>
+                            
+							
+						</tr>
+						</tbody>
+					</table>
+
+                   
+
+                       
+                    <!-- </div> -->
+
+
+                 
+               
+                    
+                    <!-- authorizeRowDataSheet -->
+                    
+                           <div class="authorizeRowDataSheet">
+						<div>
+                            <div>
+                                <b>
+                                    Tested By 
+                                </b>
+                                
+                            </div>
+                            <div style="height:40px">
+
+                            </div>
+                            <div>
+                                <b>
+                                <span t-esc="eln.sample_id.filled_by.name"/>
+                                </b>
+                            </div>
+                            <div>
+                                <b>
+                                    (<span t-esc="eln.sample_id.filled_by.job_title"/>)
+                                </b>
+                            </div>
+						</div>
+						<div style="margin-left:500px">
+							
+							<div>
+								<b>
+									Approved By
+								</b>
+							</div>
+							<div style="height:40px">
+
+							</div>
+							<div>
+								<b>
+								<span t-esc="eln.sample_id.check_by.name"/>
+								</b>
+							</div>
+							
+							<div>
+								<b>
+									(<span t-esc="eln.sample_id.check_by.job_title"/>)
+								</b>
+							</div>
+						</div>
+					</div>
+                    
+                </div>
+
+            </t>
+        </t>
+    </template>
+    </odoo>

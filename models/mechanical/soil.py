@@ -39,6 +39,59 @@ class Soil(models.Model):
     soil_table = fields.One2many('mechanical.soils.cbr.line','parent_id',string="CBR")
     chart_image_cbr = fields.Binary("Line Chart", compute="_compute_chart_image_cbr", store=True)
 
+    ps_2mm = fields.Float("PS for 2.5mm",compute="_compute_ps_2mm")
+    pt_2mm = fields.Float("PT at 2.5mm",default=1370)
+    cbr_2mm = fields.Float("CBR at 2.5mm",compute="_compute_cbr_2mm")
+
+    ps_5mm = fields.Float("PS for 5mm",compute="_compute_ps_5mm")
+    pt_5mm = fields.Float("PT at 5mm",default=2055)
+    cbr_5mm = fields.Float("CBR at 5mm",compute="_compute_cbr_5mm")
+
+    cbr_result = fields.Float("CBR",compute="_compute_final_cbr")
+
+    @api.depends('soil_table')
+    def _compute_ps_2mm(self):
+        for record in self:
+            if record.soil_table and len(record.soil_table) >= 6:
+                fifth_row = record.soil_table[5] 
+                record.ps_2mm = fifth_row.load
+            else:
+                record.ps_2mm = 0
+
+
+    @api.depends('soil_table')
+    def _compute_ps_5mm(self):
+        for record in self:
+            if record.soil_table and len(record.soil_table) >= 9:
+                fifth_row = record.soil_table[8] 
+                record.ps_5mm = fifth_row.load
+            else:
+                record.ps_5mm = 0
+
+    @api.depends('pt_2mm','ps_2mm')
+    def _compute_cbr_2mm(self):
+        for record in self:
+            if record.pt_2mm != 0:
+                record.cbr_2mm = round((record.ps_2mm/record.pt_2mm)*100,2)
+            else:
+                record.cbr_2mm = 0
+
+    @api.depends('pt_5mm','ps_5mm')
+    def _compute_cbr_5mm(self):
+        for record in self:
+            if record.pt_5mm != 0:
+                record.cbr_5mm = round((record.ps_5mm/record.pt_5mm)*100,2)
+            else:
+                record.cbr_5mm = 0
+
+    @api.depends('cbr_5mm','cbr_2mm')
+    def _compute_final_cbr(self):
+        for record in self:
+            if record.cbr_5mm > record.cbr_2mm:
+                record.cbr_result = record.cbr_5mm
+            else:
+                record.cbr_result = record.cbr_2mm
+
 
     # def generate_line_chart_cbr(self):
     #     # Prepare data for the chart
@@ -115,7 +168,8 @@ class Soil(models.Model):
                 chart_image = record.generate_line_chart_cbr()
                 record.chart_image_cbr = chart_image
         except:
-            pass
+            pass 
+
 
 
     # FSI
@@ -1044,12 +1098,113 @@ class Soil(models.Model):
             num_lines = len(record.moisture_content_table)
             record.average_block = total_moisture_content / num_lines if num_lines else 0.0
 
+
+
+        # CBR Infrastructure
+
+    soil_infra_name = fields.Char("Name",default="California Bearing Ratio")
+    soil_infra_visible = fields.Boolean("California Bearing Ratio Visible",compute="_compute_visible")
+    
+    soil_infra_table = fields.One2many('mechanical.soil.infra.cbr.line','parent_id',string="CBR")
+    chart_image_cbr_infra = fields.Binary("Line Chart", compute="_compute_chart_image_cbr_infra", store=True)
+
+
+    soil_infra_ps_2mm = fields.Float("PS for 2.5mm",compute="_compute_ps_2mm_soil_infra_ps")
+    soil_infra_pt_2mm = fields.Float("PT at 2.5mm",default=1370)
+    soil_infra_cbr_2mm = fields.Float("CBR at 2.5mm",compute="_compute_cbr_2mm_infra")
+
+    soil_infra_ps_5mm = fields.Float("PS for 5mm",compute="_compute_ps_5mm_infra")
+    soil_infra_pt_5mm = fields.Float("PT at 5mm",default=2055)
+    soil_infra_cbr_5mm = fields.Float("CBR at 5mm",compute="_compute_cbr_5mm_infra")
+
+    soil_infra_cbr_result = fields.Float("CBR",compute="_compute_final_cbr_infra")
+
+    @api.depends('soil_infra_table')
+    def _compute_ps_2mm_soil_infra_ps(self):
+        for record in self:
+            if record.soil_infra_table and len(record.soil_infra_table) >= 6:
+                fifth_row1 = record.soil_infra_table[5] 
+                record.soil_infra_ps_2mm = fifth_row1.load1
+            else:
+                record.soil_infra_ps_2mm = 0
+
+
+    @api.depends('soil_infra_table')
+    def _compute_ps_5mm_infra(self):
+        for record in self:
+            if record.soil_infra_table and len(record.soil_infra_table) >= 9:
+                fifth_row = record.soil_infra_table[8] 
+                record.soil_infra_ps_5mm = fifth_row.load1
+            else:
+                record.soil_infra_ps_5mm = 0
+
+    @api.depends('soil_infra_pt_2mm','soil_infra_ps_2mm')
+    def _compute_cbr_2mm_infra(self):
+        for record in self:
+            if record.soil_infra_pt_2mm != 0:
+                record.soil_infra_cbr_2mm = round((record.soil_infra_ps_2mm/record.soil_infra_pt_2mm)*100,2)
+            else:
+                record.soil_infra_cbr_2mm = 0
+
+    @api.depends('soil_infra_pt_5mm','soil_infra_ps_5mm')
+    def _compute_cbr_5mm_infra(self):
+        for record in self:
+            if record.soil_infra_pt_5mm != 0:
+                record.soil_infra_cbr_5mm = round((record.soil_infra_ps_5mm/record.soil_infra_pt_5mm)*100,2)
+            else:
+                record.soil_infra_cbr_5mm = 0
+
+    @api.depends('soil_infra_cbr_5mm','soil_infra_cbr_2mm')
+    def _compute_final_cbr_infra(self):
+        for record in self:
+            if record.soil_infra_cbr_5mm > record.soil_infra_cbr_2mm:
+                record.soil_infra_cbr_result = record.soil_infra_cbr_5mm
+            else:
+                record.soil_infra_cbr_result = record.soil_infra_cbr_2mm
+
+
+    def generate_line_chart_cbr_infra(self):
+        # Prepare data for the chart
+        x_values = []
+        y_values = []
+        for line in self.soil_infra_table:
+            x_values.append(line.penetration1)
+            y_values.append(line.load1)
+        
+        # Create the line chart
+        plt.plot(x_values, y_values, marker='o')
+        plt.xlabel('Penetration')
+        plt.ylabel('Load')
+        plt.title('CBR')
+
+
+        plt.ylim(bottom=0, top=max(y_values) + 10)
+        
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        plt.close()  # Close the figure to free up resources
+        buffer.seek(0)
+    
+        # Convert the chart image to base64
+        chart_image = base64.b64encode(buffer.read()).decode('utf-8')  
+        return chart_image
+    
+    @api.depends('soil_infra_table')
+    def _compute_chart_image_cbr_infra(self):
+        try:
+            for record in self:
+                chart_image = record.generate_line_chart_cbr_infra()
+                record.chart_image_cbr_infra = chart_image
+        except:
+            pass 
+
      ### Compute Visible
     @api.depends('sample_parameters')
     def _compute_visible(self):
       
         for record in self:
             record.soil_visible = False
+            record.soil_infra_visible = False
             record.fsi_visible  = False  
             record.sieve_visible = False
             record.heavy_visible = False
@@ -1068,6 +1223,10 @@ class Soil(models.Model):
                 print("Samples internal id",sample.internal_id)
                 if sample.internal_id == '47ba9d28-2065-4532-814a-3a4c1e884305':
                     record.soil_visible = True
+
+                if sample.internal_id == '65214fgtr-2065-4532-814a-3a4c1e884305':
+                    record.soil_infra_visible = True
+
                 if sample.internal_id == 'a2ae0d2c-ca64-44dd-b0ae-228aacf04998':
                     record.fsi_visible = True
                 if sample.internal_id == '5a0ac62b-5c56-475b-9a89-93a59c9ee3a2':
@@ -1176,6 +1335,42 @@ class SoilCBRLine(models.Model):
     def _compute_load(self):
         for record in self:
             record.load = record.proving_reading * 6.96
+
+
+
+class SoilInfraCBRLine(models.Model):
+    _name = "mechanical.soil.infra.cbr.line"
+    parent_id = fields.Many2one('mechanical.soil',string="Parent Id")
+
+    penetration1 = fields.Float(string="Penetration in mm")
+    proving_reading1 = fields.Float(string="Proving Ring Reading 1")
+
+    proving_reading2 = fields.Float(string="Proving Ring Reading 2")
+    proving_reading3 = fields.Float(string="Proving Ring Reading 3")
+
+    proving_reading_avg = fields.Integer(string="Proving Ring Reading Avg.",compute="_compute_avg_reading")
+
+    load1 = fields.Float(string="Load in Kg", compute="_compute_load")
+
+
+    @api.depends('proving_reading1', 'proving_reading2', 'proving_reading3')
+    def _compute_avg_reading(self):
+        for rec in self:
+            readings = [rec.proving_reading1, rec.proving_reading2, rec.proving_reading3]
+            if any(readings):
+                avg = sum(readings) / 3
+                if avg <= 5.5:
+                    rec.proving_reading_avg = math.floor(avg)
+                else:
+                    rec.proving_reading_avg = math.ceil(avg)
+            else:
+                rec.proving_reading_avg = 0
+
+
+    @api.depends('proving_reading_avg')
+    def _compute_load(self):
+        for record in self:
+            record.load1 = record.proving_reading_avg * 5.88
 
 
 class FreeSwellIndexLine(models.Model):

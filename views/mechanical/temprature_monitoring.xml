@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="mechanical_temprature_monitoring" model="ir.ui.view">
+        <field name="name">enviroment.temprature.form</field>
+        <field name="model">enviroment.temprature</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                   <group >
+                        <h1>
+                            <field name="name" readonly="1" nolabel="1"/>
+                        </h1>
+                    </group>
+                    <group>
+                        <field name="srf_id" invisible="1"/>
+                        <field name="sample_id" readonly="1"/>
+                        <field name="eln_ref" readonly="1"/>
+                         <field name="grade" readonly="1"/>
+                        <field name="parameter_id" invisible="1"/>
+                    </group>
+                    <group>
+                      <field name="sample_parameters">
+                        <tree>
+                          <field name="parameter_name"/>
+                          <field name="test_method"/>
+                        </tree>
+                      </field>
+                    </group>
+
+                    <group style="white-space: nowrap; width:70%;" >
+                         <field name="concrete_pouring"  />
+                    </group>
+                   
+       
+
+                    <group>
+                            <field name="child_lines_temprature" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name='sr_no'/>
+                                    <field name="day" />
+                                    <field name="date" />
+                                   <field name="measurement_time" />
+
+                                    <field name='bottom'/>
+                                   <field name="middle" />
+                                    <field name='top'/>
+                                   <field name="temp_diff" />
+
+
+                                   <field name='bottom1'/>
+                                   <field name="middle1" />
+                                    <field name='top1'/>
+                                   <field name="temp_diff1" />
+                                    <field name='ambient'/>
+                                
+                                </tree>
+                            
+                            </field> 
+                           
+                    </group>
+
+                    <group style="white-space: nowrap; width:70%;">
+                         <field name="peak_max_temp_ambient" style="white-space: nowrap; width:70%;"/>
+                          <field name="peak_max_temp_ambient_observed" style="white-space: nowrap; width:70%;"/>
+                    </group>
+
+                     <group style="white-space: nowrap; width:70%;">
+                        <field name="peak_max_temp" style="white-space: nowrap; width:70%;"/>
+                        <field name="peak_max_temp_middle1_observed" style="white-space: nowrap; width:70%;"/>
+                        
+                    </group>
+
+                    <group style="white-space: nowrap; width:70%;">
+                        <field name="peak_max_temp_diff" style="white-space: nowrap; width:70%;"/>
+                         <field name="peak_max_temp_diff_observed" style="white-space: nowrap; width:70%;"/>
+                    </group>
+
+
+                    <group >
+                        <field name="graph_image_20mm" widget="image" readonly="1"/>
+                        </group>
+
+
+
+
+
+                     <button
+                            type="object"
+                            class="oe_highlight" 
+                            name="open_eln_page"
+                            string="Submit"
+                            />
+                    
+                     
+
+
+                </sheet>
+            </form>
+        </field>
+        </record>
+
+    </data>
+</odoo>

@@ -368,8 +368,76 @@
                     <group attrs="{'invisible': [('soil_visible', '=', False)]}">
                       <field name="chart_image_cbr" widget="image" readonly="1"/>
                     </group>
+
+
+                      <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="ps_2mm" />
+                          <field name="pt_2mm" />
+                          <field name="cbr_2mm" />
+                        </group>
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="ps_5mm" />
+                          <field name="pt_5mm" />
+                          <field name="cbr_5mm" />
+                          
+                        </group>
+
+                        
+                    </group>
+                    <group attrs="{'invisible': [('soil_visible', '=', False)]}">
+                      <field name="cbr_result" />
+                    </group>
+
+
+
+
+
+                     <!-- CBR  Infra-->
+                     <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                        <h1>
+                            <field name="soil_infra_name" readonly="1" nolabel="1"/>
+                            <field name="soil_infra_visible" invisible="1"/>
+                        </h1>
+                    </group>
+                   
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                      <field name="soil_infra_table">
+                        <tree editable="bottom">
+                          <field name="penetration1"/>
+                          <field name="proving_reading1"/>
+                           <field name="proving_reading2"/>
+                            <field name="proving_reading3" string="Proving Ring Reading 3"/>
+                           
+                            <field name="proving_reading_avg"/>
+                          <field name="load1"/>
+                          <!-- <field name="wt_retained"/> -->
+                        </tree>
+                      </field>
+                      
+                    </group>
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                      <field name="chart_image_cbr_infra" widget="image" readonly="1"/>
+                    </group>
                     
-                    
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="soil_infra_ps_2mm" />
+                          <field name="soil_infra_pt_2mm" />
+                          <field name="soil_infra_cbr_2mm" />
+                        </group>
+                        <group style="width:50%; white-space: nowrap;">
+                          <field name="soil_infra_ps_5mm" />
+                          <field name="soil_infra_pt_5mm" />
+                          <field name="soil_infra_cbr_5mm" />
+                          
+                        </group>
+
+                        
+                    </group>
+                    <group attrs="{'invisible': [('soil_infra_visible', '=', False)]}">
+                      <field name="soil_infra_cbr_result" />
+                    </group>
                    
                    
                  
