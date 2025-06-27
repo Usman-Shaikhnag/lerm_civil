@@ -6,6 +6,7 @@
  'version': '13.0.1', 
  'depends':['base' , 'contacts','stock','product' , 'mail','documents','documents_spreadsheet','lerm_civil_inv','attachment_indexation','maintenance','portal'],
  'data': [
+  
     'security/security.xml',
     'data/sequence.xml',
     'views/enviroment_register.xml',
@@ -274,7 +275,10 @@
     'reports/seperated_module_action.xml',
     'views/mechanical/plate_load.xml',
     'reports/plate_load/plate_load_datasheet.xml',
-    'reports/plate_load/plate_load_report.xml'
+    'reports/plate_load/plate_load_report.xml',
+    'views/mechanical/wood.xml',
+    'reports/wood/wood_datasheet.xml',
+    'reports/wood/wood_report.xml'
     # 'reports/demo_dsreport/datashet.xml'
 
 

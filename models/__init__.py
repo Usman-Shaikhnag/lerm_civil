@@ -171,6 +171,8 @@ from .mechanical import morter_cube
 from .report import mortar_cube_ds_report
 from .mechanical import plate_load_test
 from .report import plate_load_ds_report
+from .mechanical import wood
+from .report import wood_ds_report
 # from .report import demo_datasheet
 
 # from .import dash_bord
