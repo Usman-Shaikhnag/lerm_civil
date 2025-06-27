@@ -729,6 +729,7 @@ quality.lerm_civil.access_pile_integrity_line,access_pile_integrity_line,lerm_ci
 
 
 
+
 technician.lerm_civil.access_ndt_crack_depth,access_ndt_crack_depth,lerm_civil.model_ndt_crack_depth,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_ndt_crack_depth_line,access_ndt_crack_depth_line,lerm_civil.model_ndt_crack_depth_line,kes_technician_access_group,1,1,1,1
 technician.lerm_civil.access_ndt_acil_crack_depth,access_ndt_acil_crack_depth,lerm_civil.model_ndt_acil_crack_depth,kes_technician_access_group,1,1,1,1
@@ -996,6 +997,7 @@ technician.lerm_civil.access_pile_integrity_line,access_pile_integrity_line,lerm
 
 technician.sample.reallocation.wizard,access_sample_reallocation_wizard,lerm_civil.model_sample_reallocation_wizard,kes_technician_access_group,1,0,0,0
 technician.sample.cancellation.wizard,access_sample_cancellation_wizard,lerm_civil.model_sample_cancellation_wizard,kes_technician_access_group,1,0,0,0
+
 
 
 

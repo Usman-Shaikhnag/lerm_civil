@@ -15,7 +15,7 @@ from scipy.interpolate import make_interp_spline
 
 
 class PlateLoad(models.Model):
-    _name = "mechanical.plate.test"
+    _name = "mechanical.plate.test1"
     _inherit = "lerm.eln"
     _rec_name = "name"
 
@@ -99,11 +99,11 @@ class PlateLoad(models.Model):
                 line.cumulative_sett1 = prev_cumulative + increment
                 prev_cumulative = line.cumulative_sett1
 
-    child_lines_plate_unload = fields.One2many('mechanical.unload.test.line','parent_id',string="UNLOADING LINE")
+    child_lines_plate_unload = fields.One2many('mechanical.unload.test.line1','parent_id',string="UNLOADING LINE")
 
-    child_lines_loadand_cumilitive = fields.One2many('mechanical.load.cumilitive.line','parent_id')
+    child_lines_loadand_cumilitive = fields.One2many('mechanical.load.cumilitive.line1','parent_id')
 
-    child_lines_loadand_cumilitive1 = fields.One2many('mechanical.load.cumilitive.line1','parent_id')
+    child_lines_loadand_cumilitive1 = fields.One2many('mechanical.load.cumilitive.line2','parent_id')
 
     chart_pressure_line = fields.Binary("Line Chart", compute="_compute_pressure_line_chart", store=True)
 
@@ -747,7 +747,7 @@ class PlateLoad(models.Model):
 
 
     def get_all_fields(self):
-        record = self.env['mechanical.plate.test'].browse(self.ids[0])
+        record = self.env['mechanical.plate.test1'].browse(self.ids[0])
         field_values = {}
         for field_name, field in record._fields.items():
             field_value = record[field_name]
@@ -760,7 +760,7 @@ class PlateLoad(models.Model):
 
 class PlateLoadLine(models.Model):
     _name = "mechanical.plate.test.line"
-    parent_id = fields.Many2one('mechanical.plate.test',string="Parent Id")
+    parent_id = fields.Many2one('mechanical.plate.test1',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
 
@@ -809,8 +809,8 @@ class PlateLoadLine(models.Model):
             record.sr_no = index + 1
 
 class UnLoadLine(models.Model):
-    _name = "mechanical.unload.test.line"
-    parent_id = fields.Many2one('mechanical.plate.test',string="Parent Id")
+    _name = "mechanical.unload.test.line1"
+    parent_id = fields.Many2one('mechanical.plate.test1',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
 
@@ -897,8 +897,8 @@ class UnLoadLine(models.Model):
 
 
 class LoadAndCumilitiveLine(models.Model):
-    _name = "mechanical.load.cumilitive.line"
-    parent_id = fields.Many2one('mechanical.plate.test',string="Parent Id")
+    _name = "mechanical.load.cumilitive.line1"
+    parent_id = fields.Many2one('mechanical.plate.test1',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
 
@@ -970,8 +970,8 @@ class LoadAndCumilitiveLine(models.Model):
 
 
 class LoadAndCumilitiveLine1(models.Model):
-    _name = "mechanical.load.cumilitive.line1"
-    parent_id = fields.Many2one('mechanical.plate.test',string="Parent Id")
+    _name = "mechanical.load.cumilitive.line2"
+    parent_id = fields.Many2one('mechanical.plate.test1',string="Parent Id")
    
     sr_no = fields.Integer(string="Sr No.",readonly=True, copy=False, default=1)
 

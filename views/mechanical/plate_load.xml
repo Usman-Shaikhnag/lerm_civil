@@ -3,8 +3,8 @@
     <data>
 
         <record id="mechanical_plate_load" model="ir.ui.view">
-        <field name="name">mechanical.plate.test.form</field>
-        <field name="model">mechanical.plate.test</field>
+        <field name="name">mechanical.plate.test1.form</field>
+        <field name="model">mechanical.plate.test1</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
