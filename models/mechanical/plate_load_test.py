@@ -55,51 +55,111 @@ class PlateLoad(models.Model):
     parameter_id = fields.Many2one('eln.parameters.result',string="Parameter")
     child_lines_plate_load = fields.One2many('mechanical.plate.test.line','parent_id',string="Parameter")
 
-  
 
 
-
-    def calculate_cumulative_sett1(self):
+    def action_calculate_settlement(self):
         for rec in self:
-            lines = rec.child_lines_plate_load.filtered(
-                lambda l: l.applied_pressure and l.avg_sett is not None
-            )
+            lines = rec.child_lines_plate_load.sorted(key=lambda l: l.sr_no)
+            pressure_lines = [line for line in lines if line.applied_pressure]
 
-            if len(lines) < 2:
-                continue
+            # Step 1: Clear all avg_sett and cumulative_sett1
+            for line in lines:
+                line.avg_sett = 0.0
+                line.cumulative_sett1 = 0.0
 
-            # Sort lines
-            sorted_lines = sorted(lines, key=lambda l: l.applied_pressure)
-            descending_lines = sorted(lines, key=lambda l: l.applied_pressure, reverse=True)
+            # Step 2: Calculate avg_sett
+            for i in range(len(pressure_lines)):
+                first_pressure = pressure_lines[i]
 
-            min_line = sorted_lines[0]
-            min_avg = min_line.avg_sett or 0.0
+                if i + 1 < len(pressure_lines):
+                    # Normal case: next applied_pressure exists
+                    second_pressure = pressure_lines[i + 1]
+                    ref_sr_no = second_pressure.sr_no - 1
+                    ref_line = next((l for l in lines if l.sr_no == ref_sr_no), None)
+                else:
+                    # Last applied_pressure: use last line after current
+                    ref_line = next((l for l in reversed(lines) if l.sr_no > first_pressure.sr_no), None)
 
-            # Get top 6 max applied_pressure values
-            max_lines = descending_lines[:10]  # top 6 max lines
-            max_pressure_to_avg = {
-                l.applied_pressure: l.avg_sett or 0.0
-                for l in max_lines
-            }
+                if not ref_line:
+                    continue
 
-            # Get specific max avg values
-            third_max_avg = max_pressure_to_avg.get(
-                max_lines[3].applied_pressure if len(max_lines) > 3 else None,
-                0.0
-            )
+                # Calculate avg_sett = ref - current
+                d1 = ref_line.d1 - first_pressure.d1
+                d2 = ref_line.d2 - first_pressure.d2
+                d3 = ref_line.d3 - first_pressure.d3
+                d4 = ref_line.d4 - first_pressure.d4
+                avg = (d1 + d2 + d3 + d4) / 4.0
 
-            # Step 1: Assign fixed value to min_line
-            min_line.cumulative_sett1 = third_max_avg - min_avg
-            prev_cumulative = min_line.cumulative_sett1
+                first_pressure.avg_sett = avg
 
-            # Step 2: Apply logic to remaining lines
-            for line in sorted_lines[1:]:
-                ap = line.applied_pressure
-                increment = max_pressure_to_avg.get(ap, 0.0)
-                line.cumulative_sett1 = prev_cumulative + increment
-                prev_cumulative = line.cumulative_sett1
+            # Step 3: Calculate cumulative_sett1
+            cumulative = 0.0
+            for line in lines:
+                if line.avg_sett and line.avg_sett > 0.0:
+                    cumulative += line.avg_sett
+                    line.cumulative_sett1 = cumulative
+                else:
+                    line.cumulative_sett1 = 0.0
+
+
+
+
+
 
     child_lines_plate_unload = fields.One2many('mechanical.unload.test.line1','parent_id',string="UNLOADING LINE")
+
+
+    def action_calculate_unload_settlement_and_cumulative(self):
+        for rec in self:
+            load_lines = rec.child_lines_plate_load.sorted(key=lambda l: l.sr_no)
+            unload_lines = rec.child_lines_plate_unload.sorted(key=lambda l: l.sr_no or 0)
+
+            if not load_lines or not unload_lines:
+                continue
+
+            # Step 1: Clear all avg_sett1 and cumulative_sett11
+            for ul in unload_lines:
+                ul.avg_sett1 = 0.0
+                ul.cumulative_sett11 = 0.0
+
+            # Step 2: Calculate avg_sett1
+            last_load = load_lines[-1]
+            for i, ul in enumerate(unload_lines):
+                if i == 0:
+                    # First unload line: current - last load
+                    d1 = ul.d11 - last_load.d1
+                    d2 = ul.d22 - last_load.d2
+                    d3 = ul.d33 - last_load.d3
+                    d4 = ul.d44 - last_load.d4
+                else:
+                    # Rest: current - previous unload
+                    prev = unload_lines[i - 1]
+                    d1 = ul.d11 - prev.d11
+                    d2 = ul.d22 - prev.d22
+                    d3 = ul.d33 - prev.d33
+                    d4 = ul.d44 - prev.d44
+
+                avg = (d1 + d2 + d3 + d4) / 4.0
+                ul.avg_sett1 = avg
+
+            # Step 3: Calculate cumulative_sett11
+            last_cumulative = 0.0
+            load_with_cum = [l for l in load_lines if l.cumulative_sett1]
+            if load_with_cum:
+                last_cumulative = load_with_cum[-1].cumulative_sett1
+
+            cumulative = last_cumulative
+            for ul in unload_lines:
+                if ul.avg_sett1:
+                    cumulative += ul.avg_sett1
+                ul.cumulative_sett11 = cumulative
+
+
+    
+
+
+
+
 
     child_lines_loadand_cumilitive = fields.One2many('mechanical.load.cumilitive.line1','parent_id')
 
@@ -775,18 +835,21 @@ class PlateLoadLine(models.Model):
     d3 = fields.Float(string="D3",digits=(12,2))
     d4 = fields.Float(string="D4",digits=(12,2))
 
-    avg_sett = fields.Float(string="Average Settlement mm",digits=(12,2),compute="_compute_avg_sett")
+    avg_sett = fields.Float(string="Average Settlement mm",digits=(12,3))
     cumulative_sett1 = fields.Float(string="Cumulative Settlement",digits=(12,3))
 
    
     
 
-    @api.depends('d1', 'd2', 'd3', 'd4')
-    def _compute_avg_sett(self):
-        for rec in self:
-            values = [rec.d1, rec.d2, rec.d3, rec.d4]
-            non_empty = [v for v in values if v is not None]
-            rec.avg_sett = sum(non_empty) / len(non_empty) if non_empty else 0.0
+    # @api.depends('d1', 'd2', 'd3', 'd4')
+    # def _compute_avg_sett(self):
+    #     for rec in self:
+    #         values = [rec.d1, rec.d2, rec.d3, rec.d4]
+    #         non_empty = [v for v in values if v is not None]
+    #         rec.avg_sett = sum(non_empty) / len(non_empty) if non_empty else 0.0
+
+   
+
 
 
 
@@ -825,20 +888,21 @@ class UnLoadLine(models.Model):
     d33 = fields.Float(string="D3",digits=(12,2))
     d44 = fields.Float(string="D4",digits=(12,2))
 
-    avg_sett1 = fields.Float(string="Average Settlement mm",digits=(12,2),compute="_compute_avg_sett1")
+    avg_sett1 = fields.Float(string="Average Settlement mm",digits=(12,3))
     cumulative_sett11 = fields.Float(string="Cumulative Settlement",digits=(12,3))
 
    
     
 
-    @api.depends('d11', 'd22', 'd33', 'd44')
-    def _compute_avg_sett1(self):
-        for rec in self:
-            values = [rec.d11, rec.d22, rec.d33, rec.d44]
-            non_empty = [v for v in values if v is not None]
-            rec.avg_sett1 = sum(non_empty) / len(non_empty) if non_empty else 0.0
+    # @api.depends('d11', 'd22', 'd33', 'd44')
+    # def _compute_avg_sett1(self):
+    #     for rec in self:
+    #         values = [rec.d11, rec.d22, rec.d33, rec.d44]
+    #         non_empty = [v for v in values if v is not None]
+    #         rec.avg_sett1 = sum(non_empty) / len(non_empty) if non_empty else 0.0
 
    
+
 
     @api.depends(
         'parent_id.child_lines_plate_load.applied_pressure',
@@ -863,6 +927,12 @@ class UnLoadLine(models.Model):
                 reverse=True
             )
 
+            # Start from second last: skip the highest pressure
+            if len(load_lines) > 1:
+                load_lines = load_lines[1:]
+            else:
+                load_lines = []  # not enough to map
+
             # Sort unload lines by sr_no
             unload_lines = list(parent.child_lines_plate_unload.sorted(key=lambda l: l.sr_no or 0))
 
@@ -873,6 +943,7 @@ class UnLoadLine(models.Model):
                     line.applied_pressure1 = match.applied_pressure or 0.0
                     line.load_plate1 = match.load_plate or 0.0
                     line.pressure_plate1 = match.pressure_plate or 0.0
+
 
 
 

@@ -4,6 +4,7 @@
 <template id="plate_load_report">
 		<t t-call="web.html_container">
 			<!-- <t t-call="web.basic_layout"> -->
+			
 			<t t-call="lerm_civil.custom_layout_header_footer_lerm_eln">
 				<!-- <div style="text-align:center;margin-top:10px">
 					<p style="font-size:15px"><b>Test Report</b></p>
@@ -178,14 +179,12 @@
                         <tr style="border-bottom: 1px solid black;">
                             <th style="padding: 5px; border: 1px solid black;">Sr. No.</th>
                             <th style="padding: 5px; border: 1px solid black;">Item</th>
-                            <!-- <th style="padding: 5px; border: 1px solid black;">Content Page Nos.</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="padding: 5px; border: 1px solid black;">1</td>
                             <td style="padding: 5px; border: 1px solid black;">Introduction</td>
-                              <!-- <td style="padding: 5px; border: 1px solid black;">2-5</td> -->
                         </tr>
                         <tr>
                             <td style="padding: 5px; border: 1px solid black;">2</td>
@@ -365,7 +364,7 @@
 								</div>
 							</td>
 							<td >
-								<span t-esc="r['pressure_plate2']" />
+								<span t-esc="r['pressure_plate2']" t-options='{"widget": "float", "precision": 2}' />
 							</td>
 							<td colspan="1">
 								<span t-esc="r['cumulative_sett2']" t-options='{"widget": "float", "precision": 2}'/>
@@ -560,7 +559,7 @@
 								</div>
 							</td>
 							<td >
-								<span t-esc="r['pressure_plate3']" />
+								<span t-esc="r['pressure_plate3']"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
 							<td colspan="1">
 								<span t-esc="r['settlement3']" t-options='{"widget": "float", "precision": 2}'/>
@@ -609,9 +608,14 @@
 						<div style="text-align:center;margin-top:25px">
 							......End of Report......
 						</div>
-					</div>
 
 					</div>
+
+					
+
+					</div>
+
+					
 
 			</t>
 		</t>
