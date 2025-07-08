@@ -190,7 +190,7 @@
                           
                            
                             <td colspan="1" style="text-align:center;">
-								<span t-esc="r['specific_gravity']"  t-options='{"widget": "float", "precision": 3}'/>
+								<span t-esc="r['specific_gravity']"  t-options='{"widget": "float", "precision": 2}'/>
 							</td>
                          
 						</tr>
@@ -201,7 +201,7 @@
                             <tr cols="12">
                                 <td colspan="6"><b>Average Specific Gravity :</b></td>
                                 <td colspan="6" style="text-align: center;">
-                                    <span t-field="data.average_specific_gravity" t-options='{"widget": "float", "precision": 3}'/>
+                                    <span t-field="data.average_specific_gravity" t-options='{"widget": "float", "precision": 2}'/>
                                 </td>
                             </tr>
                           

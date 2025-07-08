@@ -91,7 +91,7 @@ class WOOD(models.Model):
     specific_gravity_visible = fields.Boolean("Specific Gravity  Visible",compute="_compute_visible")
     
     specific_gravity_child_lines = fields.One2many('mechanical.specific.gravity.line','parent_id',string="Parameter")
-    average_specific_gravity = fields.Float(string="Average Specific Gravity ",compute="_compute_average_specific_gravity", digits=(12,3))
+    average_specific_gravity = fields.Float(string="Average Specific Gravity ",compute="_compute_average_specific_gravity", digits=(12,2))
 
     @api.depends('specific_gravity_child_lines.specific_gravity')
     def _compute_average_specific_gravity(self):
@@ -278,9 +278,17 @@ class MechanicalSpecificLine(models.Model):
     length = fields.Float(string="Length in mm")
     width = fields.Float(string="Width in mm")
     thickness = fields.Float(string="Thickness in mm")
-    volume = fields.Float(string="volume")
+    volume = fields.Float(string="volume",compute="_compute_volume",store=True)
     oven_dry = fields.Float(string="Oven Dry Weight")
-    specific_gravity = fields.Float(string="Specific Gravity",digits=(12,3),compute="_compute_specific_gravity")
+    specific_gravity = fields.Float(string="Specific Gravity",digits=(12,2),compute="_compute_specific_gravity")
+
+    @api.depends('length', 'width', 'thickness')
+    def _compute_volume(self):
+        for rec in self:
+            if rec.length and rec.width and rec.thickness:
+                rec.volume = rec.length * rec.width * rec.thickness
+            else:
+                rec.volume = 0.0
 
     @api.depends('oven_dry', 'volume')
     def _compute_specific_gravity(self):

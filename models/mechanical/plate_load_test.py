@@ -169,8 +169,11 @@ class PlateLoad(models.Model):
 
 
 
+
+
     def generate_pressure_line_chart(self):
-    
+  
+
         x_vals = []
         y_vals = []
 
@@ -188,9 +191,27 @@ class PlateLoad(models.Model):
         x_up = x_vals[:max_idx + 1]
         y_up = y_vals[:max_idx + 1]
 
-        # 2. Unloading part - side shift
-        x_down = [x + 10 for x in x_vals[max_idx:]]  # 👉 side shift X axis +10
-        y_down = y_vals[max_idx:]
+        x_last = x_up[-1]
+        y_last = y_up[-1]
+
+        # 2. Actual Unloading values (user provided, after max_idx)
+        raw_unloading_x = x_vals[max_idx + 1:]
+        raw_unloading_y = y_vals[max_idx + 1:]
+
+        # 3. Prepare unloading with side shift
+        shift_x = 6  # 🔁 shift the unloading X values leftwards
+        x_down = []
+        y_down = []
+
+        if raw_unloading_x and len(raw_unloading_x) >= 1:
+            # Add loading last point as the first point of unloading
+            x_down.append(x_last)
+            y_down.append(y_last)
+
+            for i in range(len(raw_unloading_x)):
+                x_shifted = raw_unloading_x[i] - shift_x
+                x_down.append(x_shifted)
+                y_down.append(raw_unloading_y[i])
 
         def smooth(x, y):
             if len(x) < 3:
@@ -200,41 +221,56 @@ class PlateLoad(models.Model):
             sorted_idx = np.argsort(x_np)
             x_np = x_np[sorted_idx]
             y_np = y_np[sorted_idx]
-            x_s = np.linspace(x_np.min(), x_np.max(), 200)
+            x_s = np.linspace(x_np.min(), x_np.max(), 150)
             spline = make_interp_spline(x_np, y_np, k=2)
             y_s = spline(x_s)
             return x_s, y_s
 
+        # Smooth lines
         x_up_s, y_up_s = smooth(x_up, y_up)
-        x_down_s, y_down_s = smooth(x_down, y_down)
+        x_down_s, y_down_s = smooth(x_down, y_down) if len(x_down) >= 3 else (x_down, y_down)
 
+        # Plotting
         plt.figure(figsize=(7, 4))
         plt.plot(x_up_s, y_up_s, color="blue", linewidth=2, label="Loading")
-        plt.plot(x_down_s, y_down_s, color="brown", linewidth=2, label="Unloading (Shifted)")
 
-        # Scatter original loading & unloading points
-        plt.scatter(x_up, y_up, color='black', s=30, zorder=5)
-        plt.scatter(x_down, y_down, color='gray', s=30, zorder=5)
+        if x_down and len(x_down) >= 2:
+            plt.plot(x_down_s, y_down_s, color="blue", linewidth=2, label="Unloading (shifted)")
+
+        # Show raw points
+        plt.scatter(x_up, y_up, color='black', s=30, marker='D')
+        if x_down:
+            plt.scatter(x_down, y_down, color='gray', s=30, marker='D')
 
         plt.gca().invert_yaxis()
         plt.xlabel('Applied Load (T/m²)', fontsize=10)
         plt.ylabel('Settlement (mm)', fontsize=10)
-        plt.title('LOAD  SETTLEMENT  CURVE', fontsize=14, fontweight='bold')
+        plt.title('LOAD SETTLEMENT CURVE', fontsize=14, fontweight='bold')
         plt.grid(True, linestyle='--', alpha=0.4)
         plt.legend()
         plt.tight_layout()
 
+        # Convert to image
         buffer = io.BytesIO()
         plt.savefig(buffer, format='png')
         plt.close()
         buffer.seek(0)
-
         return base64.b64encode(buffer.read()).decode('utf-8')
 
-   
 
-        
-            
+    
+
+
+
+
+
+
+
+
+
+
+
+
         
     @api.depends('child_lines_loadand_cumilitive1')
     def _compute_pressure_line_chart(self):

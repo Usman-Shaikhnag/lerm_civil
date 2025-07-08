@@ -491,12 +491,12 @@
 								<p>Bp = Size of plate in m,</p>
 								<p>Sp = Settlement of test plate in mm,</p>
 								<p>Sf = Settlement of footing in mm.</p>
-								<p>Size of footing as 7m, Bf = 7m</p>
-								<p>Bp = 0.30m</p>
-								<p>Sp = 3.76 mm</p>
+								<p>Size of footing as  Bf = <span t-field="data.size_footing"/>m</p>
+								<p>Bp = <span t-field="data.size_plate"/>m</p>
+								<p>Sp = <span t-field="data.settlement_test"/> mm</p>
 								<p>Settlement below PCC, = sf = sp {Bf(Bp + 0.3)/Bp (Bf + 0.3)}²</p>
 								<p style="text-align:center;">3.76 × {7(0.3 + 0.3) / 0.3(7 + 0.3)}²</p>
-								<p style="text-align:center;">= 13.85 mm &lt; 25 mm (IS 1888-1982 clause 4.7)</p>
+								<p style="text-align:center;">= <span t-field="data.settlement_below"/> (IS 1888-1982 clause 4.7)</p>
 							</div>
 						
 				</table>
