@@ -29,13 +29,9 @@
                       </field>
                     </group>
 
-                    <group style="white-space: nowrap; width:70%;" >
-                         <field name="concrete_pouring"  />
-                    </group>
-                   
        
 
-                    <group>
+                    <!-- <group>
                             <field name="child_lines_temprature" nolabel="1" >
                                 <tree editable="bottom">
                                     <field name='sr_no'/>
@@ -80,7 +76,162 @@
 
                     <group >
                         <field name="graph_image_20mm" widget="image" readonly="1"/>
+                        </group> -->
+
+                     <!-- <group >
+                        <field name="upload_file" filename="file_name"/>
+                          <field name="file_name" />
+                        
+                     </group >
+                
+                <group >
+                      <button string="Import Excel" type="object" name="action_import_excel"
+                        class="btn-primary"/>
+                </group > -->
+
+                <group string="Introduction"  style="white-space: nowrap; width:100%;"> 
+                    <field name="introduction"/>
+                   
+                    
+                </group>
+
+                <group  col="4" style="white-space: nowrap; width:70%;"> 
+                    <field name="raft_thickness"/>
+                    <field name="date_pouring"/>
+                    <field name="date_termination"/>
+                    <field name="period_monitoring"/>
+                    
+                </group>
+
+                    <group >
+                          <field name="tempreture_upload1" widget="many2many_binary" />
+                      </group>
+
+                 <group string="Temperature Monitoring location"  style="white-space: nowrap; width:100%;"> 
+                    <field name="temprerature_location"/>
+                </group>
+
+                <group >
+                    <field name="tempreture_upload2" widget="many2many_binary" />
+                </group>
+
+                 <group string="Positioning of the Thermocouples"  style="white-space: nowrap; width:100%;"> 
+                    <field name="position_thermpcouples"/>
+                </group>
+
+                <group string="Result"  style="white-space: nowrap; width:100%;"> 
+                    <field name="result"/>
+                </group>
+
+                 <group >
+                    <field name="tempreture_upload3" widget="many2many_binary" />
+                </group>
+
+                   <group string="Show Thermocouple  Lines" col="4" style="white-space: nowrap; width:70%;"> 
+                    <field name="show_thermocouple1_bottom"/>
+                    <field name="show_thermocouple2_middle"/>
+                    <field name="show_thermocouple3_top"/>
+                    <field name="show_thermocouple4_stand1"/>
+                    <field name="show_thermocouple5_stand2"/>
+                    <field name="show_thermocouple6_bottom"/>
+                    <field name="show_thermocouple7_middle"/>
+                    <field name="show_thermocouple8_top"/>
+                    <field name="show_thermocouple9_stand1"/>
+                    <field name="show_thermocouple10_stand2"/>
+                    <field name="show_thermocouple11_bottom"/>
+                    <field name="show_thermocouple12_middle"/>
+                    <field name="show_thermocouple13_top"/>
+                    <field name="show_thermocouple14_stand1"/>
+                    <field name="show_thermocouple15_stand2"/>
+                    <field name="show_thermocouple16_bottom"/>
+                    <field name="show_thermocouple17_middle"/>
+                    <field name="show_thermocouple18_top"/>
+                    <field name="show_thermocouple19_stand1"/>
+                    <field name="show_thermocouple20_stand2"/>
+                    <field name="show_ambient"/>
+                </group>
+
+
+                <group string="Show Temperature Differential Lines" col="4" style="white-space: nowrap; width:70%;"> 
+                    <field name="show_temperature_differential1"/>
+                    <field name="show_temperature_differential2"/>
+                    <field name="show_temperature_differential3"/>
+                     <field name="show_temperature_differential4"/>
+                    
+                </group>
+
+
+
+                 <group>
+                            <field name="temprature_line" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name='sr_no'/>
+                                    <field name="days" />
+                                    <field name="date" />
+                                    <field name="time" />
+                                   <field name="thermocouple1_bottom" />
+                                    <field name='thermocouple2_middle'/>
+                                   <field name="thermocouple3_top" />
+                                    <field name='thermocouple4_stand1'/>
+                                   <field name="thermocouple5_stand2" />
+                                   <field name='thermal_gradient1'/>
+
+                                   <field name="thermocouple6_bottom" />
+                                    <field name='thermocouple7_middle'/>
+                                   <field name="thermocouple8_top" />
+                                    <field name='thermocouple9_stand1'/>
+                                   <field name="thermocouple10_stand2" />
+                                   <field name='thermal_gradient2'/>
+
+                                    <field name="thermocouple11_bottom" />
+                                    <field name='thermocouple12_middle'/>
+                                   <field name="thermocouple13_top" />
+                                    <field name='thermocouple14_stand1'/>
+                                   <field name="thermocouple15_stand2" />
+                                   <field name='thermal_gradient3'/>
+
+                                   <field name="thermocouple16_bottom" />
+                                    <field name='thermocouple17_middle'/>
+                                   <field name="thermocouple18_top" />
+                                    <field name='thermocouple19_stand1'/>
+                                   <field name="thermocouple20_stand2" />
+                                   <field name='thermal_gradient4'/>
+
+                                    <field name='ambient1'/>
+                                   
+                                
+                                </tree>
+                            
+                            </field> 
+
+                            
+                           
+                    </group>
+
+                   
+
+                    <group >
+                        <field name="upload_file1" filename="file_name"/>
+                          <field name="file_name" />
+                        
+                     </group >
+                
+                <group >
+                      <button string="Import Excel Data" type="object" name="action_import_excel_data"
+                        class="btn-primary"/>
+                </group >
+
+               
+
+                        <group >
+                        <field name="graph_image_tc" widget="image" readonly="1"/>
                         </group>
+
+
+                          <group >
+                        <field name="graph_image_temp" widget="image" readonly="1"/>
+                        </group>
+
 
 
 

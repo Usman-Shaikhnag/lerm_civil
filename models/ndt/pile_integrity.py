@@ -123,7 +123,7 @@ class PileIntegrity(models.Model):
 
     pile_report_upload = fields.Many2many(
         'ir.attachment',
-        'pile_report_upload_rel',
+        'temprature_upload_rel1',
         'sample_id',
         'attachment_id',
         string='Report Upload',

@@ -281,7 +281,7 @@
     'reports/wood/wood_report.xml',
     'views/mechanical/temprature_monitoring.xml',
     'reports/temprature_monitoring/temprature_datasheet.xml',
-    'reports/temprature_monitoring/temprature_monitoring_report.xml'
+    'reports/temprature_monitoring/temprature_monitoring_report.xml',
     # 'reports/demo_dsreport/datashet.xml'
 
 
