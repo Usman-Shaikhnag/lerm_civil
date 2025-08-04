@@ -142,10 +142,10 @@
 									<img t-if="qrcode" t-att-src="'data:image/png;base64,'+str(qrcode)" style="width: 75px; height: 70px;"/>
 								</div>
 								
-								<div style="margin-left:90px">
+								<div style="margin-left:200px">
 									<div class="footertext">
 										<span>
-											Email : henry.dsa@esehat.org <span style="padding-left:10px">Website : www.lerm.in </span> 
+											Email : henry.dsa@esehat.org <span style="padding-left:50px">Website : www.lerm.in </span> 
 										</span>
 									</div>
 									<div class="footertext">
@@ -154,7 +154,7 @@
 									
 									
 								</div>
-								<div  style="padding-left : 80px;">
+								<div  style="padding-left : 200px;">
 									<img src="/lerm_civil/static/src/img/qr_image.png" style="width: 60px; height: 55px;"/>
 								</div>
 							</div>

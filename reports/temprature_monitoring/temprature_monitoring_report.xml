@@ -311,7 +311,7 @@
                      <tr><td><b>Period of Monitoring:</b></td><td><span t-field="data.period_monitoring" /></td></tr>
                     </table>
 
-
+                    <div style="text-align: center;">
                     <t t-foreach="data.tempreture_upload1" t-as="attachment">
 							<t t-if="attachment.mimetype.startswith('image/')">
 								<div class="container_eln">
@@ -323,14 +323,16 @@
 								</div>
 							</t>
 						</t>
+                        </div>
 
+                 
 
                     <div style="margin-top:5px">
                      <table>
                     <td><b> Temperature Monitoring location:</b></td><td><span t-field="data.temprerature_location" /></td>
                     </table>
                     </div>
-
+                     <div style="text-align: center;">
                     <t t-foreach="data.tempreture_upload2" t-as="attachment">
 							<t t-if="attachment.mimetype.startswith('image/')">
 								<div class="container_eln">
@@ -342,6 +344,7 @@
 								</div>
 							</t>
 						</t>
+                        </div>
 
                     <div style="margin-top:5px">
                      <table>
@@ -354,7 +357,7 @@
                     <td><b> Result:</b></td><td><span t-field="data.result" /></td>
                     </table>
                     </div>
-
+                    <div style="text-align: center;">
                      <t t-foreach="data.tempreture_upload3" t-as="attachment">
 							<t t-if="attachment.mimetype.startswith('image/')">
 								<div class="container_eln">
@@ -366,19 +369,20 @@
 								</div>
 							</t>
 						</t>
+                    </div>
 
-                    <div t-if="data.graph_image_tc" style="margin-top: 20px;">
-						<img t-att-src="'data:image/png;base64,' + data.graph_image_tc.decode('utf-8')" style="max-width: 100%;"/>
+                    <div t-if="data.graph_image_tc" style="margin-top: 10px;text-align: center;">
+						<img t-att-src="'data:image/png;base64,' + data.graph_image_tc.decode('utf-8')" style="max-width: 80%;"/>
 					</div>
 
-                    <div t-if="data.graph_image_temp" style="margin-top: 20px;">
-						<img t-att-src="'data:image/png;base64,' + data.graph_image_temp.decode('utf-8')" style="max-width: 100%;"/>
+                    <div t-if="data.graph_image_temp" style="margin-top: 10px;text-align: center;">
+						<img t-att-src="'data:image/png;base64,' + data.graph_image_temp.decode('utf-8')" style="max-width: 80%;"/>
 					</div>
 
 
 
 
-                    <table style="margin-top:20px">
+                    <table style="page-break-before: always; margin-top:10px;">
                    
 					<thead style="background-color: #d3d3d3;">
                    
